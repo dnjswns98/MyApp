@@ -2,6 +2,7 @@ package com.example.myapp;
 
 public class Memberinfo {
     private String id;
+    private String pwd;
     private String nickname;
     private String username;
     private String phoneNum;
@@ -9,8 +10,9 @@ public class Memberinfo {
     private String status;
     private String search;
 
-    public Memberinfo(String id, String nickname, String username, String phoneNum, String imageURL, String status, String search){
+    public Memberinfo(String id, String pwd, String nickname, String username, String phoneNum, String imageURL, String status, String search){
         this.id = id;
+        this.pwd = pwd;
         this.nickname = nickname;
         this.username = username;
         this.phoneNum = phoneNum;
@@ -24,6 +26,9 @@ public class Memberinfo {
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+
+    public String getPwd() { return pwd; }
+    public void setPwd(String pwd) { this.pwd = pwd; }
 
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) { this.nickname = nickname; }

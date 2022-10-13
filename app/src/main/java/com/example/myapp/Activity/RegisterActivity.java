@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BasicActivity {
 
     EditText nickname, email, phoneNum, password, username;
     Button btn_register;
@@ -79,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", userid);
+                    hashMap.put("pwd", password);
                     hashMap.put("nickname", nickname);
                     hashMap.put("phoneNum", phoneNum);
                     hashMap.put("username", username);
