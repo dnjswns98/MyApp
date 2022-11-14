@@ -12,13 +12,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="50dp"
-        android:paddingBottom="80dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/gmarketsans"
             android:text="고객님"
@@ -74,8 +74,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
+            android:hint="이름"
             android:inputType="textPersonName"
-            android:text="이름"
             android:textColor="#979595"
             android:textSize="18sp" />
 
@@ -86,8 +86,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
+            android:hint="전화번호"
             android:inputType="text"
-            android:text="전화번호"
             android:textColor="#979595" />
 
         <EditText
@@ -97,8 +97,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="이메일"
+            android:hint="이메일"
+            android:inputType="text"
             android:textColor="#979595" />
 
         <EditText
@@ -108,8 +108,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
+            android:hint="닉네임"
             android:inputType="textPersonName"
-            android:text="닉네임"
             android:textColor="#979595" />
 
         <!--            전화번호-->
@@ -124,8 +124,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
+            android:hint="비밀번호"
             android:inputType="text"
-            android:text="비밀번호"
             android:textColor="#979595" />
 
         <TextView
@@ -144,10 +144,9 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="비밀번호 확인"
-            android:textColor="#979595"
-            tools:text="비밀번호 확인" />
+            android:hint="비밀번호 확인"
+            android:inputType="text"
+            android:textColor="#979595" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_register"
@@ -173,12 +172,12 @@
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
             android:background="@color/cardview_shadow_end_color"
             android:minHeight="48dip"
-            android:hint="로그인"
+            android:text="로그인"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />

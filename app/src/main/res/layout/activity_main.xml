@@ -8,48 +8,32 @@
     tools:context=".Activity.MainActivity">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:orientation="vertical"
-            android:padding="20dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="한줄 소개"
-            android:textColor="#2196F3"
-            android:textSize="13sp" />
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center"
+        android:minHeight="60dp"
+        android:password="false"
+        android:text="app name"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom">
-
-            <!--            앱 이미지 넣어야함 drawable="@drawable/image"-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="app name"
-
-                android:textColor="#070809"
-                android:textSize="23dp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/font_login"
-                android:text="추천 동영상"/>
-
-    </LinearLayout>
-
-
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="85dp"
+        android:background="@color/black"
+        android:fontFamily="@font/font_login"
+        android:orientation="vertical"
+        android:text=" 오늘의 운동 "
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
 
     <HorizontalScrollView
@@ -129,17 +113,17 @@
 
     </HorizontalScrollView>
 
-<!--<com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
--->
+    <!--<com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
