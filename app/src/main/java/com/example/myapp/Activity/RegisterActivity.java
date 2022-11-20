@@ -1,7 +1,6 @@
 package com.example.myapp.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,10 +35,10 @@ public class RegisterActivity extends BasicActivity {
         setContentView(R.layout.activity_register);
 
         nickname = findViewById(R.id.et_Nickname);
-        email = findViewById(R.id.et_email);
-        phoneNum = findViewById(R.id.et_callNum);
+        email = findViewById(R.id.send_email);
+        phoneNum = findViewById(R.id.send_callNum);
         password = findViewById(R.id.et_pwd);
-        username = findViewById(R.id.et_name);
+        username = findViewById(R.id.send_name);
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.login_button);
         checkPwd = findViewById(R.id.et_checkPwd);

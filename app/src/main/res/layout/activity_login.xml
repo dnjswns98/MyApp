@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_notice">
 
         <EditText
-            android:id="@+id/et_email"
+            android:id="@+id/send_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edge"
@@ -98,16 +98,6 @@
             android:textColor="@color/black"
             android:textColorHint="#AAAAAA"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:baselineAligned="true"
-            android:orientation="horizontal">
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,14 +133,6 @@
             android:text="로그인하기"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout_autoLoginBox"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-        </LinearLayout>
 
 
     </LinearLayout>

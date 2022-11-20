@@ -1,10 +1,8 @@
 package com.example.myapp.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,7 +32,7 @@ public class LoginActivity extends BasicActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        email = findViewById(R.id.et_email);
+        email = findViewById(R.id.send_email);
         password = findViewById(R.id.et_pwd);
         btn_ok = findViewById(R.id.btn_ok);
 
