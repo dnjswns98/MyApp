@@ -52,7 +52,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/send_Nickname"
+                    android:id="@+id/text_email"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="15dp"
@@ -60,13 +60,13 @@
                     android:layout_marginEnd="15dp"
                     android:background="#B8C0C3"
                     android:gravity="center_vertical"
-                    android:hint="닉네임"
+                    android:hint="이메일"
                     android:inputType="text"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/send_pwd"
+                    android:id="@+id/text_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="15dp"

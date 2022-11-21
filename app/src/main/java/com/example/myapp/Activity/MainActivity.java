@@ -8,6 +8,7 @@ import android.media.session.MediaController;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
 
 import com.example.myapp.R;
@@ -24,13 +25,10 @@ import java.util.List;
 
 public class MainActivity extends BasicActivity {
 
-
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
     }
 
