@@ -16,21 +16,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UserLeaveActivity"
+            android:name=".Activity.UserLeaveActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserUpdateinfoActivity"
+            android:name=".Activity.UserUpdateinfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SettingActivity"
+            android:name=".Activity.SettingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
