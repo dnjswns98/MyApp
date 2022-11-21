@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        tools:context=".Activity.UserInfoActivity"
+        tools:context=".Activity.UserInfoUpdateActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

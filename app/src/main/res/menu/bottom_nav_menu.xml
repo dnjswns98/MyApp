@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <!-- 이 창은 아래 네비게이션 바 띄워주는 xml입니다 -->
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home"/>
+        android:title="Home"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/nav_community"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Community" />
+        android:title="Community"
+        app:showAsAction="always"/>
 
 <!--    &lt;!&ndash;  android:icon="@drawable/ic_baseline_home_24"  &ndash;&gt;-->
 <!--    <item-->
@@ -20,11 +23,13 @@
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Settings"/>
+        android:title="Settings"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/nav_menu"
         android:icon="@drawable/ic_baseline_dehaze_24"
-        android:title="Menu" />
+        android:title="Menu"
+        app:showAsAction="always"/>
 
 </menu>
