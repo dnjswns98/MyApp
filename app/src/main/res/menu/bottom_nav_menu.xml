@@ -7,24 +7,24 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search"/>
-
-    <!--  android:icon="@drawable/ic_baseline_home_24"  -->
-    <item
-        android:id="@+id/nav_placeholder"
-        android:title=""/>
-
-    <item
-        android:id="@+id/nav_person"
+        android:id="@+id/nav_community"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"/>
+        android:title="Community" />
+
+<!--    &lt;!&ndash;  android:icon="@drawable/ic_baseline_home_24"  &ndash;&gt;-->
+<!--    <item-->
+<!--        android:id="@+id/nav_placeholder"-->
+<!--        android:title=""/>-->
+
 
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings"/>
 
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/ic_baseline_dehaze_24"
+        android:title="Menu" />
 
 </menu>

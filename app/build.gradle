@@ -51,9 +51,7 @@ dependencies {
     // 로딩 화면 생성
     implementation 'com.airbnb.android:lottie:5.2.0'
 
-    //캘린더 커스텀
-    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+
 
     // graph 생성
 
