@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingActivity extends BasicActivity {
 
     Button btn_go_info_update, btn_go_user_leave, btn_logout;
+    Button btn_home,btn_setting, btn_community, btn_menu;
     private FirebaseAuth auth;
 
     @Override
@@ -23,6 +24,10 @@ public class SettingActivity extends BasicActivity {
         btn_go_info_update = findViewById(R.id.btn_go_info_update);
         btn_logout = findViewById(R.id.btn_logout);
         btn_go_user_leave = findViewById(R.id.btn_go_user_leave);
+        btn_setting = findViewById(R.id.btn_setting);
+        btn_home = findViewById(R.id.btn_home);
+        btn_community = findViewById(R.id.btn_community);
+        btn_menu = findViewById(R.id.btn_menu);
 
         auth = FirebaseAuth.getInstance();
 
@@ -45,6 +50,30 @@ public class SettingActivity extends BasicActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SettingActivity.this, UserLeaveActivity.class));
+            }
+        });
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, SettingActivity.class));
+            }
+        });
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, MainActivity.class));
+            }
+        });
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, MenuActivity.class));
+            }
+        });
+        btn_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, CommunityActivity.class));
             }
         });
     }
