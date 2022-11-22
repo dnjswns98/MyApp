@@ -133,33 +133,83 @@
             android:orientation="vertical">
 
             <CalendarView
-                android:id="@+id/Diary"
-                android:layout_marginTop="25dp"
+                android:id="@+id/Calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp" />
         </LinearLayout>
-    </LinearLayout>
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:id="@+id/bottomAppBar"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="10dp"
-        >
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/bottomNavigationView"
-            android:layout_marginRight="16dp"
-            app:menu="@menu/bottom_nav_menu"
-            android:background="@drawable/transparent_background"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
 
-            />
-    </com.google.android.material.bottomappbar.BottomAppBar>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_home_24"
+                android:scaleType="fitStart"
+                android:text="Home"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_community"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_person_24"
+                android:text="Community"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_settings_24"
+                android:text="Setting"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_dehaze_24"
+                android:text="menu"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:id="@+id/bottomAppBar"-->
+<!--        app:fabCradleMargin="10dp"-->
+<!--        app:fabCradleRoundedCornerRadius="10dp"-->
+<!--        app:fabCradleVerticalOffset="10dp"-->
+<!--        >-->
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/bottomNavigationView"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            app:menu="@menu/bottom_nav_menu"-->
+<!--            android:background="@drawable/transparent_background"-->
+
+<!--            />-->
+<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
 
 
 

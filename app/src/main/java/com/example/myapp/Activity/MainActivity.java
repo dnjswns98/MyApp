@@ -2,6 +2,7 @@ package com.example.myapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.session.MediaController;
@@ -25,11 +26,43 @@ import java.util.List;
 
 public class MainActivity extends BasicActivity {
 
+    Button btn_home,btn_setting, btn_community, btn_menu;
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
 
+        btn_setting = findViewById(R.id.btn_setting);
+        btn_home = findViewById(R.id.btn_home);
+        btn_community = findViewById(R.id.btn_community);
+        btn_menu = findViewById(R.id.btn_menu);
+
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
+        });
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+            }
+        });
+        btn_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CommunityActivity.class));
+            }
+        });
     }
+
+
 
 }

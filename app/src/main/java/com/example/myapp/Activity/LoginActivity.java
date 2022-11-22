@@ -32,7 +32,7 @@ public class LoginActivity extends BasicActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        email = findViewById(R.id.send_email);
+        email = findViewById(R.id.et_email);
         password = findViewById(R.id.et_pwd);
         btn_ok = findViewById(R.id.btn_ok);
 

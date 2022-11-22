@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPasswordActivity extends BasicActivity {
 
-    EditText send_email;
+    EditText et_email;
     Button btn_reset;
 
     FirebaseAuth auth;
@@ -27,7 +27,7 @@ public class ResetPasswordActivity extends BasicActivity {
         setContentView(R.layout.activity_reset_password);
         setToolbarTitle("비밀번호 초기화");
 
-        send_email = findViewById(R.id.send_email);
+        et_email = findViewById(R.id.et_email);
         btn_reset = findViewById(R.id.btn_reset);
 
         auth = FirebaseAuth.getInstance();
@@ -36,7 +36,7 @@ public class ResetPasswordActivity extends BasicActivity {
             @Override
             public void onClick(View v) {
                 //email 보내기
-                String email = send_email.getText().toString();
+                String email = et_email.getText().toString();
 
                 if(email.equals("")){
                     Toast.makeText(ResetPasswordActivity.this, "All filed are required!", Toast.LENGTH_SHORT).show();
