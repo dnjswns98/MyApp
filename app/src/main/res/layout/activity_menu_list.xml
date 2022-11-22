@@ -228,24 +228,6 @@
                 app:strokeWidth="1dp" />
 
             <Button
-                android:shape="rectangle"
-                android:id="@+id/btn_go_bmi_and_cal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/material_dynamic_neutral80"
-                android:fontFamily="@font/gmarketsans"
-                android:insetTop="-5dp"
-                android:insetBottom="0dp"
-                android:insetLeft="-5dp"
-                android:insetRight="-5dp"
-                android:text="BMI 계산기 /  칼로리 처방"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/material_dynamic_neutral60"
-                app:strokeWidth="1dp"
-                />
-
-            <Button
                 android:id="@+id/btn_go_diary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
