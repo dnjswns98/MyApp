@@ -1,0 +1,178 @@
+Index: app/src/main/java/com/example/myapp/Activity/UserLeaveActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.example.myapp.R;\r\n\r\npublic class UserLeaveActivity extends BasicActivity {\r\n\r\n    Button btn_user_leave;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_user_leave);\r\n\r\n        btn_user_leave = findViewById(R.id.btn_user_leave);\r\n\r\n        btn_user_leave.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(UserLeaveActivity.this, UserLeaveCheckActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/UserLeaveActivity.java b/app/src/main/java/com/example/myapp/Activity/UserLeaveActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/UserLeaveActivity.java	(revision 06382adde2c81bad89afca54a841848edb2a3c64)
++++ b/app/src/main/java/com/example/myapp/Activity/UserLeaveActivity.java	(date 1669196475016)
+@@ -4,29 +4,58 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.text.TextUtils;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.EditText;
++import android.widget.Toast;
+ 
+ import com.example.myapp.R;
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.firebase.auth.AuthCredential;
++import com.google.firebase.auth.EmailAuthProvider;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++
++import java.util.regex.Pattern;
+ 
+ public class UserLeaveActivity extends BasicActivity {
+ 
+     Button btn_user_leave;
++    EditText et_email, et_password;
++    private FirebaseAuth auth;
++    private FirebaseUser user;
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_user_leave);
+ 
++        auth = FirebaseAuth.getInstance();
++        user = FirebaseAuth.getInstance().getCurrentUser();
++
+         btn_user_leave = findViewById(R.id.btn_user_leave);
++        et_email = findViewById(R.id.et_email);
++        et_password = findViewById(R.id.et_pwd);
+ 
+         btn_user_leave.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                Intent intent = new Intent(UserLeaveActivity.this, UserLeaveCheckActivity.class);
+-                startActivity(intent);
++                if(user != null) {
++                    String txt_email = et_email.getText().toString();
++                    String txt_password = et_password.getText().toString();
++                    if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
++                        Toast.makeText(UserLeaveActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
++                    } else {
++                        reauthenticate(txt_email, txt_password);
++                    }
++                }
+             }
+         });
++    }
++
++    private void reauthenticate(String txt_email, String txt_password) {
+ 
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/Activity/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.media.MediaPlayer;\r\nimport android.media.session.MediaController;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.VideoView;\r\n\r\nimport com.example.myapp.R;\r\nimport com.github.mikephil.charting.charts.BarChart;\r\nimport com.github.mikephil.charting.data.BarData;\r\nimport com.github.mikephil.charting.data.BarDataSet;\r\nimport com.github.mikephil.charting.data.BarEntry;\r\nimport com.github.mikephil.charting.utils.ColorTemplate;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\n\r\npublic class MainActivity extends BasicActivity {\r\n\r\n    Button btn_home,btn_setting, btn_community, btn_menu;\r\n    @Override\r\n    protected void onCreate(Bundle saveInstanceState) {\r\n        super.onCreate(saveInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n        btn_home = findViewById(R.id.btn_home);\r\n        btn_community = findViewById(R.id.btn_community);\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_home.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, CommunityActivity.class));\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/MainActivity.java b/app/src/main/java/com/example/myapp/Activity/MainActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/MainActivity.java	(revision 06382adde2c81bad89afca54a841848edb2a3c64)
++++ b/app/src/main/java/com/example/myapp/Activity/MainActivity.java	(date 1669196380287)
+@@ -1,5 +1,6 @@
+ package com.example.myapp.Activity;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.content.Intent;
+@@ -8,6 +9,7 @@
+ import android.media.session.MediaController;
+ import android.net.Uri;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.VideoView;
+@@ -18,6 +20,11 @@
+ import com.github.mikephil.charting.data.BarDataSet;
+ import com.github.mikephil.charting.data.BarEntry;
+ import com.github.mikephil.charting.utils.ColorTemplate;
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -27,6 +34,8 @@
+ public class MainActivity extends BasicActivity {
+ 
+     Button btn_home,btn_setting, btn_community, btn_menu;
++    private FirebaseAuth mFirebaseAuth;
++
+     @Override
+     protected void onCreate(Bundle saveInstanceState) {
+         super.onCreate(saveInstanceState);
+@@ -37,6 +46,9 @@
+         btn_community = findViewById(R.id.btn_community);
+         btn_menu = findViewById(R.id.btn_menu);
+ 
++        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
++
++
+         btn_setting.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision 06382adde2c81bad89afca54a841848edb2a3c64)
++++ /dev/null	(revision 06382adde2c81bad89afca54a841848edb2a3c64)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <runningDeviceTargetSelectedWithDropDown>
+-      <Target>
+-        <type value="RUNNING_DEVICE_TARGET" />
+-        <deviceKey>
+-          <Key>
+-            <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\tngkr\.android\avd\Pixel_2_API_30.avd" />
+-          </Key>
+-        </deviceKey>
+-      </Target>
+-    </runningDeviceTargetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-11-23T02:15:19.933823900Z" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApp\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Activity.UserLeaveActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserUpdateinfoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SettingActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ResetPasswordActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <!--\r\n <activity android:name=\".Activity.MainActivity\"\r\n            android:exported=\"false\"> 가 원래 모습\r\n        -->\r\n        <activity\r\n            android:name=\".Activity.MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SplashscreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 06382adde2c81bad89afca54a841848edb2a3c64)
++++ b/app/src/main/AndroidManifest.xml	(date 1669170551699)
+@@ -38,10 +38,7 @@
+         </activity>
+         <activity
+             android:name=".Activity.ResetPasswordActivity"
+-            android:exported="false">
+-            <meta-data
+-                android:name="android.app.lib_name"
+-                android:value="" />
++            android:parentActivityName=".Activity.LoginActivity">
+         </activity>
+         <!--
+  <activity android:name=".Activity.MainActivity"

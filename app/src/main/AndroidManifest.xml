@@ -72,6 +72,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".Activity.UserLeaveCheckActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.UserUpdateinfoActivity"
             android:exported="false">
             <meta-data
@@ -87,10 +94,7 @@
         </activity>
         <activity
             android:name=".Activity.ResetPasswordActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:parentActivityName=".Activity.LoginActivity">
         </activity>
         <!--
  <activity android:name=".Activity.MainActivity"

@@ -1,5 +1,7 @@
 package com.example.myapp.Activity;
 
+import com.example.myapp.Memberinfo;
+
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapp.Memberinfo;
 import com.example.myapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

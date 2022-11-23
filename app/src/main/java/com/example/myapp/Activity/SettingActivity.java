@@ -41,16 +41,16 @@ public class SettingActivity extends BasicActivity {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                finishAffinity();
+                auth.getInstance().signOut();
                 startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
         btn_go_user_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, UserLeaveActivity.class));
+                startActivity(new Intent(SettingActivity.this, UserLeaveCheckActivity.class));
             }
         });
         btn_setting.setOnClickListener(new View.OnClickListener() {

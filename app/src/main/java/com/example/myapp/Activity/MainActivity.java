@@ -1,5 +1,6 @@
 package com.example.myapp.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.media.MediaPlayer;
 import android.media.session.MediaController;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
@@ -18,6 +20,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,8 @@ import java.util.List;
 public class MainActivity extends BasicActivity {
 
     Button btn_home,btn_setting, btn_community, btn_menu;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -36,6 +45,13 @@ public class MainActivity extends BasicActivity {
         btn_home = findViewById(R.id.btn_home);
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
+
+        FirebaseUser user = auth.getInstance().getCurrentUser();
+        if(user == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
