@@ -1,8 +1,5 @@
 package com.example.myapp.Activity;
 
-import com.example.myapp.Memberinfo;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -28,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.regex.Pattern;
 
 public class UserLeaveActivity extends BasicActivity {
-
+    Button btn_home,btn_setting, btn_community, btn_menu;
     Button btn_user_leave;
     EditText et_email, et_password;
     private FirebaseAuth auth;
@@ -42,6 +39,10 @@ public class UserLeaveActivity extends BasicActivity {
         setContentView(R.layout.activity_user_leave);
 
         btn_user_leave = findViewById(R.id.btn_user_leave);
+        btn_setting = findViewById(R.id.btn_setting);
+        btn_home = findViewById(R.id.btn_home);
+        btn_community = findViewById(R.id.btn_community);
+        btn_menu = findViewById(R.id.btn_menu);
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_pwd);
 
@@ -67,5 +68,32 @@ public class UserLeaveActivity extends BasicActivity {
                 }
             }
         });
+
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+                startActivity(new Intent(UserLeaveActivity.this, SettingActivity.class));
+            }
+        });
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserLeaveActivity.this, MainActivity.class));
+            }
+        });
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserLeaveActivity.this, MenuActivity.class));
+            }
+        });
+        btn_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserLeaveActivity.this, CommunityActivity.class));
+            }
+        });
+
     }
 }

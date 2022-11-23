@@ -1,6 +1,5 @@
 package com.example.myapp.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.media.MediaPlayer;
 import android.media.session.MediaController;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
@@ -33,7 +31,7 @@ import java.util.List;
 
 public class MainActivity extends BasicActivity {
 
-    Button btn_home,btn_setting, btn_community, btn_menu;
+    Button btn_setting, btn_community, btn_menu;
     private FirebaseAuth auth;
 
     @Override
@@ -42,7 +40,7 @@ public class MainActivity extends BasicActivity {
         setContentView(R.layout.activity_main);
 
         btn_setting = findViewById(R.id.btn_setting);
-        btn_home = findViewById(R.id.btn_home);
+
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
 
@@ -57,12 +55,6 @@ public class MainActivity extends BasicActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
-            }
-        });
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
             }
         });
         btn_menu.setOnClickListener(new View.OnClickListener() {
