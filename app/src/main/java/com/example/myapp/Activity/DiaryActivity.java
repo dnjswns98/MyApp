@@ -1,4 +1,4 @@
 package com.example.myapp.Activity;
 
-public class MenuListActivity {
+public class DiaryActivity {
 }
