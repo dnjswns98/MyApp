@@ -15,6 +15,7 @@
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".Activity.DetailReportActivity"
             android:exported="false">

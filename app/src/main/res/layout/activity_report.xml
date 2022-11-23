@@ -32,7 +32,7 @@
         android:password="false"
         android:text="월별 상세 리포트"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="37sp"
         android:textStyle="bold" />
 
     <TextView
