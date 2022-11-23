@@ -9,6 +9,7 @@ import com.example.myapp.R;
 
 public class MenuActivity extends BasicActivity{
     Button btn_go_dictionary,btn_go_diary,btn_go_alarm,btn_go_report,btn_go_video;
+    Button btn_home,btn_setting, btn_community, btn_menu;
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -47,6 +48,36 @@ public class MenuActivity extends BasicActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, VideoActivity.class));
+            }
+        });
+
+        btn_setting = findViewById(R.id.btn_setting);
+        btn_home = findViewById(R.id.btn_home);
+        btn_community = findViewById(R.id.btn_community);
+        btn_menu = findViewById(R.id.btn_menu);
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+                startActivity(new Intent(MenuActivity.this, SettingActivity.class));
+            }
+        });
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, MainActivity.class));
+            }
+        });
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, MainActivity.class));
+            }
+        });
+        btn_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, CommunityActivity.class));
             }
         });
     }
