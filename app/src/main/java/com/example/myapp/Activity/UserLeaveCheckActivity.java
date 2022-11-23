@@ -21,6 +21,10 @@ public class UserLeaveCheckActivity extends BasicActivity {
 
         btn_yes = findViewById(R.id.btn_yes);
         btn_no = findViewById(R.id.btn_no);
+        btn_home = findViewById(R.id.btn_home);
+        btn_setting = findViewById(R.id.btn_setting);
+        btn_community = findViewById(R.id.btn_community);
+        btn_menu = findViewById(R.id.btn_menu);
 
         auth = FirebaseAuth.getInstance();
         btn_yes.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +46,6 @@ public class UserLeaveCheckActivity extends BasicActivity {
                 finish();
             }
         });
-
-        btn_setting = findViewById(R.id.btn_setting);
-        btn_home = findViewById(R.id.btn_home);
-        btn_community = findViewById(R.id.btn_community);
-        btn_menu = findViewById(R.id.btn_menu);
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override

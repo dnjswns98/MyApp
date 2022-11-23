@@ -44,7 +44,8 @@ public class MainActivity extends BasicActivity {
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
 
-        FirebaseUser user = auth.getInstance().getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
         if(user == null) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));

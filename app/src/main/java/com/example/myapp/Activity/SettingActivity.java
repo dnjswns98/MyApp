@@ -41,7 +41,7 @@ public class SettingActivity extends BasicActivity {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.getInstance().signOut();
+                auth.signOut();
                 startActivity(new Intent(SettingActivity.this, LoginActivity.class));
                 finish();
             }
