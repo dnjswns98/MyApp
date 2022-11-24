@@ -27,6 +27,16 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="494dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
@@ -127,95 +137,211 @@
 
         </HorizontalScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
             <CalendarView
-                android:id="@+id/Calendar"
+                android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp" />
-            <LinearLayout
+                android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/diaryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:text="식사"
+                android:visibility="invisible"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/contextEditText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="bottom"
-                android:layout_weight="1">
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:hint="내용을 입력하세요."
+                android:inputType="textMultiLine"
+                android:visibility="invisible" /></LinearLayout>
+<!--        푸드딕셔너리 검색해서 추가 가능해지면 이코드로-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/material_dynamic_neutral80"
-                    android:drawableTop="@drawable/ic_baseline_home_24"
-                    android:scaleType="fitStart"
-                    android:text="Home"
-                    android:textSize="11sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/textF2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginLeft="8dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:layout_marginRight="8dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="식사"-->
+<!--                android:visibility="invisible"-->
+<!--                android:textSize="20sp" />-->
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_community"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_person_24"
-                    android:text="Community"
-                    android:textSize="11sp"
-                    android:layout_gravity="bottom"/>
+<!--            <androidx.appcompat.widget.SearchView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/food_searchview"-->
+<!--            app:iconifiedByDefault="false"-->
+<!--            app:queryHint="검색어를 입력하시오."-->
+<!--            app:searchIcon="@drawable/ic_baseline_search_24"-->
+<!--                android:visibility="invisible"-->
+<!--            android:inputType="text"-->
+<!--            />-->
+<!--        </LinearLayout>-->
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_settings_24"
-                    android:text="Setting"
-                    android:textSize="11sp"
-                    android:layout_gravity="bottom"/>
+        <Button
+            android:id="@+id/save_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
+            android:text="저장"
+            android:visibility="invisible" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/edgeall"
+            android:visibility="invisible" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_dehaze_24"
-                    android:text="menu"
-                    android:textSize="11sp"
-                    android:layout_gravity="bottom"/>
 
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cha_Btn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0"
+                android:text="수정"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/del_Btn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+
+                android:layout_marginRight="8dp"
+                android:layout_weight="0"
+                android:text="삭제"
+                android:visibility="invisible"></Button>
+
         </LinearLayout>
 
 
     </LinearLayout>
 
-<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:id="@+id/bottomAppBar"-->
-<!--        app:fabCradleMargin="10dp"-->
-<!--        app:fabCradleRoundedCornerRadius="10dp"-->
-<!--        app:fabCradleVerticalOffset="10dp"-->
-<!--        >-->
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/bottomNavigationView"-->
-<!--            android:layout_marginRight="16dp"-->
-<!--            app:menu="@menu/bottom_nav_menu"-->
-<!--            android:background="@drawable/transparent_background"-->
+    </ScrollView>
 
-<!--            />-->
-<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@color/material_dynamic_neutral80"
+                android:drawableTop="@drawable/ic_baseline_home_24"
+                android:scaleType="fitStart"
+                android:text="Home"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_community"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_person_24"
+                android:text="Community"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_settings_24"
+                android:text="Setting"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_dehaze_24"
+                android:text="menu"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
 
 
 

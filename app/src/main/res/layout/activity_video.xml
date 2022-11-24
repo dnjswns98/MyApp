@@ -346,7 +346,7 @@
                                 android:layout_height="wrap_content"
                                 android:scaleType="fitXY"
                                 app:autoPlay="false"
-                                app:videoId="KXYi6bI-UPE" />
+                                app:videoId="nOGT4lXlSHw" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -360,7 +360,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:autoPlay="false"
-                                app:videoId="dpBYYEhdofI" />
+                                app:videoId="c_5ENJWekbQ" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -374,7 +374,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:autoPlay="false"
-                                app:videoId="QSCeJ__akl0" />
+                                app:videoId="PjGcOP-TQPE" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -388,7 +388,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:autoPlay="false"
-                                app:videoId="js8z5wIZ0wg" />
+                                app:videoId="oQfGNXp4xlM" />
 
                         </androidx.cardview.widget.CardView>
 
