@@ -12,7 +12,7 @@ import com.google.firebase.auth.UserInfo;
 
 public class UserUpdateinfoActivity extends BasicActivity {
 
-    Button btn_home,btn_setting, btn_community, btn_menu;
+    Button btn_home,btn_setting, btn_community, btn_menu, btn_pwdReset, btn_info_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,16 @@ public class UserUpdateinfoActivity extends BasicActivity {
         btn_home = findViewById(R.id.btn_home);
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
+        btn_info_update = findViewById(R.id.btn_info_update);
+        btn_pwdReset = findViewById(R.id.btn_pwdReset);
+
+        btn_pwdReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserUpdateinfoActivity.this, ResetPasswordActivity.class));
+                finish();
+            }
+        });
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override

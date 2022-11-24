@@ -1,0 +1,377 @@
+Index: app/src/main/java/com/example/myapp/Activity/UserUpdateinfoActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.example.myapp.R;\r\nimport com.google.firebase.auth.UserInfo;\r\n\r\npublic class UserUpdateinfoActivity extends BasicActivity {\r\n\r\n    Button btn_home,btn_setting, btn_community, btn_menu;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_user_info_update);\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n        btn_home = findViewById(R.id.btn_home);\r\n        btn_community = findViewById(R.id.btn_community);\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                finishAffinity();\r\n                startActivity(new Intent(UserUpdateinfoActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_home.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(UserUpdateinfoActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(UserUpdateinfoActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(UserUpdateinfoActivity.this, CommunityActivity.class));\r\n            }\r\n        });\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/UserUpdateinfoActivity.java b/app/src/main/java/com/example/myapp/Activity/UserUpdateinfoActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/UserUpdateinfoActivity.java	(revision bff957497c2cfbd3f352311cfae9ff503418f9c5)
++++ b/app/src/main/java/com/example/myapp/Activity/UserUpdateinfoActivity.java	(date 1669269661786)
+@@ -12,7 +12,7 @@
+ 
+ public class UserUpdateinfoActivity extends BasicActivity {
+ 
+-    Button btn_home,btn_setting, btn_community, btn_menu;
++    Button btn_home,btn_setting, btn_community, btn_menu, btn_pwdReset, btn_info_update;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -23,6 +23,16 @@
+         btn_home = findViewById(R.id.btn_home);
+         btn_community = findViewById(R.id.btn_community);
+         btn_menu = findViewById(R.id.btn_menu);
++        btn_info_update = findViewById(R.id.btn_info_update);
++        btn_pwdReset = findViewById(R.id.btn_pwdReset);
++
++        btn_pwdReset.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                startActivity(new Intent(UserUpdateinfoActivity.this, ResetPasswordActivity.class));
++                finish();
++            }
++        });
+ 
+         btn_setting.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/res/layout/activity_user_info_update.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_gravity=\"bottom\"\r\n        android:layout_weight=\"1\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_home\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:adjustViewBounds=\"true\"\r\n            android:background=\"@color/white\"\r\n            android:drawableTop=\"@drawable/ic_baseline_home_24\"\r\n            android:scaleType=\"fitStart\"\r\n            android:text=\"Home\"\r\n            android:textSize=\"11sp\" />\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_community\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:background=\"@color/white\"\r\n            android:drawableTop=\"@drawable/ic_baseline_person_24\"\r\n            android:text=\"Community\"\r\n            android:textSize=\"11sp\" />\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_setting\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:background=\"@color/white\"\r\n            android:drawableTop=\"@drawable/ic_baseline_settings_24\"\r\n            android:text=\"Setting\"\r\n            android:textSize=\"11sp\" />\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_menu\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:background=\"@color/white\"\r\n            android:drawableTop=\"@drawable/ic_baseline_dehaze_24\"\r\n            android:text=\"menu\"\r\n            android:textSize=\"11sp\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <androidx.coordinatorlayout.widget.CoordinatorLayout\r\n        tools:context=\".Activity.UserUpdateinfoActivity\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/black\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"60dp\"\r\n                android:password=\"false\"\r\n                android:text=\"app name\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"40sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView6\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/cardview_dark_background\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"60dp\"\r\n                android:password=\"false\"\r\n                android:text=\"회원 정보 수정\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"40sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\"\r\n                android:padding=\"16dp\">\r\n\r\n                <EditText\r\n                    android:id=\"@+id/et_name\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:ems=\"10\"\r\n                    android:hint=\"이름\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:textColor=\"#979595\"\r\n                    android:textSize=\"18sp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/et_callNum\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:ems=\"10\"\r\n                    android:hint=\"전화번호\"\r\n                    android:inputType=\"text\"\r\n                    android:textColor=\"#979595\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/et_email\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:ems=\"10\"\r\n                    android:hint=\"이메일\"\r\n                    android:inputType=\"text\"\r\n                    android:textColor=\"#979595\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView12\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:text=\"@{this.nickname}\"\r\n                    android:textSize=\"18sp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView5\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:text=\"닉네임 수정 불가\"\r\n                    android:textSize=\"12sp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/et_pwd\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:ems=\"10\"\r\n                    android:hint=\"비밀번호\"\r\n                    android:inputType=\"text\"\r\n                    android:textColor=\"#979595\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView7\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:text=\"8~15자의 영문자, 숫자, 특수문자 포함\"\r\n                    android:textSize=\"12sp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/et_checkPwd\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"15dp\"\r\n                    android:layout_marginEnd=\"15dp\"\r\n                    android:ems=\"10\"\r\n                    android:hint=\"비밀번호 확인\"\r\n                    android:inputType=\"text\"\r\n                    android:textColor=\"#979595\" />\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_info_update\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"58dp\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    android:layout_marginEnd=\"10dp\"\r\n                    android:background=\"#161132\"\r\n                    android:text=\"수정하기\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </LinearLayout>\r\n\r\n\r\n            <!--<com.github.mikephil.charting.charts.BarChart\r\n                    android:id=\"@+id/chart\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_margin=\"10dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintHorizontal_bias=\"0.5\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n        -->\r\n\r\n        </LinearLayout>\r\n\r\n\r\n    </androidx.coordinatorlayout.widget.CoordinatorLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_user_info_update.xml b/app/src/main/res/layout/activity_user_info_update.xml
+--- a/app/src/main/res/layout/activity_user_info_update.xml	(revision bff957497c2cfbd3f352311cfae9ff503418f9c5)
++++ b/app/src/main/res/layout/activity_user_info_update.xml	(date 1669269661800)
+@@ -159,37 +159,6 @@
+                     android:text="닉네임 수정 불가"
+                     android:textSize="12sp" />
+ 
+-                <EditText
+-                    android:id="@+id/et_pwd"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="15dp"
+-                    android:layout_marginEnd="15dp"
+-                    android:ems="10"
+-                    android:hint="비밀번호"
+-                    android:inputType="text"
+-                    android:textColor="#979595" />
+-
+-                <TextView
+-                    android:id="@+id/textView7"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="15dp"
+-                    android:layout_marginEnd="15dp"
+-                    android:text="8~15자의 영문자, 숫자, 특수문자 포함"
+-                    android:textSize="12sp" />
+-
+-                <EditText
+-                    android:id="@+id/et_checkPwd"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="15dp"
+-                    android:layout_marginEnd="15dp"
+-                    android:ems="10"
+-                    android:hint="비밀번호 확인"
+-                    android:inputType="text"
+-                    android:textColor="#979595" />
+-
+                 <androidx.appcompat.widget.AppCompatButton
+                     android:id="@+id/btn_info_update"
+                     android:layout_width="match_parent"
+@@ -202,6 +171,19 @@
+                     android:textColor="@color/white"
+                     android:textSize="20sp"
+                     android:textStyle="bold" />
++
++                <androidx.appcompat.widget.AppCompatButton
++                    android:id="@+id/btn_pwdReset"
++                    android:layout_width="match_parent"
++                    android:layout_height="58dp"
++                    android:layout_marginStart="10dp"
++                    android:layout_marginTop="10dp"
++                    android:layout_marginEnd="10dp"
++                    android:background="#161132"
++                    android:text="비밀번호 수정"
++                    android:textColor="@color/white"
++                    android:textSize="20sp"
++                    android:textStyle="bold" />
+             </LinearLayout>
+ 
+ 
+Index: app/src/main/res/layout/activity_detail_report.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Activity.DetailReportActivity\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_detail_report.xml b/app/src/main/res/layout/activity_detail_report.xml
+--- a/app/src/main/res/layout/activity_detail_report.xml	(revision bff957497c2cfbd3f352311cfae9ff503418f9c5)
++++ b/app/src/main/res/layout/activity_detail_report.xml	(date 1669227978202)
+@@ -1,9 +1,144 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".Activity.DetailReportActivity">
++    android:layout_height="match_parent">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <TextView
++            android:id="@+id/textView"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/black"
++            android:fontFamily="@font/gmarketsans"
++            android:gravity="center"
++            android:minHeight="60dp"
++            android:text="app name"
++            android:textColor="@color/white"
++            android:textSize="40sp"
++            android:textStyle="bold" />
++
++        <TextView
++            android:id="@+id/textView6"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/cardview_dark_background"
++            android:fontFamily="@font/gmarketsans"
++            android:gravity="center"
++            android:minHeight="60dp"
++            android:text="상세 리포트"
++            android:textColor="@color/white"
++            android:textSize="37sp"
++            android:textStyle="bold" />
++
++        <!--        월별 평균 체중 필요-->
++        <TextView
++            android:layout_width="361dp"
++            android:layout_height="192dp"
++            android:layout_gravity="center"
++            android:layout_marginVertical="20dp"
++            android:background="#ADAEB1"
++            android:text="월별 평균 체중\n9월 -60kg\n10월 -58kg\n11월 -58kg"
++            android:textAlignment="textStart"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            tools:ignore="RtlCompat" />
++        <!--평균 운동 칼로리 필요-->
++        <TextView
++            android:layout_width="361dp"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:background="#ADAEB1"
++            android:text="평균 운동 칼로리 kcal"
++            android:textAlignment="textStart"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            tools:ignore="RtlCompat" />
++        <!--        평균 걸음수 필요-->
++        <TextView
++            android:layout_width="361dp"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:layout_marginTop="20dp"
++            android:background="#ADAEB1"
++            android:text="평균 걸음수 보"
++            android:textAlignment="textStart"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            tools:ignore="RtlCompat" />
++        <!--        운동을 가장 많이 한 날-->
++        <TextView
++            android:layout_width="361dp"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:layout_marginTop="20dp"
++            android:background="#ADAEB1"
++            android:text="운동을 가장 많이 한 날 "
++            android:textAlignment="textStart"
++            android:textColor="@color/white"
++            android:textSize="20sp"
++            tools:ignore="RtlCompat" />
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_alignParentBottom="true"
++            android:layout_gravity="bottom"
++            android:layout_weight="1"
++            android:orientation="horizontal">
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_home"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:adjustViewBounds="true"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_home_24"
++                android:scaleType="fitStart"
++                android:text="Home"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_community"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_person_24"
++                android:text="Community"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_setting"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_settings_24"
++                android:text="Setting"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_menu"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/material_dynamic_neutral80"
++                android:drawableTop="@drawable/ic_baseline_dehaze_24"
++                android:text="menu"
++                android:textSize="11sp" />
++
++
++        </LinearLayout>
++    </LinearLayout>
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_video.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Activity.VideoActivity\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_video.xml b/app/src/main/res/layout/activity_video.xml
+--- a/app/src/main/res/layout/activity_video.xml	(revision bff957497c2cfbd3f352311cfae9ff503418f9c5)
++++ b/app/src/main/res/layout/activity_video.xml	(date 1669227900380)
+@@ -1,9 +1,98 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".Activity.VideoActivity">
++    android:layout_height="match_parent">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++        <TextView
++            android:id="@+id/textView"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/black"
++            android:fontFamily="@font/gmarketsans"
++            android:gravity="center"
++            android:minHeight="60dp"
++            android:text="app name"
++            android:textColor="@color/white"
++            android:textSize="40sp"
++            android:textStyle="bold" />
++
++        <TextView
++            android:id="@+id/textView6"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@color/cardview_dark_background"
++            android:fontFamily="@font/gmarketsans"
++            android:gravity="center"
++            android:minHeight="60dp"
++            android:text="추천 운동 video"
++            android:textColor="@color/white"
++            android:textSize="37sp"
++            android:textStyle="bold" />
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_alignParentBottom="true"
++            android:layout_gravity="bottom"
++            android:layout_weight="1"
++            android:orientation="horizontal">
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_home"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:adjustViewBounds="true"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_home_24"
++                android:scaleType="fitStart"
++                android:text="Home"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_community"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_person_24"
++                android:text="Community"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_setting"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_settings_24"
++                android:text="Setting"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_menu"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/material_dynamic_neutral80"
++                android:drawableTop="@drawable/ic_baseline_dehaze_24"
++                android:text="menu"
++                android:textSize="11sp" />
++
++
++        </LinearLayout>
++
++    </LinearLayout>
++
++
++
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
