@@ -15,7 +15,6 @@
         android:fontFamily="@font/gmarketsans"
         android:gravity="center"
         android:minHeight="60dp"
-        android:password="false"
         android:text="app name"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -28,11 +27,10 @@
         android:background="@color/cardview_dark_background"
         android:fontFamily="@font/gmarketsans"
         android:gravity="center"
-        android:minHeight="60dp"
-        android:password="false"
+        android:minHeight="40dp"
         android:text="월별 상세 리포트"
         android:textColor="@color/white"
-        android:textSize="37sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
