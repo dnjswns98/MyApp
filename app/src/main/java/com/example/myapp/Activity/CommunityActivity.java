@@ -9,12 +9,21 @@ import com.example.myapp.R;
 
 public class CommunityActivity extends BasicActivity{
     Button btn_home,btn_setting, btn_community, btn_menu;
+    Button btn_go_friend;
 
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_community);
+
+        btn_go_friend = findViewById(R.id.btn_go_friend);
+        btn_go_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         btn_setting = findViewById(R.id.btn_setting);
         btn_home = findViewById(R.id.btn_home);

@@ -38,6 +38,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:21.0.8'
     implementation 'com.google.firebase:firebase-database:20.0.6'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+
+    //circleimageview 사용
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Glide 사용, 이미지를 빠르고 효율적으로 불러올 수 있게 도와주는 라이브러리
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
 
     // 유튜브 추가 레이어
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'

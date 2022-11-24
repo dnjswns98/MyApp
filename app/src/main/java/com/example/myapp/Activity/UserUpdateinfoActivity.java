@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.myapp.Fragments.ProfileFragment;
 import com.example.myapp.R;
 import com.google.firebase.auth.UserInfo;
 
 public class UserUpdateinfoActivity extends BasicActivity {
 
     Button btn_home,btn_setting, btn_community, btn_menu, btn_pwdReset, btn_info_update;
+    ImageView image_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,15 @@ public class UserUpdateinfoActivity extends BasicActivity {
         btn_menu = findViewById(R.id.btn_menu);
         btn_info_update = findViewById(R.id.btn_info_update);
         btn_pwdReset = findViewById(R.id.btn_pwdReset);
+        image_profile = findViewById(R.id.profile_image);
+
+        image_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserUpdateinfoActivity.this, ProfileFragment.class));
+                finish();
+            }
+        });
 
         btn_pwdReset.setOnClickListener(new View.OnClickListener() {
             @Override
