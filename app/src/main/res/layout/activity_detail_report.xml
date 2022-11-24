@@ -29,10 +29,10 @@
             android:background="@color/cardview_dark_background"
             android:fontFamily="@font/gmarketsans"
             android:gravity="center"
-            android:minHeight="60dp"
+            android:minHeight="40dp"
             android:text="상세 리포트"
             android:textColor="@color/white"
-            android:textSize="37sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <!--        월별 평균 체중 필요-->
