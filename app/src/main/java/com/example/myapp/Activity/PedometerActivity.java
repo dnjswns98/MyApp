@@ -20,10 +20,12 @@ import android.content.pm.PackageManager;
 public class PedometerActivity extends BasicActivity implements SensorEventListener {
 
     TextView tv_sensor;
+    TextView kcal, km;
     SensorManager sm;
     Sensor sensor_step_detector;
     ProgressBar progressBar;
     int steps = 0; //sensor
+    String Kcal, Km;
 
     Button btn_home,btn_setting, btn_community, btn_menu;
     @Override
@@ -101,7 +103,14 @@ public class PedometerActivity extends BasicActivity implements SensorEventListe
         switch (event.sensor.getType()) {
             case Sensor.TYPE_STEP_DETECTOR:
                 tv_sensor.setText("" + (++steps));
-                progressBar.setProgress(steps);
+                if (steps >= 10000) {
+                    progressBar.setProgress(10000);
+                }
+                else progressBar.setProgress(steps);
+                Kcal=Double.toString(steps*0.034);
+                kcal.setText(Kcal);
+                Km=Double.toString(steps*0.001);
+                km.setText(Km);
                 break;
         }
     };
