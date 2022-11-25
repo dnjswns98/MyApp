@@ -13,11 +13,67 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_home_24"
+                android:scaleType="fitStart"
+                android:text="Home"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_community"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_person_24"
+                android:text="Community"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:drawableTop="@drawable/ic_baseline_settings_24"
+                android:text="Setting"
+                android:textSize="11sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/material_dynamic_neutral80"
+                android:drawableTop="@drawable/ic_baseline_dehaze_24"
+                android:text="menu"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textview1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
@@ -44,105 +100,52 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_home"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/button_timepicker"
+                    android:layout_centerHorizontal="true"
+
+
+                    android:layout_marginBottom="31dp"
+                    android:fontFamily="@font/gmarketsans"
+                    android:gravity="center"
+                    android:text="알람 없음"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button_timepicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_home_24"
-                    android:scaleType="fitStart"
-                    android:text="Home"
-                    android:textSize="11sp" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/material_dynamic_primary60"
+                    android:text="알람 추가"
+                    android:textSize="24sp"
+                    app:iconTint="@color/material_dynamic_neutral70" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_community"
+                <Button
+                    android:id="@+id/button_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_person_24"
-                    android:text="Community"
-                    android:textSize="11sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_baseline_settings_24"
-                    android:text="Setting"
-                    android:textSize="11sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:background="@color/material_dynamic_neutral80"
-                    android:drawableTop="@drawable/ic_baseline_dehaze_24"
-                    android:text="menu"
-                    android:textSize="11sp" />
-
-
+                    android:layout_below="@+id/button_timepicker"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@color/material_dynamic_primary60"
+                    android:text="알람 취소"
+                    android:textSize="24sp" />
             </LinearLayout>
 
-
-            <!--<com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-        -->
-
         </LinearLayout>
-
-
-        <!--        <com.google.android.material.bottomappbar.BottomAppBar-->
-        <!--            android:id="@+id/bottomAppBar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="bottom"-->
-        <!--            app:fabCradleMargin="10dp"-->
-        <!--            app:fabCradleRoundedCornerRadius="10dp"-->
-        <!--            app:fabCradleVerticalOffset="10dp">-->
-
-        <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--                android:id="@+id/bottomNavigationView"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_marginRight="16dp"-->
-        <!--                android:background="@drawable/transparent_background"-->
-        <!--                app:menu="@menu/bottom_nav_menu"-->
-
-        <!--                />-->
-        <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:id="@+id/fab"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:src="@drawable/ic_baseline_add_24"-->
-        <!--            app:layout_anchor="@id/bottomAppBar"-->
-
-        <!--            />-->
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
