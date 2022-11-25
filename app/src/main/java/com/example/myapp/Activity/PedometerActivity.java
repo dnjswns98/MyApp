@@ -1,35 +1,41 @@
 package com.example.myapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.myapp.R;
 
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
 public class PedometerActivity extends BasicActivity implements SensorEventListener {
 
     TextView tv_sensor;
     SensorManager sm;
     Sensor sensor_step_detector;
-
-    int steps = 0;
+    ProgressBar progressBar;
+    int steps = 0; //sensor
 
     Button btn_home,btn_setting, btn_community, btn_menu;
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_pedometer);
+// 활동 퍼미션 체크
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
 
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
+        }
         tv_sensor = (TextView) findViewById(R.id.sensor);        // 텍스트뷰 인식
         tv_sensor.setText("0"); // 걸음 수 초기화 및 출력
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);   // 센서 매니저 생성
@@ -39,6 +45,9 @@ public class PedometerActivity extends BasicActivity implements SensorEventListe
         btn_home = findViewById(R.id.btn_home);
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
+
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +101,9 @@ public class PedometerActivity extends BasicActivity implements SensorEventListe
         switch (event.sensor.getType()) {
             case Sensor.TYPE_STEP_DETECTOR:
                 tv_sensor.setText("" + (++steps));
+                progressBar.setProgress(steps);
                 break;
         }
     };
+
 }
