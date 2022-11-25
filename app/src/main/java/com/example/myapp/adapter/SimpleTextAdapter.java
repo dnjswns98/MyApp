@@ -39,7 +39,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.food_recyclerview_item, parent, false) ;
+        View view = inflater.inflate(R.layout.item_food_recyclerview, parent, false) ;
         SimpleTextAdapter.ViewHolder vh = new SimpleTextAdapter.ViewHolder(view) ;
 
         return vh ;

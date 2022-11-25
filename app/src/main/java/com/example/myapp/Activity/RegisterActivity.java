@@ -75,7 +75,7 @@ public class RegisterActivity extends BasicActivity {
                 else if (!txt_password.equals(txt_checkPwd)){
                     Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(txt_username, txt_email, txt_password, txt_phoneNum, txt_username);
+                    register(txt_nickname, txt_email, txt_password, txt_phoneNum, txt_username);
                 }
             }
         });
@@ -102,7 +102,6 @@ public class RegisterActivity extends BasicActivity {
 
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", userid);
-                    hashMap.put("pwd", password);
                     hashMap.put("nickname", nickname);
                     hashMap.put("phoneNum", phoneNum);
                     hashMap.put("username", username);
