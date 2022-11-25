@@ -42,6 +42,10 @@ public class PedometerActivity extends BasicActivity implements SensorEventListe
         tv_sensor.setText("0"); // 걸음 수 초기화 및 출력
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);   // 센서 매니저 생성
         sensor_step_detector = sm.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);  // 스템 감지 센서 등록
+        kcal = (TextView) findViewById(R.id.kcal);
+        kcal.setText("0");
+        km = (TextView) findViewById(R.id.km);
+        km.setText("0");
 
         btn_setting = findViewById(R.id.btn_setting);
         btn_home = findViewById(R.id.btn_home);
