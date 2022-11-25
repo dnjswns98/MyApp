@@ -8,14 +8,13 @@ import android.widget.Button;
 import com.example.myapp.R;
 
 public class MenuActivity extends BasicActivity{
-    Button btn_go_dictionary,btn_go_diary,btn_go_alarm,btn_go_report,btn_go_video;
+    Button btn_go_dictionary,btn_go_alarm,btn_go_report,btn_go_video;
     Button btn_home,btn_setting, btn_community, btn_menu;
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_menu_list);
         btn_go_dictionary = findViewById(R.id.btn_go_dictionary);
-//        btn_go_diary = findViewById(R.id.btn_go_diary);
         btn_go_alarm = findViewById(R.id.btn_go_alarm);
         btn_go_report = findViewById(R.id.btn_go_report);
         btn_go_video = findViewById(R.id.btn_go_video);

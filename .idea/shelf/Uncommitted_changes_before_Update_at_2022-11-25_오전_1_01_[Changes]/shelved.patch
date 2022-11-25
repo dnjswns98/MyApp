@@ -1,0 +1,248 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApp\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n\r\n        <activity\r\n            android:name=\".Activity.DetailReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ExerDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.FoodDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.VideoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DiaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.AlarmActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.CommunityActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.MenuActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveCheckActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserUpdateinfoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SettingActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ResetPasswordActivity\"\r\n            android:parentActivityName=\".Activity.LoginActivity\">\r\n        </activity>\r\n        <!--\r\n <activity android:name=\".Activity.MainActivity\"\r\n            android:exported=\"false\"> 가 원래 모습\r\n        -->\r\n        <activity\r\n            android:name=\".Activity.MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SplashscreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision f50c26c26e5858742ee5bfacead6ba17e4849b7d)
++++ b/app/src/main/AndroidManifest.xml	(date 1669305571926)
+@@ -3,6 +3,8 @@
+     xmlns:tools="http://schemas.android.com/tools">
+ 
+     <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
++    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+ 
+     <application
+         android:allowBackup="true"
+@@ -10,12 +12,22 @@
+         android:fullBackupContent="@xml/backup_rules"
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
++        android:requestLegacyExternalStorage="true"
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.MyApp"
+         android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+-
++        <activity
++            android:name=".RoomActivity"
++            android:exported="false">
++            <meta-data
++                android:name="android.app.lib_name"
++                android:value="" />
++        </activity>
++        <activity android:name=".Activity.PostActivity" />
++        <activity android:name=".Activity.MessageActivity" />
++        <activity android:name=".Activity.GalleryActivity" />
+         <activity
+             android:name=".Activity.DetailReportActivity"
+             android:exported="false">
+@@ -72,13 +84,7 @@
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+-        <activity
+-            android:name=".Activity.CommunityActivity"
+-            android:exported="false">
+-            <meta-data
+-                android:name="android.app.lib_name"
+-                android:value="" />
+-        </activity>
++        <activity android:name=".Activity.CommunityActivity" />
+         <activity
+             android:name=".Activity.MenuActivity"
+             android:exported="false">
+@@ -116,8 +122,7 @@
+         </activity>
+         <activity
+             android:name=".Activity.ResetPasswordActivity"
+-            android:parentActivityName=".Activity.LoginActivity">
+-        </activity>
++            android:parentActivityName=".Activity.LoginActivity" />
+         <!--
+  <activity android:name=".Activity.MainActivity"
+             android:exported="false"> 가 원래 모습
+@@ -154,4 +159,4 @@
+         </activity>
+     </application>
+ 
+-</manifest>
+\ No newline at end of file
++</manifest>
+Index: app/src/main/res/layout/activity_pedometer.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_pedometer.xml b/app/src/main/res/layout/activity_pedometer.xml
+new file mode 100644
+--- /dev/null	(date 1669305286613)
++++ b/app/src/main/res/layout/activity_pedometer.xml	(date 1669305286613)
+@@ -0,0 +1,162 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools" >
++
++    <androidx.coordinatorlayout.widget.CoordinatorLayout
++        tools:context=".Activity.PedometerActivity"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_gravity="bottom"
++            android:layout_weight="1"
++            android:orientation="horizontal">
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_home"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:adjustViewBounds="true"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_home_24"
++                android:scaleType="fitStart"
++                android:text="Home"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_community"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_person_24"
++                android:text="Community"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_setting"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_settings_24"
++                android:text="Setting"
++                android:textSize="11sp" />
++
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_menu"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/material_dynamic_neutral80"
++                android:drawableTop="@drawable/ic_baseline_dehaze_24"
++                android:text="menu"
++                android:textSize="11sp" />
++
++
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="vertical">
++
++            <TextView
++                android:id="@+id/textView"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:background="@color/black"
++                android:fontFamily="@font/gmarketsans"
++                android:gravity="center"
++                android:minHeight="60dp"
++                android:text="app name"
++                android:textColor="@color/white"
++                android:textSize="40sp"
++                android:textStyle="bold" />
++
++            <TextView
++                android:id="@+id/textView6"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:background="@color/cardview_dark_background"
++                android:fontFamily="@font/gmarketsans"
++                android:gravity="center"
++                android:minHeight="40dp"
++                android:text="만보기"
++                android:textColor="@color/white"
++                android:textSize="25sp"
++                android:textStyle="bold" />
++
++            <TextView
++                android:id="@+id/sensor"
++                android:textSize="100dp"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="0"
++                app:layout_constraintBottom_toBottomOf="parent"
++                app:layout_constraintLeft_toLeftOf="parent"
++                app:layout_constraintRight_toRightOf="parent"
++                app:layout_constraintTop_toTopOf="parent" />
++
++
++
++
++            <!--<com.github.mikephil.charting.charts.BarChart
++                    android:id="@+id/chart"
++                    android:layout_width="match_parent"
++                    android:layout_height="300dp"
++                    android:layout_margin="10dp"
++                    app:layout_constraintBottom_toBottomOf="parent"
++                    app:layout_constraintEnd_toEndOf="parent"
++                    app:layout_constraintHorizontal_bias="0.5"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintTop_toTopOf="parent" />
++        -->
++
++        </LinearLayout>
++
++
++        <!--        <com.google.android.material.bottomappbar.BottomAppBar-->
++        <!--            android:id="@+id/bottomAppBar"-->
++        <!--            android:layout_width="match_parent"-->
++        <!--            android:layout_height="wrap_content"-->
++        <!--            android:layout_gravity="bottom"-->
++        <!--            app:fabCradleMargin="10dp"-->
++        <!--            app:fabCradleRoundedCornerRadius="10dp"-->
++        <!--            app:fabCradleVerticalOffset="10dp">-->
++
++        <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
++        <!--                android:id="@+id/bottomNavigationView"-->
++        <!--                android:layout_width="match_parent"-->
++        <!--                android:layout_height="match_parent"-->
++        <!--                android:layout_marginRight="16dp"-->
++        <!--                android:background="@drawable/transparent_background"-->
++        <!--                app:menu="@menu/bottom_nav_menu"-->
++
++        <!--                />-->
++        <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
++
++        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
++        <!--            android:id="@+id/fab"-->
++        <!--            android:layout_width="wrap_content"-->
++        <!--            android:layout_height="wrap_content"-->
++        <!--            android:src="@drawable/ic_baseline_add_24"-->
++        <!--            app:layout_anchor="@id/bottomAppBar"-->
++
++        <!--            />-->
++
++
++    </androidx.coordinatorlayout.widget.CoordinatorLayout>
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

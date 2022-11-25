@@ -1,0 +1,68 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:requestLegacyExternalStorage=\"true\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApp\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".RoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.PostActivity\" />\r\n        <activity android:name=\".Activity.MessageActivity\" />\r\n        <activity android:name=\".Activity.GalleryActivity\" />\r\n        <activity\r\n            android:name=\".Activity.DetailReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ExerDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.FoodDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.VideoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DiaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.AlarmActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.CommunityActivity\" />\r\n        <activity\r\n            android:name=\".Activity.MenuActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveCheckActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserUpdateinfoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SettingActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ResetPasswordActivity\"\r\n            android:parentActivityName=\".Activity.LoginActivity\" />\r\n        <!--\r\n <activity android:name=\".Activity.MainActivity\"\r\n            android:exported=\"false\"> 가 원래 모습\r\n        -->\r\n        <activity\r\n            android:name=\".Activity.MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SplashscreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/AndroidManifest.xml	(date 1669306915859)
+@@ -5,6 +5,8 @@
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
++    <uses-feature android:name="android.hardware.sensor.stepdetector" />
++
+ 
+     <application
+         android:allowBackup="true"
+@@ -19,7 +21,20 @@
+         android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+         <activity
+-            android:name=".RoomActivity"
++            android:name=".Activity.PedometerActivity"
++            android:exported="true">
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN" />
++
++                <category android:name="android.intent.category.LAUNCHER" />
++            </intent-filter>
++
++            <meta-data
++                android:name="android.app.lib_name"
++                android:value="" />
++        </activity>
++        <activity
++            android:name=".Activity.RoomActivity"
+             android:exported="false">
+             <meta-data
+                 android:name="android.app.lib_name"
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <targetSelectedWithDropDown>\r\n      <Target>\r\n        <type value=\"QUICK_BOOT_TARGET\" />\r\n        <deviceKey>\r\n          <Key>\r\n            <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n            <value value=\"C:\\Users\\하은\\.android\\avd\\Pixel_3_XL_API_29.avd\" />\r\n            <value value=\"C:\\Users\\tngkr\\.android\\avd\\Pixel_2_API_30_1.avd\" />\r\n            <value value=\"C:\\Users\\하은\\.android\\avd\\Pixel_2_API_29.avd\" />\r\n          </Key>\r\n        </deviceKey>\r\n      </Target>\r\n    </targetSelectedWithDropDown>\r\n    <timeTargetWasSelectedWithDropDown value=\"2022-11-24T10:02:13.662555400Z\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1669307833974)
+@@ -7,13 +7,11 @@
+         <deviceKey>
+           <Key>
+             <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\하은\.android\avd\Pixel_3_XL_API_29.avd" />
+-            <value value="C:\Users\tngkr\.android\avd\Pixel_2_API_30_1.avd" />
+-            <value value="C:\Users\하은\.android\avd\Pixel_2_API_29.avd" />
++            <value value="C:\Users\하은\.android\avd\Pixel_3a_API_33.avd" />
+           </Key>
+         </deviceKey>
+       </Target>
+     </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-11-24T10:02:13.662555400Z" />
++    <timeTargetWasSelectedWithDropDown value="2022-11-24T16:35:35.543630900Z" />
+   </component>
+ </project>
+\ No newline at end of file
