@@ -101,48 +101,45 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="60dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/button_timepicker"
-                    android:layout_centerHorizontal="true"
-
-
-                    android:layout_marginBottom="31dp"
                     android:fontFamily="@font/gmarketsans"
-                    android:gravity="center"
-                    android:text="알람 없음"
-                    android:textSize="34sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_horizontal"
+                    android:text="Time"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold"></TextView>
 
                 <Button
-                    android:id="@+id/button_timepicker"
+                    android:id="@+id/btn_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="20dp"
                     android:backgroundTint="@color/material_dynamic_primary60"
-                    android:text="알람 추가"
+                    android:fontFamily="@font/gmarketsans"
+                    android:gravity="center_horizontal"
+                    android:text="시간 지정"
                     android:textSize="24sp"
-                    app:iconTint="@color/material_dynamic_neutral70" />
+                    android:textStyle="bold"></Button>
 
                 <Button
-                    android:id="@+id/button_cancel"
+                    android:id="@+id/btn_alarm_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/button_timepicker"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
                     android:backgroundTint="@color/material_dynamic_primary60"
+                    android:fontFamily="@font/gmarketsans"
+                    android:gravity="center_horizontal"
                     android:text="알람 취소"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold"></Button>
             </LinearLayout>
 
         </LinearLayout>
