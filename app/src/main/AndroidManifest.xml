@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.sensor.stepdetector" />
-
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
     <application
@@ -28,6 +27,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <receiver android:name=".Fragments.AlertReceiver"/>
         <activity
             android:name=".Activity.PedometerActivity"
             android:exported="true">
@@ -81,13 +81,6 @@
         </activity>
         <activity
             android:name=".Activity.ReportActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.DiaryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
