@@ -3,20 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Activity.FoodDictionaryActivity">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        tools:context=".Activity.FoodDictionaryActivity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        tools:context=".Activity.FoodDictionaryActivity"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linear1"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView"
@@ -44,95 +47,118 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/food_searchview"
-                app:iconifiedByDefault="false"
-                app:queryHint="검색어를 입력하시오."
-                app:searchIcon="@drawable/ic_baseline_search_24"
-                android:inputType="text"
-                />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_food"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_food"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
 
-
-
-
-            <!--<com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-        -->
+                android:layout_margin="5dp"
+                android:background="@drawable/round_button"
+                android:backgroundTint="@color/white"
+                android:text="+"
+                android:textColor="#626367"
+                android:textSize="34sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
-        <LinearLayout
+
+
+<!--&lt;!&ndash;            <androidx.appcompat.widget.SearchView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/food_searchview"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:iconifiedByDefault="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:queryHint="검색어를 입력하시오."&ndash;&gt;-->
+<!--&lt;!&ndash;                app:searchIcon="@drawable/ic_baseline_search_24"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:inputType="text"&ndash;&gt;-->
+<!--&lt;!&ndash;                />&ndash;&gt;-->
+<!--            -->
+
+
+
+<!--            &lt;!&ndash;<com.github.mikephil.charting.charts.BarChart-->
+<!--                    android:id="@+id/chart"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="300dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+<!--        &ndash;&gt;-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_food"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"/>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_home_24"
+            android:scaleType="fitStart"
+            android:text="Home"
+            android:textSize="11sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="@color/white"
-                android:drawableTop="@drawable/ic_baseline_home_24"
-                android:scaleType="fitStart"
-                android:text="Home"
-                android:textSize="11sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_community"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_person_24"
+            android:text="Community"
+            android:textSize="11sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_community"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:drawableTop="@drawable/ic_baseline_person_24"
-                android:text="Community"
-                android:textSize="11sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:text="Setting"
+            android:textSize="11sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_setting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:drawableTop="@drawable/ic_baseline_settings_24"
-                android:text="Setting"
-                android:textSize="11sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@color/material_dynamic_neutral80"
-                android:drawableTop="@drawable/ic_baseline_dehaze_24"
-                android:text="menu"
-                android:textSize="11sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/material_dynamic_neutral80"
+            android:drawableTop="@drawable/ic_baseline_dehaze_24"
+            android:text="menu"
+            android:textSize="11sp" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--    //</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,5 +45,7 @@ public class ExerDictionaryActivity  extends  BasicActivity{
                 startActivity(new Intent(ExerDictionaryActivity.this, CommunityActivity.class));
             }
         });
+
+
     }
 }

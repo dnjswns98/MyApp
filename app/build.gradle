@@ -60,6 +60,7 @@ dependencies {
     // 로딩 화면 생성
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
 
     // graph 생성
