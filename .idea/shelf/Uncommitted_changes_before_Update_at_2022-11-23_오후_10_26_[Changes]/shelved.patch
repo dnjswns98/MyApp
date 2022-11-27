@@ -1,0 +1,136 @@
+Index: app/src/main/java/com/example/myapp/Activity/ReportActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\npublic class ReportActivity {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/ReportActivity.java b/app/src/main/java/com/example/myapp/Activity/ReportActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/ReportActivity.java	(revision 4f43f470ae15d4a2deb0754c4e6242e96ac455cb)
++++ b/app/src/main/java/com/example/myapp/Activity/ReportActivity.java	(date 1669208723850)
+@@ -1,4 +1,61 @@
+ package com.example.myapp.Activity;
+ 
+-public class ReportActivity {
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.graphics.Color;
++import android.os.Bundle;
++
++
++import com.example.myapp.R;
++import com.github.mikephil.charting.charts.LineChart;
++import com.github.mikephil.charting.data.Entry;
++import com.github.mikephil.charting.data.LineData;
++import com.github.mikephil.charting.data.LineDataSet;
++import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
++import com.github.mikephil.charting.utils.ColorTemplate;
++
++
++import java.util.ArrayList;
++
++public class ReportActivity extends BasicActivity{
++    //선 그래프
++    private LineChart lineChart;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_report);
++
++        ArrayList<Entry> entry_chart1 = new ArrayList<>(); // 데이터를 담을 Arraylist
++
++
++        lineChart = (LineChart) findViewById(R.id.chart);
++
++        LineData chartData = new LineData(); // 차트에 담길 데이터
++
++        entry_chart1.add(new Entry(1, 1)); //entry_chart1에 좌표 데이터를 담는다.
++        entry_chart1.add(new Entry(2, 2));
++        entry_chart1.add(new Entry(3, 3));
++        entry_chart1.add(new Entry(4, 4));
++        entry_chart1.add(new Entry(5, 2));
++        entry_chart1.add(new Entry(6, 8));
++
++
++
++        LineDataSet lineDataSet1 = new LineDataSet(entry_chart1, "LineGraph1"); // 데이터가 담긴 Arraylist 를 LineDataSet 으로 변환한다.
++
++        lineDataSet1.setColor(Color.BLUE); // 해당 LineDataSet의 색 설정 :: 각 Line 과 관련된 세팅은 여기서 설정한다.
++
++
++        chartData.addDataSet(lineDataSet1); // 해당 LineDataSet 을 적용될 차트에 들어갈 DataSet 에 넣는다.
++
++
++        lineChart.setData(chartData); // 차트에 위의 DataSet을 넣는다.
++
++        lineChart.invalidate(); // 차트 업데이트
++        lineChart.setTouchEnabled(false); // 차트 터치 disable
++
++    }
++
+ }
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.myapp'\r\n    compileSdk 33\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.myapp\"\r\n        minSdk 29\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:30.4.1')\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'com.google.firebase:firebase-auth:21.0.8'\r\n    implementation 'com.google.firebase:firebase-database:20.0.6'\r\n\r\n    // 유튜브 추가 레이어\r\n    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'\r\n\r\n    // 메인 화면 차트 생성\r\n    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'\r\n\r\n    // navigation bar 생성\r\n    implementation 'com.google.android.material:material:1.7.0'\r\n\r\n    // 로딩 화면 생성\r\n    implementation 'com.airbnb.android:lottie:5.2.0'\r\n\r\n\r\n\r\n    // graph 생성\r\n\r\n\r\n    testImplementation 'junit:junit:4.13.2'\r\n\r\n\r\n\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 4f43f470ae15d4a2deb0754c4e6242e96ac455cb)
++++ b/app/build.gradle	(date 1669209366599)
+@@ -62,4 +62,5 @@
+ 
+     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+-}
+\ No newline at end of file
++}
++
+Index: app/src/main/res/layout/activity_report.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_report.xml b/app/src/main/res/layout/activity_report.xml
+new file mode 100644
+--- /dev/null	(date 1669208693757)
++++ b/app/src/main/res/layout/activity_report.xml	(date 1669208693757)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:gravity="center"
++    android:layout_height="match_parent"
++    android:orientation="vertical">
++
++    <com.github.mikephil.charting.charts.LineChart
++        android:layout_height="300dp"
++        android:layout_width="match_parent"
++        android:id="@+id/chart"/>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        maven { url \"https://maven.google.com\" }\r\n    }\r\n    dependencies {\r\n        classpath 'com.android.tools.build:gradle:3.4.3'\r\n        classpath 'com.google.gms:google-services:4.3.14'\r\n    }\r\n}\r\n\r\nplugins {\r\n    id 'com.android.application' version '7.3.0' apply false\r\n    id 'com.android.library' version '7.3.0' apply false\r\n\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 4f43f470ae15d4a2deb0754c4e6242e96ac455cb)
++++ b/build.gradle	(date 1669207891135)
+@@ -2,7 +2,9 @@
+     repositories {
+         google()
+         jcenter()
++        mavenCentral()
+         maven { url "https://maven.google.com" }
++        maven { url "https://jitpack.io" }
+     }
+     dependencies {
+         classpath 'com.android.tools.build:gradle:3.4.3'

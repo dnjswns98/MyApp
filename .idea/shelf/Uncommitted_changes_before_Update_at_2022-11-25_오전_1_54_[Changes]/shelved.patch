@@ -1,0 +1,809 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:requestLegacyExternalStorage=\"true\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApp\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".RoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.PostActivity\" />\r\n        <activity android:name=\".Activity.MessageActivity\" />\r\n        <activity android:name=\".Activity.GalleryActivity\" />\r\n        <activity\r\n            android:name=\".Activity.DetailReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ExerDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.FoodDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.VideoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DiaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.AlarmActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.CommunityActivity\" />\r\n        <activity\r\n            android:name=\".Activity.MenuActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveCheckActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserUpdateinfoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SettingActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ResetPasswordActivity\"\r\n            android:parentActivityName=\".Activity.LoginActivity\" />\r\n        <!--\r\n <activity android:name=\".Activity.MainActivity\"\r\n            android:exported=\"false\"> 가 원래 모습\r\n        -->\r\n        <activity\r\n            android:name=\".Activity.MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SplashscreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/AndroidManifest.xml	(date 1669308848490)
+@@ -19,7 +19,7 @@
+         android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+         <activity
+-            android:name=".RoomActivity"
++            android:name=".Activity.RoomActivity"
+             android:exported="false">
+             <meta-data
+                 android:name="android.app.lib_name"
+@@ -27,7 +27,7 @@
+         </activity>
+         <activity android:name=".Activity.PostActivity" />
+         <activity android:name=".Activity.MessageActivity" />
+-        <activity android:name=".Activity.GalleryActivity" />
++<!--        <activity android:name=".Activity.GalleryActivity" />-->
+         <activity
+             android:name=".Activity.DetailReportActivity"
+             android:exported="false">
+Index: app/src/main/java/com/example/myapp/Activity/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.media.MediaPlayer;\r\nimport android.media.session.MediaController;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.VideoView;\r\n\r\nimport com.example.myapp.R;\r\nimport com.github.mikephil.charting.charts.BarChart;\r\nimport com.github.mikephil.charting.data.BarData;\r\nimport com.github.mikephil.charting.data.BarDataSet;\r\nimport com.github.mikephil.charting.data.BarEntry;\r\nimport com.github.mikephil.charting.utils.ColorTemplate;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\n\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\n\r\npublic class MainActivity extends BasicActivity {\r\n\r\n    Button btn_setting, btn_community, btn_menu;\r\n    private FirebaseAuth auth;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle saveInstanceState) {\r\n        super.onCreate(saveInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n\r\n        btn_community = findViewById(R.id.btn_community);\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n\r\n        auth = FirebaseAuth.getInstance();\r\n        FirebaseUser user = auth.getCurrentUser();\r\n        if(user == null) {\r\n            finish();\r\n            startActivity(new Intent(this, LoginActivity.class));\r\n        }\r\n\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(MainActivity.this, CommunityActivity.class));\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/MainActivity.java b/app/src/main/java/com/example/myapp/Activity/MainActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/MainActivity.java	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/java/com/example/myapp/Activity/MainActivity.java	(date 1669307660560)
+@@ -22,6 +22,22 @@
+ import com.google.android.gms.tasks.Task;
+ import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.auth.FirebaseUser;
++import java.io.FileInputStream;
++import java.io.FileOutputStream;
++import androidx.annotation.NonNull;
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.annotation.SuppressLint;
++import android.content.ContentValues;
++import android.content.Intent;
++import android.database.Cursor;
++import android.database.sqlite.SQLiteDatabase;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++import android.widget.CalendarView;
++import android.widget.EditText;
++import android.widget.TextView;
+ 
+ 
+ import java.util.ArrayList;
+@@ -31,6 +47,14 @@
+ 
+ public class MainActivity extends BasicActivity {
+ 
++//    캘린더용변수
++    public String fname=null;
++    public String str=null;
++    public CalendarView calendarView;
++    public Button cha_Btn,del_Btn,save_Btn;
++    public TextView diaryTextView,textView2,textF;
++    public EditText contextEditText;
++
+     Button btn_setting, btn_community, btn_menu;
+     private FirebaseAuth auth;
+ 
+@@ -40,18 +64,9 @@
+         setContentView(R.layout.activity_main);
+ 
+         btn_setting = findViewById(R.id.btn_setting);
+-
+         btn_community = findViewById(R.id.btn_community);
+         btn_menu = findViewById(R.id.btn_menu);
+-
+         auth = FirebaseAuth.getInstance();
+-        FirebaseUser user = auth.getCurrentUser();
+-        if(user == null) {
+-            finish();
+-            startActivity(new Intent(this, LoginActivity.class));
+-        }
+-
+-
+         btn_setting.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+@@ -70,6 +85,142 @@
+                 startActivity(new Intent(MainActivity.this, CommunityActivity.class));
+             }
+         });
++//캘린더
++        calendarView=findViewById(R.id.calendarView);
++        diaryTextView=findViewById(R.id.diaryTextView);
++        save_Btn=findViewById(R.id.save_Btn);
++        del_Btn=findViewById(R.id.del_Btn);
++        cha_Btn=findViewById(R.id.cha_Btn);
++        textView2=findViewById(R.id.textView2);
++        textF=findViewById(R.id.textF);
++        contextEditText=findViewById(R.id.contextEditText);
++        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
++            @Override
++            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
++                diaryTextView.setVisibility(View.VISIBLE);
++                save_Btn.setVisibility(View.VISIBLE);
++                contextEditText.setVisibility(View.VISIBLE);
++                textF.setVisibility(View.VISIBLE);
++                textView2.setVisibility(View.INVISIBLE);
++                cha_Btn.setVisibility(View.INVISIBLE);
++                del_Btn.setVisibility(View.INVISIBLE);
++                diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
++                contextEditText.setText("");
++                checkDay(year,month,dayOfMonth);
++            }
++        });
++        save_Btn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                saveDiary(fname);
++                str=contextEditText.getText().toString();
++                textView2.setText(str);
++                save_Btn.setVisibility(View.INVISIBLE);
++                cha_Btn.setVisibility(View.VISIBLE);
++                del_Btn.setVisibility(View.VISIBLE);
++                contextEditText.setVisibility(View.INVISIBLE);
++                textView2.setVisibility(View.VISIBLE);
++
++            }
++        });
++    }
++
++    public void  checkDay(int cYear,int cMonth,int cDay){
++        fname=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
++        FileInputStream fis=null;//FileStream fis 변수
++
++        try{
++            fis=openFileInput(fname);
++
++            byte[] fileData=new byte[fis.available()];
++            fis.read(fileData);
++            fis.close();
++
++            str=new String(fileData);
++
++            contextEditText.setVisibility(View.INVISIBLE);
++            textView2.setVisibility(View.VISIBLE);
++            textView2.setText(str);
++
++            save_Btn.setVisibility(View.INVISIBLE);
++            cha_Btn.setVisibility(View.VISIBLE);
++            del_Btn.setVisibility(View.VISIBLE);
++
++            cha_Btn.setOnClickListener(new View.OnClickListener() {
++                @Override
++                public void onClick(View view) {
++                    contextEditText.setVisibility(View.VISIBLE);
++                    textView2.setVisibility(View.INVISIBLE);
++                    contextEditText.setText(str);
++
++                    save_Btn.setVisibility(View.VISIBLE);
++                    cha_Btn.setVisibility(View.INVISIBLE);
++                    del_Btn.setVisibility(View.INVISIBLE);
++                    textView2.setText(contextEditText.getText());
++                }
++
++            });
++            del_Btn.setOnClickListener(new View.OnClickListener() {
++                @Override
++                public void onClick(View view) {
++                    textView2.setVisibility(View.INVISIBLE);
++                    contextEditText.setText("");
++                    contextEditText.setVisibility(View.VISIBLE);
++                    save_Btn.setVisibility(View.VISIBLE);
++                    cha_Btn.setVisibility(View.INVISIBLE);
++                    del_Btn.setVisibility(View.INVISIBLE);
++                    removeDiary(fname);
++                }
++            });
++            if(textView2.getText()==null){
++                textView2.setVisibility(View.INVISIBLE);
++                diaryTextView.setVisibility(View.VISIBLE);
++                save_Btn.setVisibility(View.VISIBLE);
++                cha_Btn.setVisibility(View.INVISIBLE);
++                del_Btn.setVisibility(View.INVISIBLE);
++                contextEditText.setVisibility(View.VISIBLE);
++            }
++
++        }catch (Exception e){
++            e.printStackTrace();
++        }
++    }
++    @SuppressLint("WrongConstant")
++    public void removeDiary(String readDay){
++        FileOutputStream fos=null;
++
++        try{
++            fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
++            String content="";
++            fos.write((content).getBytes());
++            fos.close();
++
++        }catch (Exception e){
++            e.printStackTrace();
++        }
++    }
++    @SuppressLint("WrongConstant")
++    public void saveDiary(String readDay){
++        FileOutputStream fos=null;
++
++        try{
++            fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
++            String content=contextEditText.getText().toString();
++            fos.write((content).getBytes());
++            fos.close();
++        }catch (Exception e){
++            e.printStackTrace();
++        }
++
++
++        FirebaseUser user = auth.getCurrentUser();
++        if(user == null) {
++            finish();
++            startActivity(new Intent(this, LoginActivity.class));
++        }
++
++
++
+     }
+ 
+ 
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".Activity.MainActivity\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:background=\"@color/black\"\r\n            android:fontFamily=\"@font/gmarketsans\"\r\n            android:gravity=\"center\"\r\n            android:minHeight=\"60dp\"\r\n            android:password=\"false\"\r\n            android:text=\"app name\"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"40sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView4\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginStart=\"7dp\"\r\n            android:layout_marginTop=\"35dp\"\r\n            android:background=\"@color/black\"\r\n            android:fontFamily=\"@font/gmarketsans\"\r\n            android:orientation=\"vertical\"\r\n            android:text=\" 오늘의 운동 \"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"22sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n\r\n        <!--<com.github.mikephil.charting.charts.BarChart\r\n                    android:id=\"@+id/chart\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_margin=\"10dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintHorizontal_bias=\"0.5\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n        -->\r\n\r\n        <HorizontalScrollView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\">\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <androidx.cardview.widget.CardView\r\n                    android:layout_width=\"175dp\"\r\n                    android:layout_height=\"95dp\"\r\n                    android:layout_margin=\"5dp\"\r\n                    app:cardElevation=\"5dp\">\r\n\r\n                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:scaleType=\"fitXY\"\r\n                        app:autoPlay=\"false\"\r\n                        app:videoId=\"5IBhz4c2D4o\" />\r\n\r\n                </androidx.cardview.widget.CardView>\r\n\r\n                <androidx.cardview.widget.CardView\r\n                    android:layout_width=\"175dp\"\r\n                    android:layout_height=\"95dp\"\r\n                    android:layout_margin=\"5dp\"\r\n                    app:cardElevation=\"5dp\">\r\n\r\n                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        app:autoPlay=\"false\"\r\n                        app:videoId=\"_RXjbRdiFBs\" />\r\n\r\n                </androidx.cardview.widget.CardView>\r\n\r\n                <androidx.cardview.widget.CardView\r\n                    android:layout_width=\"195dp\"\r\n                    android:layout_height=\"95dp\"\r\n                    android:layout_margin=\"5dp\"\r\n                    app:cardElevation=\"5dp\">\r\n\r\n                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        app:autoPlay=\"false\"\r\n                        app:videoId=\"g6enC_9eO24\" />\r\n\r\n                </androidx.cardview.widget.CardView>\r\n\r\n                <androidx.cardview.widget.CardView\r\n                    android:layout_width=\"195dp\"\r\n                    android:layout_height=\"95dp\"\r\n                    android:layout_margin=\"5dp\"\r\n                    app:cardElevation=\"5dp\">\r\n\r\n                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        app:autoPlay=\"false\"\r\n                        app:videoId=\"DZAqP67WQNU\" />\r\n\r\n                </androidx.cardview.widget.CardView>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n        </HorizontalScrollView>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <CalendarView\r\n                android:id=\"@+id/Calendar\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"40dp\" />\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\">\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_home\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:adjustViewBounds=\"true\"\r\n                    android:background=\"@color/material_dynamic_neutral80\"\r\n                    android:drawableTop=\"@drawable/ic_baseline_home_24\"\r\n                    android:scaleType=\"fitStart\"\r\n                    android:text=\"Home\"\r\n                    android:textSize=\"11sp\" />\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_community\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:background=\"@color/white\"\r\n                    android:drawableTop=\"@drawable/ic_baseline_person_24\"\r\n                    android:text=\"Community\"\r\n                    android:textSize=\"11sp\"\r\n                    android:layout_gravity=\"bottom\"/>\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_setting\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:background=\"@color/white\"\r\n                    android:drawableTop=\"@drawable/ic_baseline_settings_24\"\r\n                    android:text=\"Setting\"\r\n                    android:textSize=\"11sp\"\r\n                    android:layout_gravity=\"bottom\"/>\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_menu\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:background=\"@color/white\"\r\n                    android:drawableTop=\"@drawable/ic_baseline_dehaze_24\"\r\n                    android:text=\"menu\"\r\n                    android:textSize=\"11sp\"\r\n                    android:layout_gravity=\"bottom\"/>\r\n\r\n            </LinearLayout>\r\n        </LinearLayout>\r\n\r\n\r\n    </LinearLayout>\r\n\r\n<!--    <com.google.android.material.bottomappbar.BottomAppBar-->\r\n<!--        android:layout_width=\"match_parent\"-->\r\n<!--        android:layout_height=\"wrap_content\"-->\r\n<!--        android:layout_gravity=\"bottom\"-->\r\n<!--        android:id=\"@+id/bottomAppBar\"-->\r\n<!--        app:fabCradleMargin=\"10dp\"-->\r\n<!--        app:fabCradleRoundedCornerRadius=\"10dp\"-->\r\n<!--        app:fabCradleVerticalOffset=\"10dp\"-->\r\n<!--        >-->\r\n<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->\r\n<!--            android:layout_width=\"match_parent\"-->\r\n<!--            android:layout_height=\"match_parent\"-->\r\n<!--            android:id=\"@+id/bottomNavigationView\"-->\r\n<!--            android:layout_marginRight=\"16dp\"-->\r\n<!--            app:menu=\"@menu/bottom_nav_menu\"-->\r\n<!--            android:background=\"@drawable/transparent_background\"-->\r\n\r\n<!--            />-->\r\n<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->\r\n\r\n\r\n\r\n\r\n\r\n</androidx.coordinatorlayout.widget.CoordinatorLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1669308766635)
+@@ -27,6 +27,16 @@
+             android:textSize="40sp"
+             android:textStyle="bold" />
+ 
++
++
++    <ScrollView
++        android:layout_width="match_parent"
++        android:layout_height="494dp">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
+         <TextView
+             android:id="@+id/textView4"
+             android:layout_width="wrap_content"
+@@ -127,95 +137,211 @@
+ 
+         </HorizontalScrollView>
+ 
++            <CalendarView
++                android:id="@+id/calendarView"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="center"
++                android:layout_marginTop="20dp" />
++
++        <TextView
++            android:id="@+id/diaryTextView"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="8dp"
++            android:layout_marginLeft="8dp"
++            android:layout_marginTop="10dp"
++            android:layout_marginEnd="8dp"
++            android:layout_marginRight="8dp"
++            android:gravity="center"
++            android:textAppearance="@style/TextAppearance.AppCompat.Large"
++            />
+         <LinearLayout
+             android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:orientation="vertical">
++            android:layout_height="wrap_content"
++            android:orientation="horizontal">
++
++            <TextView
++                android:id="@+id/textF"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="8dp"
++                android:layout_marginLeft="8dp"
++                android:layout_marginTop="16dp"
++                android:layout_marginEnd="8dp"
++                android:layout_marginRight="8dp"
++                android:gravity="center"
++                android:text="식사"
++                android:visibility="invisible"
++                android:textSize="20sp" />
++
++            <EditText
++                android:id="@+id/contextEditText"
++                android:layout_width="match_parent"
++                android:layout_height="80dp"
++                android:layout_marginStart="8dp"
++                android:layout_marginLeft="8dp"
++                android:layout_marginTop="16dp"
++                android:layout_marginEnd="8dp"
++                android:layout_marginRight="8dp"
++                android:ems="10"
++                android:hint="내용을 입력하세요."
++                android:inputType="textMultiLine"
++                android:visibility="invisible" /></LinearLayout>
++<!--        푸드딕셔너리 검색해서 추가 가능해지면 이코드로-->
++<!--        <LinearLayout-->
++<!--            android:layout_width="match_parent"-->
++<!--            android:layout_height="wrap_content"-->
++<!--            android:orientation="horizontal">-->
++
++<!--            <TextView-->
++<!--                android:id="@+id/textF2"-->
++<!--                android:layout_width="wrap_content"-->
++<!--                android:layout_height="wrap_content"-->
++<!--                android:layout_marginStart="8dp"-->
++<!--                android:layout_marginLeft="8dp"-->
++<!--                android:layout_marginTop="16dp"-->
++<!--                android:layout_marginEnd="8dp"-->
++<!--                android:layout_marginRight="8dp"-->
++<!--                android:gravity="center"-->
++<!--                android:text="식사"-->
++<!--                android:visibility="invisible"-->
++<!--                android:textSize="20sp" />-->
+ 
+-            <CalendarView
+-                android:id="@+id/Calendar"
+-                android:layout_width="match_parent"
++<!--            <androidx.appcompat.widget.SearchView-->
++<!--            android:layout_width="match_parent"-->
++<!--            android:layout_height="wrap_content"-->
++<!--            android:id="@+id/food_searchview"-->
++<!--            app:iconifiedByDefault="false"-->
++<!--            app:queryHint="검색어를 입력하시오."-->
++<!--            app:searchIcon="@drawable/ic_baseline_search_24"-->
++<!--                android:visibility="invisible"-->
++<!--            android:inputType="text"-->
++<!--            />-->
++<!--        </LinearLayout>-->
++
++        <Button
++            android:id="@+id/save_Btn"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="right"
++            android:layout_marginStart="8dp"
++            android:layout_marginLeft="8dp"
++            android:layout_marginTop="16dp"
++            android:layout_marginEnd="8dp"
++            android:layout_marginRight="8dp"
++            android:layout_marginBottom="20dp"
++            android:text="저장"
++            android:visibility="invisible" />
++        <TextView
++            android:id="@+id/textView2"
++            android:layout_width="match_parent"
++            android:layout_height="100dp"
++            android:layout_marginStart="8dp"
++            android:layout_marginLeft="8dp"
++            android:layout_marginEnd="8dp"
++            android:layout_marginRight="8dp"
++            android:background="@drawable/edgeall"
++            android:visibility="invisible" />
++
++
++        <LinearLayout
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="right"
++            android:layout_weight="0"
++            android:orientation="horizontal">
++
++            <Button
++                android:id="@+id/cha_Btn"
++                android:layout_width="100dp"
+                 android:layout_height="wrap_content"
+-                android:layout_gravity="center"
+-                android:layout_marginTop="40dp" />
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal"
+-                android:layout_gravity="bottom"
+-                android:layout_weight="1">
++                android:layout_marginStart="8dp"
++
++                android:layout_marginLeft="8dp"
++                android:layout_marginEnd="8dp"
++                android:layout_marginRight="8dp"
++                android:layout_weight="0"
++                android:text="수정"
++                android:visibility="invisible" />
++
++            <Button
++                android:id="@+id/del_Btn"
++                android:layout_width="100dp"
++                android:layout_height="wrap_content"
++                android:layout_marginEnd="5dp"
++
++                android:layout_marginRight="8dp"
++                android:layout_weight="0"
++                android:text="삭제"
++                android:visibility="invisible"></Button>
++
++        </LinearLayout>
++
++
++    </LinearLayout>
++
++    </ScrollView>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_gravity="bottom"
++            android:layout_weight="1"
++            android:orientation="horizontal">
+ 
+-                <androidx.appcompat.widget.AppCompatButton
+-                    android:id="@+id/btn_home"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_gravity="bottom"
+-                    android:layout_weight="1"
+-                    android:adjustViewBounds="true"
+-                    android:background="@color/material_dynamic_neutral80"
+-                    android:drawableTop="@drawable/ic_baseline_home_24"
+-                    android:scaleType="fitStart"
+-                    android:text="Home"
+-                    android:textSize="11sp" />
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_home"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:adjustViewBounds="true"
++                android:background="@color/material_dynamic_neutral80"
++                android:drawableTop="@drawable/ic_baseline_home_24"
++                android:scaleType="fitStart"
++                android:text="Home"
++                android:textSize="11sp" />
+ 
+-                <androidx.appcompat.widget.AppCompatButton
+-                    android:id="@+id/btn_community"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_weight="1"
+-                    android:background="@color/white"
+-                    android:drawableTop="@drawable/ic_baseline_person_24"
+-                    android:text="Community"
+-                    android:textSize="11sp"
+-                    android:layout_gravity="bottom"/>
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_community"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_person_24"
++                android:text="Community"
++                android:textSize="11sp" />
+ 
+-                <androidx.appcompat.widget.AppCompatButton
+-                    android:id="@+id/btn_setting"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_weight="1"
+-                    android:background="@color/white"
+-                    android:drawableTop="@drawable/ic_baseline_settings_24"
+-                    android:text="Setting"
+-                    android:textSize="11sp"
+-                    android:layout_gravity="bottom"/>
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_setting"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_settings_24"
++                android:text="Setting"
++                android:textSize="11sp" />
+ 
+-                <androidx.appcompat.widget.AppCompatButton
+-                    android:id="@+id/btn_menu"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_weight="1"
+-                    android:background="@color/white"
+-                    android:drawableTop="@drawable/ic_baseline_dehaze_24"
+-                    android:text="menu"
+-                    android:textSize="11sp"
+-                    android:layout_gravity="bottom"/>
++            <androidx.appcompat.widget.AppCompatButton
++                android:id="@+id/btn_menu"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_gravity="bottom"
++                android:layout_weight="1"
++                android:background="@color/white"
++                android:drawableTop="@drawable/ic_baseline_dehaze_24"
++                android:text="menu"
++                android:textSize="11sp" />
+ 
+-            </LinearLayout>
+         </LinearLayout>
+-
+-
+     </LinearLayout>
+ 
+-<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
+-<!--        android:layout_width="match_parent"-->
+-<!--        android:layout_height="wrap_content"-->
+-<!--        android:layout_gravity="bottom"-->
+-<!--        android:id="@+id/bottomAppBar"-->
+-<!--        app:fabCradleMargin="10dp"-->
+-<!--        app:fabCradleRoundedCornerRadius="10dp"-->
+-<!--        app:fabCradleVerticalOffset="10dp"-->
+-<!--        >-->
+-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+-<!--            android:layout_width="match_parent"-->
+-<!--            android:layout_height="match_parent"-->
+-<!--            android:id="@+id/bottomNavigationView"-->
+-<!--            android:layout_marginRight="16dp"-->
+-<!--            app:menu="@menu/bottom_nav_menu"-->
+-<!--            android:background="@drawable/transparent_background"-->
++
+ 
+-<!--            />-->
+-<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
++
+ 
+ 
+ 
+Index: app/src/main/java/com/example/myapp/Activity/CommunityActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.example.myapp.R;\r\n\r\npublic class CommunityActivity extends BasicActivity{\r\n    Button btn_home,btn_setting, btn_community, btn_menu;\r\n    Button btn_go_friend;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle saveInstanceState) {\r\n        super.onCreate(saveInstanceState);\r\n        setContentView(R.layout.activity_community);\r\n\r\n        btn_go_friend = findViewById(R.id.btn_go_friend);\r\n        btn_go_friend.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n            }\r\n        });\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n        btn_home = findViewById(R.id.btn_home);\r\n        btn_community = findViewById(R.id.btn_community);\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                finishAffinity();\r\n                startActivity(new Intent(CommunityActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_home.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(CommunityActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(CommunityActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(CommunityActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/CommunityActivity.java b/app/src/main/java/com/example/myapp/Activity/CommunityActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/CommunityActivity.java	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/java/com/example/myapp/Activity/CommunityActivity.java	(date 1669300929138)
+@@ -17,7 +17,7 @@
+         super.onCreate(saveInstanceState);
+         setContentView(R.layout.activity_community);
+ 
+-        btn_go_friend = findViewById(R.id.btn_go_friend);
++        btn_go_friend = findViewById(R.id.btn_go_freind);
+         btn_go_friend.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+Index: app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.example.myapp.R;\r\n\r\npublic class FoodDictionaryActivity extends BasicActivity {\r\n    Button btn_home,btn_setting, btn_community, btn_menu;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle saveInstanceState) {\r\n        super.onCreate(saveInstanceState);\r\n        setContentView(R.layout.activity_food_dictionary);\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n        btn_home = findViewById(R.id.btn_home);\r\n        btn_community = findViewById(R.id.btn_community);\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                finishAffinity();\r\n                startActivity(new Intent(FoodDictionaryActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_home.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, CommunityActivity.class));\r\n            }\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java b/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java	(date 1669299407775)
+@@ -5,7 +5,13 @@
+ import android.view.View;
+ import android.widget.Button;
+ 
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
++
+ import com.example.myapp.R;
++import com.example.myapp.adapter.SimpleTextAdapter;
++
++import java.util.ArrayList;
+ 
+ public class FoodDictionaryActivity extends BasicActivity {
+     Button btn_home,btn_setting, btn_community, btn_menu;
+@@ -45,5 +51,18 @@
+                 startActivity(new Intent(FoodDictionaryActivity.this, CommunityActivity.class));
+             }
+         });
++
++        ArrayList<String> list = new ArrayList<>();
++        for (int i=0; i<100; i++) {
++            list.add(String.format("TEXT %d", i)) ;
++        }
++
++        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
++        RecyclerView recyclerView = findViewById(R.id.recycler_view_food) ;
++        recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
++
++        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
++        SimpleTextAdapter adapter = new SimpleTextAdapter(list) ;
++        recyclerView.setAdapter(adapter) ;
+     }
+ }
+Index: app/src/main/java/com/example/myapp/adapter/SimpleTextAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/adapter/SimpleTextAdapter.java b/app/src/main/java/com/example/myapp/adapter/SimpleTextAdapter.java
+new file mode 100644
+--- /dev/null	(date 1669299407743)
++++ b/app/src/main/java/com/example/myapp/adapter/SimpleTextAdapter.java	(date 1669299407743)
+@@ -0,0 +1,60 @@
++package com.example.myapp.adapter;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.TextView;
++
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.example.myapp.R;
++
++import java.util.ArrayList;
++
++public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
++
++    private ArrayList<String> mData = null ;
++
++    // 아이템 뷰를 저장하는 뷰홀더 클래스.
++    public class ViewHolder extends RecyclerView.ViewHolder {
++        TextView textView1 ;
++
++        ViewHolder(View itemView) {
++            super(itemView) ;
++
++            // 뷰 객체에 대한 참조. (hold strong reference)
++            textView1 = itemView.findViewById(R.id.text1) ;
++        }
++    }
++
++    // 생성자에서 데이터 리스트 객체를 전달받음.
++    public SimpleTextAdapter(ArrayList<String> list) {
++        mData = list ;
++    }
++
++    // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
++    @Override
++    public SimpleTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
++        Context context = parent.getContext() ;
++        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
++
++        View view = inflater.inflate(R.layout.food_recyclerview_item, parent, false) ;
++        SimpleTextAdapter.ViewHolder vh = new SimpleTextAdapter.ViewHolder(view) ;
++
++        return vh ;
++    }
++
++    // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
++    @Override
++    public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, int position) {
++        String text = mData.get(position) ;
++        holder.textView1.setText(text) ;
++    }
++
++    // getItemCount() - 전체 데이터 갯수 리턴.
++    @Override
++    public int getItemCount() {
++        return mData.size() ;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/food_recyclerview_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/food_recyclerview_item.xml b/app/src/main/res/layout/food_recyclerview_item.xml
+new file mode 100644
+--- /dev/null	(date 1669298415069)
++++ b/app/src/main/res/layout/food_recyclerview_item.xml	(date 1669298415069)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++    <TextView
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:id="@+id/text1"
++        android:textSize="32sp"
++        tools:ignore="MissingConstraints" />
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_food_dictionary.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.coordinatorlayout.widget.CoordinatorLayout\r\n        tools:context=\".Activity.FoodDictionaryActivity\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_home\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:adjustViewBounds=\"true\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_home_24\"\r\n                android:scaleType=\"fitStart\"\r\n                android:text=\"Home\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_community\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_person_24\"\r\n                android:text=\"Community\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_setting\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_settings_24\"\r\n                android:text=\"Setting\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_menu\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/material_dynamic_neutral80\"\r\n                android:drawableTop=\"@drawable/ic_baseline_dehaze_24\"\r\n                android:text=\"menu\"\r\n                android:textSize=\"11sp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/black\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"60dp\"\r\n                android:text=\"app name\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"40sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView6\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/cardview_dark_background\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"40dp\"\r\n                android:text=\"음식 칼로리 사전\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"25sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <androidx.appcompat.widget.SearchView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:id=\"@+id/food_searchview\"\r\n                app:iconifiedByDefault=\"false\"\r\n                app:queryHint=\"검색어를 입력하시오.\"\r\n                app:searchIcon=\"@drawable/ic_baseline_search_24\"\r\n                android:inputType=\"text\"\r\n                />\r\n\r\n\r\n\r\n            <!--<com.github.mikephil.charting.charts.BarChart\r\n                    android:id=\"@+id/chart\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_margin=\"10dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintHorizontal_bias=\"0.5\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n        -->\r\n\r\n        </LinearLayout>\r\n\r\n\r\n        <!--        <com.google.android.material.bottomappbar.BottomAppBar-->\r\n        <!--            android:id=\"@+id/bottomAppBar\"-->\r\n        <!--            android:layout_width=\"match_parent\"-->\r\n        <!--            android:layout_height=\"wrap_content\"-->\r\n        <!--            android:layout_gravity=\"bottom\"-->\r\n        <!--            app:fabCradleMargin=\"10dp\"-->\r\n        <!--            app:fabCradleRoundedCornerRadius=\"10dp\"-->\r\n        <!--            app:fabCradleVerticalOffset=\"10dp\">-->\r\n\r\n        <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->\r\n        <!--                android:id=\"@+id/bottomNavigationView\"-->\r\n        <!--                android:layout_width=\"match_parent\"-->\r\n        <!--                android:layout_height=\"match_parent\"-->\r\n        <!--                android:layout_marginRight=\"16dp\"-->\r\n        <!--                android:background=\"@drawable/transparent_background\"-->\r\n        <!--                app:menu=\"@menu/bottom_nav_menu\"-->\r\n\r\n        <!--                />-->\r\n        <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->\r\n\r\n        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->\r\n        <!--            android:id=\"@+id/fab\"-->\r\n        <!--            android:layout_width=\"wrap_content\"-->\r\n        <!--            android:layout_height=\"wrap_content\"-->\r\n        <!--            android:src=\"@drawable/ic_baseline_add_24\"-->\r\n        <!--            app:layout_anchor=\"@id/bottomAppBar\"-->\r\n\r\n        <!--            />-->\r\n\r\n\r\n    </androidx.coordinatorlayout.widget.CoordinatorLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_food_dictionary.xml b/app/src/main/res/layout/activity_food_dictionary.xml
+--- a/app/src/main/res/layout/activity_food_dictionary.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/res/layout/activity_food_dictionary.xml	(date 1669298101878)
+@@ -11,7 +11,6 @@
+         android:layout_height="match_parent"
+         android:orientation="vertical">
+ 
+-
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+@@ -108,6 +107,11 @@
+                 app:searchIcon="@drawable/ic_baseline_search_24"
+                 android:inputType="text"
+                 />
++            <androidx.recyclerview.widget.RecyclerView
++                android:id="@+id/recycler_view_food"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:scrollbars="vertical"/>
+ 
+ 
+ 
+Index: app/src/main/res/drawable/edgeall.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/edgeall.xml b/app/src/main/res/drawable/edgeall.xml
+new file mode 100644
+--- /dev/null	(date 1669297049824)
++++ b/app/src/main/res/drawable/edgeall.xml	(date 1669297049824)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
++    <item>
++        <shape android:shape="rectangle" >
++            <stroke
++                android:width="2dp"
++                android:color="#AAAAAA"/>
++
++            <solid android:color="#FFF" />
++        </shape>
++    </item>
++
++</layer-list>
+Index: app/src/main/res/layout/activity_video.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n        <TextView\r\n            android:id=\"@+id/textView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:background=\"@color/black\"\r\n            android:fontFamily=\"@font/gmarketsans\"\r\n            android:gravity=\"center\"\r\n            android:minHeight=\"60dp\"\r\n            android:text=\"app name\"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"40sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView6\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:background=\"@color/cardview_dark_background\"\r\n            android:fontFamily=\"@font/gmarketsans\"\r\n            android:gravity=\"center\"\r\n            android:minHeight=\"40dp\"\r\n            android:text=\"인기 운동 video\"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"25sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <ScrollView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"494dp\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/video1\"\r\n                    android:layout_width=\"100dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:background=\"#ACC8D5\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:gravity=\"center\"\r\n                    android:minHeight=\"30dp\"\r\n                    android:text=\"전신\"\r\n                    android:textColor=\"#546E7A\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <HorizontalScrollView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"10dp\">\r\n\r\n                    <LinearLayout\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:orientation=\"horizontal\">\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                android:scaleType=\"fitXY\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"gMaB-fG4u4g\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"4kZHHPH6heY\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"cMkZ6A7wngk\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"lKwZ2DU4P-A\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n\r\n                    </LinearLayout>\r\n\r\n\r\n                </HorizontalScrollView>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/video2\"\r\n                    android:layout_width=\"100dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:background=\"#ACC8D5\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:gravity=\"center\"\r\n                    android:minHeight=\"30dp\"\r\n                    android:text=\"복부\"\r\n                    android:textColor=\"#546E7A\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <HorizontalScrollView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"10dp\">\r\n\r\n                    <LinearLayout\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:orientation=\"horizontal\">\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                android:scaleType=\"fitXY\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"PjGcOP-TQPE\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"7TLk7pscICk\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"QSZ0mUGO_CA\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"jj6ze_eqmYI\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n\r\n                    </LinearLayout>\r\n\r\n\r\n                </HorizontalScrollView>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/video3\"\r\n                    android:layout_width=\"100dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:background=\"#ACC8D5\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:gravity=\"center\"\r\n                    android:minHeight=\"30dp\"\r\n                    android:text=\"하체\"\r\n                    android:textColor=\"#546E7A\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <HorizontalScrollView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"10dp\">\r\n\r\n                    <LinearLayout\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:orientation=\"horizontal\">\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                android:scaleType=\"fitXY\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"KXYi6bI-UPE\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"dpBYYEhdofI\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"QSCeJ__akl0\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"js8z5wIZ0wg\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n\r\n                    </LinearLayout>\r\n\r\n\r\n                </HorizontalScrollView>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/video4\"\r\n                    android:layout_width=\"100dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:background=\"#ACC8D5\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:gravity=\"center\"\r\n                    android:minHeight=\"30dp\"\r\n                    android:text=\"상체\"\r\n                    android:textColor=\"#546E7A\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n\r\n                <HorizontalScrollView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"10dp\">\r\n\r\n                    <LinearLayout\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:orientation=\"horizontal\">\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                android:scaleType=\"fitXY\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"KXYi6bI-UPE\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"175dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"dpBYYEhdofI\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"QSCeJ__akl0\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n                        <androidx.cardview.widget.CardView\r\n                            android:layout_width=\"195dp\"\r\n                            android:layout_height=\"95dp\"\r\n                            android:layout_margin=\"5dp\"\r\n                            app:cardElevation=\"5dp\">\r\n\r\n                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView\r\n                                android:layout_width=\"match_parent\"\r\n                                android:layout_height=\"wrap_content\"\r\n                                app:autoPlay=\"false\"\r\n                                app:videoId=\"js8z5wIZ0wg\" />\r\n\r\n                        </androidx.cardview.widget.CardView>\r\n\r\n\r\n                    </LinearLayout>\r\n\r\n\r\n                </HorizontalScrollView>\r\n\r\n            </LinearLayout>\r\n        </ScrollView>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_alignParentBottom=\"true\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_home\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:adjustViewBounds=\"true\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_home_24\"\r\n                android:scaleType=\"fitStart\"\r\n                android:text=\"Home\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_community\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_person_24\"\r\n                android:text=\"Community\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_setting\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_settings_24\"\r\n                android:text=\"Setting\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_menu\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/material_dynamic_neutral80\"\r\n                android:drawableTop=\"@drawable/ic_baseline_dehaze_24\"\r\n                android:text=\"menu\"\r\n                android:textSize=\"11sp\" />\r\n\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_video.xml b/app/src/main/res/layout/activity_video.xml
+--- a/app/src/main/res/layout/activity_video.xml	(revision 133fcbaa1a4d014b6436c0bb585f871c4ec1db1e)
++++ b/app/src/main/res/layout/activity_video.xml	(date 1669297049843)
+@@ -346,7 +346,7 @@
+                                 android:layout_height="wrap_content"
+                                 android:scaleType="fitXY"
+                                 app:autoPlay="false"
+-                                app:videoId="KXYi6bI-UPE" />
++                                app:videoId="nOGT4lXlSHw" />
+ 
+                         </androidx.cardview.widget.CardView>
+ 
+@@ -360,7 +360,7 @@
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 app:autoPlay="false"
+-                                app:videoId="dpBYYEhdofI" />
++                                app:videoId="c_5ENJWekbQ" />
+ 
+                         </androidx.cardview.widget.CardView>
+ 
+@@ -374,7 +374,7 @@
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 app:autoPlay="false"
+-                                app:videoId="QSCeJ__akl0" />
++                                app:videoId="PjGcOP-TQPE" />
+ 
+                         </androidx.cardview.widget.CardView>
+ 
+@@ -388,7 +388,7 @@
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 app:autoPlay="false"
+-                                app:videoId="js8z5wIZ0wg" />
++                                app:videoId="oQfGNXp4xlM" />
+ 
+                         </androidx.cardview.widget.CardView>
+ 

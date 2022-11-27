@@ -1,0 +1,67 @@
+Index: app/src/main/res/layout/food_recyclerview_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:id=\"@+id/text1\"\r\n        android:textSize=\"32sp\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/food_recyclerview_item.xml b/app/src/main/res/layout/food_recyclerview_item.xml
+--- a/app/src/main/res/layout/food_recyclerview_item.xml	
++++ b/app/src/main/res/layout/food_recyclerview_item.xml	
+@@ -1,13 +1,47 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent">
++    android:layout_height="wrap_content"
++    android:minHeight="45dp"
++    android:orientation="horizontal"
++    android:padding="4dp">
++
++
+     <TextView
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:id="@+id/text1"
+-        android:textSize="32sp"
+-        tools:ignore="MissingConstraints" />
++        android:id="@+id/food"
++        android:layout_width="453dp"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center_vertical"
++        android:layout_weight="1"
++        android:textSize="24sp"
++        android:textStyle="bold"
++        tools:text="음식" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_weight="1"
++        android:orientation="vertical">
++
++        <TextView
++            android:id="@+id/unit"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="right"
++            android:layout_weight="1"
++            android:textSize="10sp"
++            tools:text="무게단위" />
++
++        <TextView
++            android:id="@+id/cal"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="right"
++            android:layout_weight="1"
++            android:textColor="@color/black"
++            android:textSize="20sp"
++            tools:text="칼로리" />
++    </LinearLayout>
++
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++</LinearLayout>
+\ No newline at end of file

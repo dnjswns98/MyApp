@@ -51,8 +51,8 @@ public class MainActivity extends BasicActivity {
     public String fname=null;
     public String str=null;
     public CalendarView calendarView;
-    public Button cha_Btn,del_Btn,save_Btn;
-    public TextView diaryTextView,textView2,textF;
+    public Button chaFood_Btn,delFood_Btn,saveFood_Btn;
+    public TextView diaryTextView,textView2,textF,textview5,todayEx,textEx;
     public EditText contextEditText;
 
     Button btn_setting, btn_community, btn_menu;
@@ -88,36 +88,42 @@ public class MainActivity extends BasicActivity {
 //캘린더
         calendarView=findViewById(R.id.calendarView);
         diaryTextView=findViewById(R.id.diaryTextView);
-        save_Btn=findViewById(R.id.save_Btn);
-        del_Btn=findViewById(R.id.del_Btn);
-        cha_Btn=findViewById(R.id.cha_Btn);
+        saveFood_Btn=findViewById(R.id.saveFood_Btn);
+        delFood_Btn=findViewById(R.id.delFood_Btn);
+        chaFood_Btn=findViewById(R.id.chaFood_Btn);
         textView2=findViewById(R.id.textView2);
+        textview5=findViewById(R.id.textview5);     //
+        todayEx=findViewById(R.id.todayEx);
+        textEx= findViewById(R.id.textEx);
         textF=findViewById(R.id.textF);
         contextEditText=findViewById(R.id.contextEditText);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 diaryTextView.setVisibility(View.VISIBLE);
-                save_Btn.setVisibility(View.VISIBLE);
+                saveFood_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
                 textF.setVisibility(View.VISIBLE);
+                textview5.setVisibility(View.VISIBLE);
+                todayEx.setVisibility(View.VISIBLE);
+                textEx.setVisibility(View.INVISIBLE);
                 textView2.setVisibility(View.INVISIBLE);
-                cha_Btn.setVisibility(View.INVISIBLE);
-                del_Btn.setVisibility(View.INVISIBLE);
+                chaFood_Btn.setVisibility(View.INVISIBLE);
+                delFood_Btn.setVisibility(View.INVISIBLE);
                 diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
                 contextEditText.setText("");
                 checkDay(year,month,dayOfMonth);
             }
         });
-        save_Btn.setOnClickListener(new View.OnClickListener() {
+        saveFood_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveDiary(fname);
                 str=contextEditText.getText().toString();
                 textView2.setText(str);
-                save_Btn.setVisibility(View.INVISIBLE);
-                cha_Btn.setVisibility(View.VISIBLE);
-                del_Btn.setVisibility(View.VISIBLE);
+                saveFood_Btn.setVisibility(View.INVISIBLE);
+                chaFood_Btn.setVisibility(View.VISIBLE);
+                delFood_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.INVISIBLE);
                 textView2.setVisibility(View.VISIBLE);
 
@@ -142,42 +148,42 @@ public class MainActivity extends BasicActivity {
             textView2.setVisibility(View.VISIBLE);
             textView2.setText(str);
 
-            save_Btn.setVisibility(View.INVISIBLE);
-            cha_Btn.setVisibility(View.VISIBLE);
-            del_Btn.setVisibility(View.VISIBLE);
+            saveFood_Btn.setVisibility(View.INVISIBLE);
+            chaFood_Btn.setVisibility(View.VISIBLE);
+            delFood_Btn.setVisibility(View.VISIBLE);
 
-            cha_Btn.setOnClickListener(new View.OnClickListener() {
+            chaFood_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     contextEditText.setVisibility(View.VISIBLE);
                     textView2.setVisibility(View.INVISIBLE);
                     contextEditText.setText(str);
 
-                    save_Btn.setVisibility(View.VISIBLE);
-                    cha_Btn.setVisibility(View.INVISIBLE);
-                    del_Btn.setVisibility(View.INVISIBLE);
+                    saveFood_Btn.setVisibility(View.VISIBLE);
+                    chaFood_Btn.setVisibility(View.INVISIBLE);
+                    delFood_Btn.setVisibility(View.INVISIBLE);
                     textView2.setText(contextEditText.getText());
                 }
 
             });
-            del_Btn.setOnClickListener(new View.OnClickListener() {
+            delFood_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     textView2.setVisibility(View.INVISIBLE);
                     contextEditText.setText("");
                     contextEditText.setVisibility(View.VISIBLE);
-                    save_Btn.setVisibility(View.VISIBLE);
-                    cha_Btn.setVisibility(View.INVISIBLE);
-                    del_Btn.setVisibility(View.INVISIBLE);
+                    saveFood_Btn.setVisibility(View.VISIBLE);
+                    chaFood_Btn.setVisibility(View.INVISIBLE);
+                    delFood_Btn.setVisibility(View.INVISIBLE);
                     removeDiary(fname);
                 }
             });
             if(textView2.getText()==null){
                 textView2.setVisibility(View.INVISIBLE);
                 diaryTextView.setVisibility(View.VISIBLE);
-                save_Btn.setVisibility(View.VISIBLE);
-                cha_Btn.setVisibility(View.INVISIBLE);
-                del_Btn.setVisibility(View.INVISIBLE);
+                saveFood_Btn.setVisibility(View.VISIBLE);
+                chaFood_Btn.setVisibility(View.INVISIBLE);
+                delFood_Btn.setVisibility(View.INVISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
             }
 
