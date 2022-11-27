@@ -73,8 +73,9 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
                         String strUnit = editUnit.getText().toString();
                         String strCal = editCal.getText().toString();
                         FoodData dictionary = new FoodData(strFood,strCal,strUnit);
-                        itemList.add(0,dictionary);
-                        adapter.notifyItemInserted(0);
+                        itemList.add(dictionary);
+                        //adapter.notifyItemInserted(0);
+                        //adapter.notifyDataSetChanged();
                         dialog.dismiss();
 
                     }
@@ -137,7 +138,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         //데이터셋변경시
-        //adapter.dataSetChanged(exampleList);
+        adapter.dataSetChanged(itemList);
 
         //어댑터의 리스너 호출
         adapter.setOnClickListener(this);
@@ -161,6 +162,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         itemList.add(new FoodData("팽이버섯", "29", "100g"));
         itemList.add(new FoodData("아이스 아메리카노", "10", "1잔"));
         itemList.add(new FoodData("코카콜라", "212", "500ml"));
+
     }
 
     /****************************************************
