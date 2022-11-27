@@ -47,13 +47,15 @@ import java.util.List;
 
 public class MainActivity extends BasicActivity {
 
-//    캘린더용변수
+    //    캘린더용변수
     public String fname=null;
-    public String str=null;
+    public String fname2=null;
+    public String strFood=null;
+    public String strEx=null;
     public CalendarView calendarView;
-    public Button chaFood_Btn,delFood_Btn,saveFood_Btn;
-    public TextView diaryTextView,textView2,textF,textview5,todayEx,textEx;
-    public EditText contextEditText;
+    public Button chaFood_Btn,delFood_Btn,saveFood_Btn, chaEx_Btn,delEx_Btn,saveEx_Btn;
+    public TextView diaryTextView,textView2,textF,textview5,todayEx,textEx,textE;
+    public EditText contextEditText,contextEditText2;
 
     Button btn_setting, btn_community, btn_menu;
     private FirebaseAuth auth;
@@ -92,11 +94,17 @@ public class MainActivity extends BasicActivity {
         delFood_Btn=findViewById(R.id.delFood_Btn);
         chaFood_Btn=findViewById(R.id.chaFood_Btn);
         textView2=findViewById(R.id.textView2);
-        textview5=findViewById(R.id.textview5);     //
+        textview5=findViewById(R.id.textview5);
         todayEx=findViewById(R.id.todayEx);
         textEx= findViewById(R.id.textEx);
         textF=findViewById(R.id.textF);
         contextEditText=findViewById(R.id.contextEditText);
+        textE=findViewById(R.id.textE);
+        chaEx_Btn=findViewById(R.id.chaEx_Btn);
+        delEx_Btn=findViewById(R.id.delEx_Btn);
+        saveEx_Btn=findViewById(R.id.saveEx_Btn);
+        contextEditText2=findViewById(R.id.contextEditText2);
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -112,15 +120,24 @@ public class MainActivity extends BasicActivity {
                 delFood_Btn.setVisibility(View.INVISIBLE);
                 diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
                 contextEditText.setText("");
+                contextEditText2.setText("");
+
+                textE.setVisibility(View.VISIBLE);
+                saveEx_Btn.setVisibility(View.VISIBLE);
+                contextEditText2.setVisibility(View.VISIBLE);
+                chaEx_Btn.setVisibility(View.INVISIBLE);
+                delEx_Btn.setVisibility(View.INVISIBLE);
                 checkDay(year,month,dayOfMonth);
+
+
             }
         });
         saveFood_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveDiary(fname);
-                str=contextEditText.getText().toString();
-                textView2.setText(str);
+                strFood=contextEditText.getText().toString();
+                textView2.setText(strFood);
                 saveFood_Btn.setVisibility(View.INVISIBLE);
                 chaFood_Btn.setVisibility(View.VISIBLE);
                 delFood_Btn.setVisibility(View.VISIBLE);
@@ -129,35 +146,65 @@ public class MainActivity extends BasicActivity {
 
             }
         });
+        saveEx_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveDiary2(fname2);
+                strEx=contextEditText2.getText().toString();
+                textEx.setText(strEx);
+                saveEx_Btn.setVisibility(View.INVISIBLE);
+                chaEx_Btn.setVisibility(View.VISIBLE);
+                delEx_Btn.setVisibility(View.VISIBLE);
+                contextEditText2.setVisibility(View.INVISIBLE);
+                textEx.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 
     public void  checkDay(int cYear,int cMonth,int cDay){
         fname=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
+        fname2=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+"2.txt";//저장할 파일 이름설정
+
         FileInputStream fis=null;//FileStream fis 변수
+        FileInputStream fis2=null;//FileStream fis 변수
 
         try{
             fis=openFileInput(fname);
+            fis2=openFileInput(fname2);
 
             byte[] fileData=new byte[fis.available()];
             fis.read(fileData);
             fis.close();
+            byte[] fileData2=new byte[fis2.available()];
+            fis2.read(fileData2);
+            fis2.close();
 
-            str=new String(fileData);
+            strFood=new String(fileData);
+            strEx=new String(fileData2);
 
             contextEditText.setVisibility(View.INVISIBLE);
             textView2.setVisibility(View.VISIBLE);
-            textView2.setText(str);
+            textView2.setText(strFood);
 
             saveFood_Btn.setVisibility(View.INVISIBLE);
             chaFood_Btn.setVisibility(View.VISIBLE);
             delFood_Btn.setVisibility(View.VISIBLE);
+
+            contextEditText2.setVisibility(View.INVISIBLE);
+            textEx.setVisibility(View.VISIBLE);
+            textEx.setText(strEx);
+
+            saveEx_Btn.setVisibility(View.INVISIBLE);
+            chaEx_Btn.setVisibility(View.VISIBLE);
+            delEx_Btn.setVisibility(View.VISIBLE);
 
             chaFood_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     contextEditText.setVisibility(View.VISIBLE);
                     textView2.setVisibility(View.INVISIBLE);
-                    contextEditText.setText(str);
+                    contextEditText.setText(strFood);
 
                     saveFood_Btn.setVisibility(View.VISIBLE);
                     chaFood_Btn.setVisibility(View.INVISIBLE);
@@ -186,6 +233,41 @@ public class MainActivity extends BasicActivity {
                 delFood_Btn.setVisibility(View.INVISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
             }
+            chaEx_Btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    contextEditText2.setVisibility(View.VISIBLE);
+                    textEx.setVisibility(View.INVISIBLE);
+                    contextEditText2.setText(strEx);
+
+                    saveEx_Btn.setVisibility(View.VISIBLE);
+                    chaEx_Btn.setVisibility(View.INVISIBLE);
+                    delEx_Btn.setVisibility(View.INVISIBLE);
+                    textEx.setText(contextEditText2.getText());
+                }
+
+            });
+            delEx_Btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    textEx.setVisibility(View.INVISIBLE);
+                    contextEditText2.setText("");
+                    contextEditText2.setVisibility(View.VISIBLE);
+                    saveEx_Btn.setVisibility(View.VISIBLE);
+                    chaEx_Btn.setVisibility(View.INVISIBLE);
+                    delEx_Btn.setVisibility(View.INVISIBLE);
+                    removeDiary(fname2);
+                }
+            });
+            if(textEx.getText()==null){
+                textEx.setVisibility(View.INVISIBLE);
+                diaryTextView.setVisibility(View.VISIBLE);
+                saveEx_Btn.setVisibility(View.VISIBLE);
+                chaEx_Btn.setVisibility(View.INVISIBLE);
+                delEx_Btn.setVisibility(View.INVISIBLE);
+                contextEditText2.setVisibility(View.VISIBLE);
+            }
+
 
         }catch (Exception e){
             e.printStackTrace();
@@ -228,7 +310,29 @@ public class MainActivity extends BasicActivity {
 
 
     }
+    @SuppressLint("WrongConstant")
+    public void saveDiary2(String readDay){
+        FileOutputStream fos=null;
 
+        try{
+            fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
+            String content=contextEditText2.getText().toString();
+            fos.write((content).getBytes());
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        FirebaseUser user = auth.getCurrentUser();
+        if(user == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+
+
+    }
 
 
 }

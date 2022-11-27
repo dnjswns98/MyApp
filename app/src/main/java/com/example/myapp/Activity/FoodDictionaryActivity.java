@@ -44,6 +44,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
     private List<FoodData> itemList;
     Button buttonInsert;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +128,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         //adapter
-        itemList = new ArrayList<>(); //샘플테이터
+        //        itemList = new ArrayList<>(); //샘플테이터
         fillData();
         adapter = new ItemAdapter(itemList);
         recyclerView.setLayoutManager(layoutManager);
