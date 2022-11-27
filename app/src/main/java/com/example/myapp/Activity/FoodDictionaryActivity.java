@@ -196,6 +196,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         itemList.add(new FoodData("코카콜라", "212", "500ml"));
 
     }
+
     public void searchFilter(String searchText) {
         filteredList.clear();
 
