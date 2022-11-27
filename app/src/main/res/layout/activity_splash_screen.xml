@@ -19,15 +19,16 @@
         />
 
     <TextView
+        android:id="@+id/txtSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="당신과 함께 합니다"
-        android:textSize="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/gmarketsans"
+        android:text="당신과 함께 합니다"
         android:textColor="@color/black"
-        android:visibility="gone"
-        android:id="@+id/txtSplash"/>
+        android:textSize="40dp"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
