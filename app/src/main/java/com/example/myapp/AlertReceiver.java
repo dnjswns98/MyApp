@@ -1,9 +1,11 @@
-package com.example.myapp.Fragments;
+package com.example.myapp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import androidx.core.app.NotificationCompat;
+
+import com.example.myapp.NotificationHelper;
 
 public class AlertReceiver extends BroadcastReceiver {
     @Override

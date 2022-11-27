@@ -1,0 +1,290 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n    <uses-feature android:name=\"android.hardware.sensor.stepdetector\" />\r\n\r\n    <uses-permission android:name=\"android.permission.ACTIVITY_RECOGNITION\"/>\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:requestLegacyExternalStorage=\"true\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MyApp\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Activity.ExerAlarmActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.PedometerActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.PostActivity\" />\r\n        <activity android:name=\".Activity.MessageActivity\" />\r\n        <activity android:name=\".Activity.GalleryActivity\" />\r\n        <activity\r\n            android:name=\".Activity.DetailReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ExerDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.FoodDictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.VideoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ReportActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DiaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.AlarmActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.DictionaryActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity android:name=\".Activity.CommunityActivity\" />\r\n        <activity\r\n            android:name=\".Activity.MenuActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserLeaveCheckActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.UserUpdateinfoActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SettingActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.ResetPasswordActivity\"\r\n            android:parentActivityName=\".Activity.LoginActivity\" />\r\n        <!--\r\n <activity android:name=\".Activity.MainActivity\"\r\n            android:exported=\"false\"> 가 원래 모습\r\n        -->\r\n        <activity\r\n            android:name=\".Activity.MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.SplashscreenActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
++++ b/app/src/main/AndroidManifest.xml	(date 1669458674478)
+@@ -1,13 +1,14 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools">
++    xmlns:tools="http://schemas.android.com/tools" >
+ 
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
++
+     <uses-feature android:name="android.hardware.sensor.stepdetector" />
+ 
+-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
++    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+ 
+     <application
+         android:allowBackup="true"
+@@ -20,30 +21,23 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.MyApp"
+         android:usesCleartextTraffic="true"
+-        tools:targetApi="31">
++        tools:targetApi="31" >
+         <activity
+             android:name=".Activity.ExerAlarmActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.PedometerActivity"
+-            android:exported="true">
++            android:exported="true" >
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+ 
+-            <meta-data
+-                android:name="android.app.lib_name"
+-                android:value="" />
+-        </activity>
+-        <activity
+-            android:name=".Activity.RoomActivity"
+-            android:exported="false">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+@@ -53,56 +47,56 @@
+         <activity android:name=".Activity.GalleryActivity" />
+         <activity
+             android:name=".Activity.DetailReportActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.ExerDictionaryActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.FoodDictionaryActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.VideoActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.ReportActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.DiaryActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.AlarmActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.DictionaryActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+@@ -110,35 +104,35 @@
+         <activity android:name=".Activity.CommunityActivity" />
+         <activity
+             android:name=".Activity.MenuActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.UserLeaveActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.UserLeaveCheckActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.UserUpdateinfoActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.SettingActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+@@ -152,28 +146,28 @@
+         -->
+         <activity
+             android:name=".Activity.MainActivity"
+-            android:exported="true">
++            android:exported="true" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.RegisterActivity"
+-            android:exported="false">
++            android:exported="false" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.LoginActivity"
+-            android:exported="true">
++            android:exported="true" >
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Activity.SplashscreenActivity"
+-            android:exported="true">
++            android:exported="true" >
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+Index: app/src/main/res/layout/activity_room.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_room.xml b/app/src/main/res/layout/activity_room.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_room.xml	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
++++ /dev/null	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".Activity.RoomActivity">
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/Activity/RoomActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/RoomActivity.java b/app/src/main/java/com/example/myapp/Activity/RoomActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/myapp/Activity/RoomActivity.java	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
++++ /dev/null	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
+@@ -1,16 +0,0 @@
+-package com.example.myapp.Activity;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import android.os.Bundle;
+-
+-import com.example.myapp.R;
+-
+-public class RoomActivity extends AppCompatActivity {
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_room);
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/Memberinfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp;\r\n\r\npublic class Memberinfo {\r\n    private String id;\r\n    private String pwd;\r\n    private String nickname;\r\n    private String username;\r\n    private String phoneNum;\r\n    private String imageURL;\r\n    private String status;\r\n    private String search;\r\n\r\n    public Memberinfo(String id, String pwd, String nickname, String username, String phoneNum, String imageURL, String status, String search){\r\n        this.id = id;\r\n        this.pwd = pwd;\r\n        this.nickname = nickname;\r\n        this.username = username;\r\n        this.phoneNum = phoneNum;\r\n        this.imageURL = imageURL;\r\n        this.status = status;\r\n        this.search = search;\r\n    }\r\n    public Memberinfo() {\r\n\r\n    }\r\n\r\n    public String getId() { return id; }\r\n    public void setId(String id) { this.id = id; }\r\n\r\n    public String getPwd() { return pwd; }\r\n    public void setPwd(String pwd) { this.pwd = pwd; }\r\n\r\n    public String getNickname() { return nickname; }\r\n    public void setNickname(String nickname) { this.nickname = nickname; }\r\n\r\n    public String getUsername() { return username; }\r\n    public void setUsername(String username) { this.username = username; }\r\n\r\n    public String getPhoneNum() { return phoneNum; }\r\n    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }\r\n\r\n    public String getImageURL() { return imageURL; }\r\n    public void setImageURL(String imageURL) { this.imageURL = imageURL; }\r\n\r\n    public String getStatus() { return status; }\r\n    public void setStatus(String status) { this.status = status; }\r\n\r\n    public String getSearch() { return search; }\r\n    public void setSearch(String search) { this.search = search; }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Memberinfo.java b/app/src/main/java/com/example/myapp/Memberinfo.java
+--- a/app/src/main/java/com/example/myapp/Memberinfo.java	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
++++ b/app/src/main/java/com/example/myapp/Memberinfo.java	(date 1669437596252)
+@@ -10,9 +10,8 @@
+     private String status;
+     private String search;
+ 
+-    public Memberinfo(String id, String pwd, String nickname, String username, String phoneNum, String imageURL, String status, String search){
++    public Memberinfo(String id, String nickname, String username, String phoneNum, String imageURL, String status, String search){
+         this.id = id;
+-        this.pwd = pwd;
+         this.nickname = nickname;
+         this.username = username;
+         this.phoneNum = phoneNum;
+@@ -27,9 +26,6 @@
+     public String getId() { return id; }
+     public void setId(String id) { this.id = id; }
+ 
+-    public String getPwd() { return pwd; }
+-    public void setPwd(String pwd) { this.pwd = pwd; }
+-
+     public String getNickname() { return nickname; }
+     public void setNickname(String nickname) { this.nickname = nickname; }
+ 
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.myapp'\r\n    compileSdk 33\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.myapp\"\r\n        minSdk 29\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:30.4.1')\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'com.google.firebase:firebase-auth:21.0.8'\r\n    implementation 'com.google.firebase:firebase-database:20.0.6'\r\n    implementation 'com.google.firebase:firebase-storage:20.0.0'\r\n\r\n    //circleimageview 사용\r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n\r\n    //Glide 사용, 이미지를 빠르고 효율적으로 불러올 수 있게 도와주는 라이브러리\r\n    implementation 'com.github.bumptech.glide:glide:4.14.2'\r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'\r\n\r\n\r\n    // 유튜브 추가 레이어\r\n    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'\r\n\r\n    // 메인 화면 차트 생성\r\n    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'\r\n\r\n    // navigation bar 생성\r\n    implementation 'com.google.android.material:material:1.7.0'\r\n\r\n    // 로딩 화면 생성\r\n    implementation 'com.airbnb.android:lottie:5.2.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n\r\n\r\n    // graph 생성\r\n\r\n\r\n    testImplementation 'junit:junit:4.13.2'\r\n\r\n\r\n\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 484c623618a66dc98cfc9e076338dea245ce3a3e)
++++ b/app/build.gradle	(date 1669440768279)
+@@ -39,6 +39,7 @@
+     implementation 'com.google.firebase:firebase-auth:21.0.8'
+     implementation 'com.google.firebase:firebase-database:20.0.6'
+     implementation 'com.google.firebase:firebase-storage:20.0.0'
++    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+ 
+     //circleimageview 사용
+     implementation 'de.hdodenhof:circleimageview:3.1.0'

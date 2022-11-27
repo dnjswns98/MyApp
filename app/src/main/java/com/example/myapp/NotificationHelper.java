@@ -1,4 +1,4 @@
-package com.example.myapp.Fragments;
+package com.example.myapp;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
