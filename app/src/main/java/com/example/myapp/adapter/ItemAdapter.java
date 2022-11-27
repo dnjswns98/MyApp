@@ -34,13 +34,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private List<FoodData> mDataList;
     private List<FoodData> mDataListAll;
-    Activity activity;
 
     //constructor
     public ItemAdapter(List<FoodData> items) {
         mDataList = items;
-        //mDataListAll = new ArrayList<>(items);
-        this.activity = activity;
+        mDataListAll = new ArrayList<>(items);
     }
 
     //interface - 클릭인터페이스
@@ -153,6 +151,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             unit = itemView.findViewById(R.id.unit);
 
         }
+    }
+    public void setItems(ArrayList<FoodData> list){
+        mDataList = list;
+        notifyDataSetChanged();
     }
 
     //onclick listener interface

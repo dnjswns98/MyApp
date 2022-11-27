@@ -2,6 +2,9 @@ package com.example.myapp.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -37,21 +40,51 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
+import android.text.TextWatcher;
+
 
 public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter.onItemListener {
     Button btn_home,btn_setting, btn_community, btn_menu;
     private ItemAdapter adapter;
-    private List<FoodData> itemList;
+    private List<FoodData> itemList = new ArrayList<>(), filteredList=new ArrayList<>();
     Button buttonInsert;
+    EditText searchET;
+    RecyclerView recyclerView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_dictionary);
+        setUpRecyclerView();
+
         btn_setting = findViewById(R.id.btn_setting);
         btn_home = findViewById(R.id.btn_home);
         btn_community = findViewById(R.id.btn_community);
+
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_view_food);
+        searchET = (EditText)findViewById(R.id.searchFood);
+        //editText.addTextChangedListener(this);
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String searchText = searchET.getText().toString();
+                searchFilter(searchText);
+
+            }
+        });
+
         btn_menu = findViewById(R.id.btn_menu);
         buttonInsert=findViewById(R.id.btn_add_food);
         buttonInsert.setOnClickListener(new View.OnClickListener(){
@@ -73,8 +106,9 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
                         String strUnit = editUnit.getText().toString();
                         String strCal = editCal.getText().toString();
                         FoodData dictionary = new FoodData(strFood,strCal,strUnit);
-                        itemList.add(0,dictionary);
-                        adapter.notifyItemInserted(0);
+                        itemList.add(dictionary);
+                        //adapter.notifyItemInserted(0);
+                        //adapter.notifyDataSetChanged();
                         dialog.dismiss();
 
                     }
@@ -115,7 +149,6 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
             }
         });
 
-        setUpRecyclerView();
     }
 
     /****************************************************
@@ -128,7 +161,7 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         //adapter
-        //        itemList = new ArrayList<>(); //샘플테이터
+        itemList = new ArrayList<>(); //샘플테이터
         fillData();
         adapter = new ItemAdapter(itemList);
         recyclerView.setLayoutManager(layoutManager);
@@ -137,14 +170,14 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         //데이터셋변경시
-        //adapter.dataSetChanged(exampleList);
+        adapter.dataSetChanged(itemList);
 
         //어댑터의 리스너 호출
         adapter.setOnClickListener(this);
     }
 
     private void fillData() {
-        itemList = new ArrayList<>(); //샘플테이터
+         //샘플테이터
         itemList.add(new FoodData("사과", "57", "100g"));
         itemList.add(new FoodData("바나나", "93", "100g"));
         itemList.add(new FoodData("닭가슴살", "109","100g"));
@@ -161,42 +194,28 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
         itemList.add(new FoodData("팽이버섯", "29", "100g"));
         itemList.add(new FoodData("아이스 아메리카노", "10", "1잔"));
         itemList.add(new FoodData("코카콜라", "212", "500ml"));
+
+    }
+    public void searchFilter(String searchText) {
+        filteredList.clear();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getFood().toLowerCase().contains(searchText.toLowerCase())) {
+                filteredList.add(itemList.get(i));
+            }
+            adapter.setItems((ArrayList<FoodData>) filteredList);
+        }
+
+        adapter.filterList((ArrayList<FoodData>) filteredList);
     }
 
-    /****************************************************
-     onCreateOptionsMenu SearchView  기능구현
-     ***************************************************/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.search, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("검색어를 입력하세요.");
-
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(FoodDictionaryActivity.this, "[검색버튼클릭] 검색어 = "+query, Toast.LENGTH_LONG).show();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
 
     /****************************************************
      리사이클러뷰 클릭이벤트 인터페이스 구현
      ***************************************************/
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(this, "" +position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" +itemList.get(position).getFood(), Toast.LENGTH_SHORT).show();
     }
 }

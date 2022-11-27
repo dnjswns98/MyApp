@@ -46,48 +46,39 @@
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_add_food"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right"
+                <EditText
+                    android:id="@+id/searchFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_baseline_search_24"
+                    android:hint="음식을 검색해 주세요."
+                    android:imeOptions="actionSearch"
+                    android:lines="1" />
 
-                android:layout_margin="5dp"
-                android:background="@drawable/round_button"
-                android:backgroundTint="@color/white"
-                android:text="+"
-                android:textColor="#626367"
-                android:textSize="34sp"
-                android:textStyle="normal" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_food"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+
+                    android:layout_margin="5dp"
+                    android:background="@drawable/round_button"
+                    android:backgroundTint="@color/white"
+                    android:text="+"
+                    android:textColor="#626367"
+                    android:textSize="34sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-
-<!--&lt;!&ndash;            <androidx.appcompat.widget.SearchView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/food_searchview"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:iconifiedByDefault="false"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:queryHint="검색어를 입력하시오."&ndash;&gt;-->
-<!--&lt;!&ndash;                app:searchIcon="@drawable/ic_baseline_search_24"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                />&ndash;&gt;-->
-<!--            -->
-
-
-
-<!--            &lt;!&ndash;<com.github.mikephil.charting.charts.BarChart-->
-<!--                    android:id="@+id/chart"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="300dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0.5"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-<!--        &ndash;&gt;-->
 
 
     <androidx.recyclerview.widget.RecyclerView
