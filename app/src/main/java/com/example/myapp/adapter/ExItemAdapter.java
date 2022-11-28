@@ -31,13 +31,13 @@ import java.util.List;
 
  **********************************************************************************************/
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> implements Filterable {
+public class ExItemAdapter extends RecyclerView.Adapter<ExItemAdapter.ItemViewHolder> implements Filterable {
 
-    private List<FoodData> mDataList;
-    private List<FoodData> mDataListAll;
+    private List<ExerData> mDataList;
+    private List<ExerData> mDataListAll;
 
     //constructor
-    public ItemAdapter(List<FoodData> items) {
+    public ExItemAdapter(List<ExerData> items) {
         mDataList = items;
         mDataListAll = new ArrayList<>(items);
     }
@@ -49,7 +49,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     //data set changed
-    public void dataSetChanged(List<FoodData> exampleList) {
+    public void dataSetChanged(List<ExerData> exampleList) {
         mDataList = exampleList;
         notifyDataSetChanged();
     }
@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_recyclerview,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exer_recyclerview,
                 parent, false);
         return new ItemViewHolder(v);
     }
@@ -66,9 +66,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     //2.onBindViewHolder  -------------------------------------------------------
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        FoodData currentItem = mDataList.get(position);
+        ExerData currentItem = mDataList.get(position);
         // TODO : 데이터를 뷰홀더에 표시하시오
-        holder.food.setText(currentItem.getFood());
+        holder.exer.setText(currentItem.getExer());
         holder.unit.setText(currentItem.getUnit());
         holder.cal.setText(currentItem.getCal());
 
@@ -94,7 +94,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return mDataList.size();
     }
 
-    public void  filterList(ArrayList<FoodData> filteredList) {
+    public void  filterList(ArrayList<ExerData> filteredList) {
         mDataList = filteredList;
         notifyDataSetChanged();
     }
@@ -110,15 +110,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         //Automatic on background thread
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<FoodData> filteredList = new ArrayList<>();
+            List<ExerData> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mDataListAll);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (FoodData item : mDataListAll) {
+                for (ExerData item : mDataListAll) {
                     //TODO filter 대상 setting
-                    if (item.getFood().toLowerCase().contains(filterPattern)) {
+                    if (item.getExer().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -140,20 +140,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     // 뷰홀더 클래스  ---------------------------------
     class ItemViewHolder extends RecyclerView.ViewHolder {
         // TODO : 뷰홀더 완성하시오
-        TextView food;
+        TextView exer;
         TextView cal;
         TextView unit;
 
         ItemViewHolder(View itemView) {
             super(itemView);
             // TODO : 뷰홀더 완성하시오
-            food = itemView.findViewById(R.id.food);
+            exer = itemView.findViewById(R.id.exer);
             cal = itemView.findViewById(R.id.cal);
             unit = itemView.findViewById(R.id.unit);
 
         }
     }
-    public void setItems(ArrayList<FoodData> list){
+    public void setItems(ArrayList<ExerData> list){
         mDataList = list;
         notifyDataSetChanged();
     }
