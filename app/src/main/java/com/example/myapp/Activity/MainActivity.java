@@ -50,16 +50,21 @@ public class MainActivity extends BasicActivity {
     //    캘린더용변수
     public String fname=null;
     public String fname2=null;
+    public String fname3=null;
+
     public String strFood=null;
     public String strEx=null;
+    public String strW=null;
+
     public CalendarView calendarView;
-    public Button chaFood_Btn,delFood_Btn,saveFood_Btn, chaEx_Btn,delEx_Btn,saveEx_Btn;
-    public TextView diaryTextView,textView2,textF,textview5,todayEx,textEx,textE;
-    public EditText contextEditText,contextEditText2;
+    public Button chaFood_Btn,delFood_Btn,saveFood_Btn, chaEx_Btn,delEx_Btn,saveEx_Btn, saveW_Btn;
+    public TextView diaryTextView,textView2,textF,textview5,todayEx,textEx,textE, textW;
+    public EditText contextEditText,contextEditText2, contextEditText3;
 
     Button btn_setting, btn_community, btn_menu;
     private FirebaseAuth auth;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -104,6 +109,9 @@ public class MainActivity extends BasicActivity {
         delEx_Btn=findViewById(R.id.delEx_Btn);
         saveEx_Btn=findViewById(R.id.saveEx_Btn);
         contextEditText2=findViewById(R.id.contextEditText2);
+        contextEditText3=findViewById(R.id.contextEditText3);
+        textW=findViewById(R.id.textW);
+        saveW_Btn=findViewById(R.id.saveW_Btn);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -121,7 +129,10 @@ public class MainActivity extends BasicActivity {
                 diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
                 contextEditText.setText("");
                 contextEditText2.setText("");
-
+                contextEditText3.setText("");
+                textW.setVisibility(View.VISIBLE);
+                saveW_Btn.setVisibility(View.VISIBLE);
+                contextEditText3.setVisibility(View.VISIBLE);
                 textE.setVisibility(View.VISIBLE);
                 saveEx_Btn.setVisibility(View.VISIBLE);
                 contextEditText2.setVisibility(View.VISIBLE);
@@ -160,18 +171,33 @@ public class MainActivity extends BasicActivity {
 
             }
         });
+        saveW_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveDiary3(fname3);
+                strW=contextEditText3.getText().toString();
+                contextEditText3.setText(strW+"kg");
+                saveW_Btn.setVisibility(View.VISIBLE);
+                contextEditText3.setVisibility(View.VISIBLE);
+                textW.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 
     public void  checkDay(int cYear,int cMonth,int cDay){
         fname=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
         fname2=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+"2.txt";//저장할 파일 이름설정
+        fname3=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+"3.txt";//저장할 파일 이름설정
 
         FileInputStream fis=null;//FileStream fis 변수
         FileInputStream fis2=null;//FileStream fis 변수
+        FileInputStream fis3=null;//FileStream fis 변수
 
         try{
             fis=openFileInput(fname);
             fis2=openFileInput(fname2);
+            fis3=openFileInput(fname3);
 
             byte[] fileData=new byte[fis.available()];
             fis.read(fileData);
@@ -179,9 +205,13 @@ public class MainActivity extends BasicActivity {
             byte[] fileData2=new byte[fis2.available()];
             fis2.read(fileData2);
             fis2.close();
+            byte[] fileData3=new byte[fis3.available()];
+            fis3.read(fileData3);
+            fis3.close();
 
             strFood=new String(fileData);
             strEx=new String(fileData2);
+            strW=new String(fileData3);
 
             contextEditText.setVisibility(View.INVISIBLE);
             textView2.setVisibility(View.VISIBLE);
@@ -198,6 +228,10 @@ public class MainActivity extends BasicActivity {
             saveEx_Btn.setVisibility(View.INVISIBLE);
             chaEx_Btn.setVisibility(View.VISIBLE);
             delEx_Btn.setVisibility(View.VISIBLE);
+
+            contextEditText3.setVisibility(View.VISIBLE);
+            textW.setVisibility(View.VISIBLE);
+            contextEditText3.setText(strW+"kg");
 
             chaFood_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -329,10 +363,23 @@ public class MainActivity extends BasicActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
-
-
     }
-
+    @SuppressLint("WrongConstant")
+    public void saveDiary3(String readDay){
+        FileOutputStream fos=null;
+        try{
+            fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
+            String content=contextEditText3.getText().toString();
+            fos.write((content).getBytes());
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        FirebaseUser user = auth.getCurrentUser();
+        if(user == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
 
 }
