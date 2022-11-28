@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapp.BulletinBoard.BulletinBoardActivity;
 import com.example.myapp.R;
 
 public class CommunityActivity extends BasicActivity{
     Button btn_home,btn_setting, btn_community, btn_menu;
-    Button btn_chatting;
+    Button btn_chatting, btn_bulletinboard;
 
 
     @Override
@@ -23,11 +24,20 @@ public class CommunityActivity extends BasicActivity{
         btn_community = findViewById(R.id.btn_community);
         btn_menu = findViewById(R.id.btn_menu);
         btn_chatting = findViewById(R.id.btn_chatting);
+        btn_bulletinboard = findViewById(R.id.btn_bulletinboard);
 
         btn_chatting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CommunityActivity.this, RoomActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_bulletinboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommunityActivity.this, BulletinBoardActivity.class);
                 startActivity(intent);
             }
         });

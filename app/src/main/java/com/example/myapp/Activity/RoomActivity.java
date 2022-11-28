@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RoomActivity extends BasicActivity {
 
     CircleImageView profile_image;
-    TextView username;
+    TextView nickname;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -50,7 +50,7 @@ public class RoomActivity extends BasicActivity {
         getSupportActionBar().setTitle("");
 
         profile_image = findViewById(R.id.profile_image);
-        username = (TextView)findViewById(R.id.username);
+        nickname = (TextView)findViewById(R.id.nickname);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -59,7 +59,7 @@ public class RoomActivity extends BasicActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Memberinfo memberinfo = dataSnapshot.getValue(Memberinfo.class);
-                username.setText(memberinfo.getUsername());
+                nickname.setText(memberinfo.getNickname());
                 if (memberinfo.getImageURL().equals("default")){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else {

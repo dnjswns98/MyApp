@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -24,119 +25,33 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <activity android:name=".Activity.RoomActivity" />
-        <activity
-            android:name=".Activity.ExerAlarmActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
+        <activity android:name=".BulletinBoard.BulletinBoardActivity" />
+        <activity android:name=".BulletinBoard.FreeActivity" />
+        <activity android:name=".BulletinBoard.ReviewActivity" />
+        <activity android:name=".BulletinBoard.TipActivity" />
+        <activity android:name=".BulletinBoard.FreeWriteActivity" />
+        <activity android:name=".BulletinBoard.ReviewWriteActivity" />
+        <activity android:name=".BulletinBoard.TipWriteActivity" />
         <receiver android:name=".AlertReceiver" />
-
-        <activity
-            android:name=".Activity.PedometerActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        <activity android:name=".Activity.ExerAlarmActivity" />
+        <activity android:name=".Activity.PedometerActivity" />
         <activity android:name=".Activity.PostActivity" />
+        <activity android:name=".Activity.RoomActivity" />
         <activity android:name=".Activity.MessageActivity" />
         <activity android:name=".Activity.GalleryActivity" />
-        <activity
-            android:name=".Activity.DetailReportActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.ExerDictionaryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.FoodDictionaryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.VideoActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.ReportActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.AlarmActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.DictionaryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.CommunityActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            />
-        </activity>
-        <activity
-            android:name=".Activity.MenuActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.UserLeaveActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.UserLeaveCheckActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.UserUpdateinfoActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.SettingActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        <activity android:name=".Activity.DetailReportActivity" />
+        <activity android:name=".Activity.ExerDictionaryActivity" />
+        <activity android:name=".Activity.FoodDictionaryActivity" />
+        <activity android:name=".Activity.VideoActivity" />
+        <activity android:name=".Activity.ReportActivity" />
+        <activity android:name=".Activity.AlarmActivity" />
+        <activity android:name=".Activity.DictionaryActivity" />
+        <activity android:name=".Activity.CommunityActivity" />
+        <activity android:name=".Activity.MenuActivity" />
+        <activity android:name=".Activity.UserLeaveActivity" />
+        <activity android:name=".Activity.UserLeaveCheckActivity" />
+        <activity android:name=".Activity.UserUpdateinfoActivity" />
+        <activity android:name=".Activity.SettingActivity" />
         <activity
             android:name=".Activity.ResetPasswordActivity"
             android:parentActivityName=".Activity.LoginActivity"></activity>
@@ -144,27 +59,9 @@
  <activity android:name=".Activity.MainActivity"
             android:exported="false"> 가 원래 모습
         -->
-        <activity
-            android:name=".Activity.MainActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.RegisterActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.LoginActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.LoginActivity" />
         <activity
             android:name=".Activity.SplashscreenActivity"
             android:exported="true">
@@ -175,5 +72,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
