@@ -32,6 +32,42 @@
         android:hint="열량(kcal)을 입력하세요."
         android:inputType="numberDecimal" />
 
+    <EditText
+        android:id="@+id/d_carbo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="탄수화물 함량(g)을 입력하세요."
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/d_protein"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="단백질 함량(g)을 입력하세요."
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/d_fat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="지방 함량(g)을 입력하세요."
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/d_sugars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="당류 함량(g)을 입력하세요."
+        android:inputType="numberDecimal" />
+
+
+    <EditText
+        android:id="@+id/d_sodium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="나트륨 함량(mg)을 입력하세요."
+        android:inputType="numberDecimal" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
