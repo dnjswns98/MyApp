@@ -332,6 +332,62 @@
                         android:visibility="invisible"></Button>
 
                 </LinearLayout>
+<!--                몸무게입력-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/font_test"
+                        android:gravity="center"
+                        android:text="오늘 몸무게"
+                        android:textColor="@color/purple_700"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
+
+                    <EditText
+                        android:id="@+id/contextEditText3"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:ems="10"
+                        android:hint="  KG"
+                        android:inputType="textMultiLine"
+                        android:visibility="invisible" />
+
+                    <Button
+                        android:id="@+id/saveW_Btn"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="center"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="저장"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        app:iconPadding="0dp" />
+                </LinearLayout>
+
+
+
                 <!--        식단기록-->
                 <LinearLayout
                     android:layout_width="match_parent"
