@@ -98,6 +98,15 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
                 final EditText editFood = (EditText) view.findViewById(R.id.d_food);
                 final EditText editUnit = (EditText) view.findViewById(R.id.d_unit);
                 final EditText editCal = (EditText) view.findViewById(R.id.d_cal);
+
+                final EditText editCarbo = (EditText) view.findViewById(R.id.d_carbo);
+                final EditText editProtein = (EditText) view.findViewById(R.id.d_protein);
+                final EditText editFat = (EditText) view.findViewById(R.id.d_fat);
+                final EditText editSugars = (EditText) view.findViewById(R.id.d_sugars);
+                final EditText editSodium = (EditText) view.findViewById(R.id.d_sodium);
+
+
+
                 final AlertDialog dialog = builder.create();
                 ButtonSubmit.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -105,7 +114,13 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
                         String strFood = editFood.getText().toString();
                         String strUnit = editUnit.getText().toString();
                         String strCal = editCal.getText().toString();
-                        FoodData dictionary = new FoodData(strFood,strCal,strUnit);
+                        String strCarbo = editCarbo.getText().toString();
+                        String strProtein = editProtein.getText().toString();
+                        String strFat = editFat.getText().toString();
+                        String strSugars = editSugars.getText().toString();
+                        String strSodium = editSodium.getText().toString();
+
+                        FoodData dictionary = new FoodData(strFood,strCal,strUnit, strCarbo, strProtein, strFat, strSugars, strSodium);
                         itemList.add(dictionary);
                         //adapter.notifyItemInserted(0);
                         //adapter.notifyDataSetChanged();
@@ -178,22 +193,26 @@ public class FoodDictionaryActivity extends BasicActivity implements ItemAdapter
 
     private void fillData() {
          //샘플테이터
-        itemList.add(new FoodData("사과", "57", "100g"));
-        itemList.add(new FoodData("바나나", "93", "100g"));
-        itemList.add(new FoodData("닭가슴살", "109","100g"));
-        itemList.add(new FoodData("상추", "18", "100g"));
-        itemList.add(new FoodData("참크래커", "85", "1봉지"));
-        itemList.add(new FoodData("방울토마토", "16", "100g"));
-        itemList.add(new FoodData("고등어", "183", "100g"));
-        itemList.add(new FoodData("양배추", "31", "100g"));
-        itemList.add(new FoodData("오이", "9", "100g"));
-        itemList.add(new FoodData("달걀", "74", "50g"));
-        itemList.add(new FoodData("군고구마", "123", "100g"));
-        itemList.add(new FoodData("두부", "95", "100g"));
-        itemList.add(new FoodData("구운계란", "55", "50g"));
-        itemList.add(new FoodData("팽이버섯", "29", "100g"));
-        itemList.add(new FoodData("아이스 아메리카노", "10", "1잔"));
-        itemList.add(new FoodData("코카콜라", "212", "500ml"));
+        itemList.add(new FoodData("사과", "52", "100g", "13.81", "0.29", "0.17", "14.34", "1"));
+        itemList.add(new FoodData("바나나", "89", "100g", "22.84", "1.09", "0.33", "14.43", "1"));
+        itemList.add(new FoodData("닭가슴살", "109","100g", "0", "22.98", "1.23", "0", "65"));
+        itemList.add(new FoodData("상추", "14", "100g", "2.97", "0.9", "0.14", "0.8", "10"));
+        itemList.add(new FoodData("참크래커", "85", "1봉지", "13.8", "1.6", "2.4", "0.5", "138"));
+        itemList.add(new FoodData("방울토마토", "18", "100g", "3.92", "0.88", "0.2", "2.63", "5"));
+        itemList.add(new FoodData("고등어", "167", "100g", "0", "19.32", "9.36", "0", "78"));
+        itemList.add(new FoodData("고등어구이", "190", "100g", "0.35", "17.59", "12.6", "0.09", "411"));
+        itemList.add(new FoodData("양배추", "24", "100g", "5.58", "1.44", "0.12", "3.58", "18"));
+        itemList.add(new FoodData("오이", "12", "100g", "2.16", "0.59", "0.16", "1.38", "2"));
+        itemList.add(new FoodData("삶은 계란", "68", "1개", "0.49", "5.51", "4.65", "0.49", "122"));
+        itemList.add(new FoodData("구운계란", "65", "1개", "0.34", "5.57", "4.4", "0.34", "131"));
+        itemList.add(new FoodData("계란후라이", "78", "1개", "0.37", "5.42", "5.88", "0.33", "207"));
+        itemList.add(new FoodData("군고구마", "123", "100g", "28.38", "1.44", "0.49", "3.63", "48"));
+        itemList.add(new FoodData("밤고구마", "128", "100g", "30.28", "1.39", "0.23", "3.19", "18"));
+        itemList.add(new FoodData("호박고구마", "155", "100g", "36.78", "1.41", "0.27", "2.2", "16"));
+        itemList.add(new FoodData("두부", "79", "100g", "2.81", "8.1", "4.21", "1.01", "29"));
+        itemList.add(new FoodData("팽이버섯", "42", "100g", "6.96", "2.7", "0.41", "0.22", "3"));
+        itemList.add(new FoodData("아이스 아메리카노", "20", "1잔", "1.87", "0.27", "1.29", "1.7", "5"));
+        itemList.add(new FoodData("코카콜라", "108", "1캔(250ml)", "27", "0", "0", "27", "8"));
 
     }
 

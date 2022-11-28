@@ -1,0 +1,389 @@
+Index: app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.view.MenuInflater;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.collection.ArraySet;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapp.FoodData;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.adapter.ItemAdapter;\r\n\r\nimport java.util.ArrayList;\r\n\r\n\r\n//////google 복붙\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.SearchView;\r\nimport androidx.recyclerview.widget.DividerItemDecoration;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\nimport android.view.inputmethod.EditorInfo;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\n//import com.nurisoft.recyclerview.adapters.ItemAdapter;\r\n//import com.nurisoft.recyclerview.models.ItemModel;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Dictionary;\r\nimport java.util.List;\r\nimport android.text.TextWatcher;\r\n\r\n\r\npublic class FoodDictionaryActivity extends BasicActivity implements ItemAdapter.onItemListener {\r\n    Button btn_home,btn_setting, btn_community, btn_menu;\r\n    private ItemAdapter adapter;\r\n    private List<FoodData> itemList = new ArrayList<>(), filteredList=new ArrayList<>();\r\n    Button buttonInsert;\r\n    EditText searchET;\r\n    RecyclerView recyclerView;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_food_dictionary);\r\n        setUpRecyclerView();\r\n\r\n        btn_setting = findViewById(R.id.btn_setting);\r\n        btn_home = findViewById(R.id.btn_home);\r\n        btn_community = findViewById(R.id.btn_community);\r\n\r\n        recyclerView = (RecyclerView)findViewById(R.id.recycler_view_food);\r\n        searchET = (EditText)findViewById(R.id.searchFood);\r\n        //editText.addTextChangedListener(this);\r\n        searchET.addTextChangedListener(new TextWatcher() {\r\n            @Override\r\n            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable editable) {\r\n\r\n                String searchText = searchET.getText().toString();\r\n                searchFilter(searchText);\r\n\r\n            }\r\n        });\r\n\r\n        btn_menu = findViewById(R.id.btn_menu);\r\n        buttonInsert=findViewById(R.id.btn_add_food);\r\n        buttonInsert.setOnClickListener(new View.OnClickListener(){\r\n            @Override\r\n            public void onClick(View v) {\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(FoodDictionaryActivity.this);\r\n                View view = getLayoutInflater().from(FoodDictionaryActivity.this).inflate(R.layout.add_food, null,false);\r\n                builder.setView(view);\r\n                final Button ButtonSubmit=(Button)view.findViewById(R.id.btn_insert);\r\n                final Button ButtonBack=(Button)view.findViewById(R.id.btn_back);\r\n                final EditText editFood = (EditText) view.findViewById(R.id.d_food);\r\n                final EditText editUnit = (EditText) view.findViewById(R.id.d_unit);\r\n                final EditText editCal = (EditText) view.findViewById(R.id.d_cal);\r\n                final AlertDialog dialog = builder.create();\r\n                ButtonSubmit.setOnClickListener(new View.OnClickListener(){\r\n                    @Override\r\n                    public void onClick(View v) {\r\n                        String strFood = editFood.getText().toString();\r\n                        String strUnit = editUnit.getText().toString();\r\n                        String strCal = editCal.getText().toString();\r\n                        FoodData dictionary = new FoodData(strFood,strCal,strUnit);\r\n                        itemList.add(dictionary);\r\n                        //adapter.notifyItemInserted(0);\r\n                        //adapter.notifyDataSetChanged();\r\n                        dialog.dismiss();\r\n\r\n                    }\r\n                });\r\n                ButtonBack.setOnClickListener(new View.OnClickListener(){\r\n                    @Override\r\n                    public void onClick(View v) {\r\n                        finish();\r\n                    }\r\n                });\r\n                dialog.show();\r\n            }\r\n        });\r\n\r\n        btn_setting.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                finishAffinity();\r\n                startActivity(new Intent(FoodDictionaryActivity.this, SettingActivity.class));\r\n            }\r\n        });\r\n        btn_home.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, MainActivity.class));\r\n            }\r\n        });\r\n        btn_menu.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, MenuActivity.class));\r\n            }\r\n        });\r\n        btn_community.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(FoodDictionaryActivity.this, CommunityActivity.class));\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    /****************************************************\r\n     리사이클러뷰, 어댑터 셋팅\r\n     ***************************************************/\r\n    private void setUpRecyclerView() {\r\n        //recyclerview\r\n        RecyclerView recyclerView = findViewById(R.id.recycler_view_food);\r\n        recyclerView.setHasFixedSize(true);\r\n        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);\r\n\r\n        //adapter\r\n        itemList = new ArrayList<>(); //샘플테이터\r\n        fillData();\r\n        adapter = new ItemAdapter(itemList);\r\n        recyclerView.setLayoutManager(layoutManager);\r\n        recyclerView.setAdapter(adapter);\r\n        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL); //밑줄\r\n        recyclerView.addItemDecoration(dividerItemDecoration);\r\n\r\n        //데이터셋변경시\r\n        adapter.dataSetChanged(itemList);\r\n\r\n        //어댑터의 리스너 호출\r\n        adapter.setOnClickListener(this);\r\n    }\r\n\r\n    private void fillData() {\r\n         //샘플테이터\r\n        itemList.add(new FoodData(\"사과\", \"57\", \"100g\"));\r\n        itemList.add(new FoodData(\"바나나\", \"93\", \"100g\"));\r\n        itemList.add(new FoodData(\"닭가슴살\", \"109\",\"100g\"));\r\n        itemList.add(new FoodData(\"상추\", \"18\", \"100g\"));\r\n        itemList.add(new FoodData(\"참크래커\", \"85\", \"1봉지\"));\r\n        itemList.add(new FoodData(\"방울토마토\", \"16\", \"100g\"));\r\n        itemList.add(new FoodData(\"고등어\", \"183\", \"100g\"));\r\n        itemList.add(new FoodData(\"양배추\", \"31\", \"100g\"));\r\n        itemList.add(new FoodData(\"오이\", \"9\", \"100g\"));\r\n        itemList.add(new FoodData(\"달걀\", \"74\", \"50g\"));\r\n        itemList.add(new FoodData(\"군고구마\", \"123\", \"100g\"));\r\n        itemList.add(new FoodData(\"두부\", \"95\", \"100g\"));\r\n        itemList.add(new FoodData(\"구운계란\", \"55\", \"50g\"));\r\n        itemList.add(new FoodData(\"팽이버섯\", \"29\", \"100g\"));\r\n        itemList.add(new FoodData(\"아이스 아메리카노\", \"10\", \"1잔\"));\r\n        itemList.add(new FoodData(\"코카콜라\", \"212\", \"500ml\"));\r\n\r\n    }\r\n\r\n    public void searchFilter(String searchText) {\r\n        filteredList.clear();\r\n\r\n        for (int i = 0; i < itemList.size(); i++) {\r\n            if (itemList.get(i).getFood().toLowerCase().contains(searchText.toLowerCase())) {\r\n                filteredList.add(itemList.get(i));\r\n            }\r\n            adapter.setItems((ArrayList<FoodData>) filteredList);\r\n        }\r\n\r\n        adapter.filterList((ArrayList<FoodData>) filteredList);\r\n    }\r\n\r\n\r\n\r\n    /****************************************************\r\n     리사이클러뷰 클릭이벤트 인터페이스 구현\r\n     ***************************************************/\r\n    @Override\r\n    public void onItemClicked(int position) {\r\n        Toast.makeText(this, \"\" +itemList.get(position).getFood(), Toast.LENGTH_SHORT).show();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java b/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java	(revision ae0eb067ecdc909448bf622e11ef043147627336)
++++ b/app/src/main/java/com/example/myapp/Activity/FoodDictionaryActivity.java	(date 1669622631206)
+@@ -98,6 +98,15 @@
+                 final EditText editFood = (EditText) view.findViewById(R.id.d_food);
+                 final EditText editUnit = (EditText) view.findViewById(R.id.d_unit);
+                 final EditText editCal = (EditText) view.findViewById(R.id.d_cal);
++
++                final EditText editCarbo = (EditText) view.findViewById(R.id.d_carbo);
++                final EditText editProtein = (EditText) view.findViewById(R.id.d_protein);
++                final EditText editFat = (EditText) view.findViewById(R.id.d_fat);
++                final EditText editSugars = (EditText) view.findViewById(R.id.d_sugars);
++                final EditText editSodium = (EditText) view.findViewById(R.id.d_sodium);
++
++
++
+                 final AlertDialog dialog = builder.create();
+                 ButtonSubmit.setOnClickListener(new View.OnClickListener(){
+                     @Override
+@@ -105,7 +114,13 @@
+                         String strFood = editFood.getText().toString();
+                         String strUnit = editUnit.getText().toString();
+                         String strCal = editCal.getText().toString();
+-                        FoodData dictionary = new FoodData(strFood,strCal,strUnit);
++                        String strCarbo = editCarbo.getText().toString();
++                        String strProtein = editProtein.getText().toString();
++                        String strFat = editFat.getText().toString();
++                        String strSugars = editSugars.getText().toString();
++                        String strSodium = editSodium.getText().toString();
++
++                        FoodData dictionary = new FoodData(strFood,strCal,strUnit, strCarbo, strProtein, strFat, strSugars, strSodium);
+                         itemList.add(dictionary);
+                         //adapter.notifyItemInserted(0);
+                         //adapter.notifyDataSetChanged();
+@@ -178,22 +193,26 @@
+ 
+     private void fillData() {
+          //샘플테이터
+-        itemList.add(new FoodData("사과", "57", "100g"));
+-        itemList.add(new FoodData("바나나", "93", "100g"));
+-        itemList.add(new FoodData("닭가슴살", "109","100g"));
+-        itemList.add(new FoodData("상추", "18", "100g"));
+-        itemList.add(new FoodData("참크래커", "85", "1봉지"));
+-        itemList.add(new FoodData("방울토마토", "16", "100g"));
+-        itemList.add(new FoodData("고등어", "183", "100g"));
+-        itemList.add(new FoodData("양배추", "31", "100g"));
+-        itemList.add(new FoodData("오이", "9", "100g"));
+-        itemList.add(new FoodData("달걀", "74", "50g"));
+-        itemList.add(new FoodData("군고구마", "123", "100g"));
+-        itemList.add(new FoodData("두부", "95", "100g"));
+-        itemList.add(new FoodData("구운계란", "55", "50g"));
+-        itemList.add(new FoodData("팽이버섯", "29", "100g"));
+-        itemList.add(new FoodData("아이스 아메리카노", "10", "1잔"));
+-        itemList.add(new FoodData("코카콜라", "212", "500ml"));
++        itemList.add(new FoodData("사과", "52", "100g", "13.81", "0.29", "0.17", "14.34", "1"));
++        itemList.add(new FoodData("바나나", "89", "100g", "22.84", "1.09", "0.33", "14.43", "1"));
++        itemList.add(new FoodData("닭가슴살", "109","100g", "0", "22.98", "1.23", "0", "65"));
++        itemList.add(new FoodData("상추", "14", "100g", "2.97", "0.9", "0.14", "0.8", "10"));
++        itemList.add(new FoodData("참크래커", "85", "1봉지", "13.8", "1.6", "2.4", "0.5", "138"));
++        itemList.add(new FoodData("방울토마토", "18", "100g", "3.92", "0.88", "0.2", "2.63", "5"));
++        itemList.add(new FoodData("고등어", "167", "100g", "0", "19.32", "9.36", "0", "78"));
++        itemList.add(new FoodData("고등어구이", "190", "100g", "0.35", "17.59", "12.6", "0.09", "411"));
++        itemList.add(new FoodData("양배추", "24", "100g", "5.58", "1.44", "0.12", "3.58", "18"));
++        itemList.add(new FoodData("오이", "12", "100g", "2.16", "0.59", "0.16", "1.38", "2"));
++        itemList.add(new FoodData("삶은 계란", "68", "1개", "0.49", "5.51", "4.65", "0.49", "122"));
++        itemList.add(new FoodData("구운계란", "65", "1개", "0.34", "5.57", "4.4", "0.34", "131"));
++        itemList.add(new FoodData("계란후라이", "78", "1개", "0.37", "5.42", "5.88", "0.33", "207"));
++        itemList.add(new FoodData("군고구마", "123", "100g", "28.38", "1.44", "0.49", "3.63", "48"));
++        itemList.add(new FoodData("밤고구마", "128", "100g", "30.28", "1.39", "0.23", "3.19", "18"));
++        itemList.add(new FoodData("호박고구마", "155", "100g", "36.78", "1.41", "0.27", "2.2", "16"));
++        itemList.add(new FoodData("두부", "79", "100g", "2.81", "8.1", "4.21", "1.01", "29"));
++        itemList.add(new FoodData("팽이버섯", "42", "100g", "6.96", "2.7", "0.41", "0.22", "3"));
++        itemList.add(new FoodData("아이스 아메리카노", "20", "1잔", "1.87", "0.27", "1.29", "1.7", "5"));
++        itemList.add(new FoodData("코카콜라", "108", "1캔(250ml)", "27", "0", "0", "27", "8"));
+ 
+     }
+ 
+Index: app/src/main/res/layout/item_food_recyclerview.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        tools:ignore=\"MissingConstraints\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/food\"\r\n            android:layout_width=\"280dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:textSize=\"24sp\" />\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"right\"\r\n            android:orientation=\"vertical\">\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:id=\"@+id/unit\"\r\n                android:textSize=\"10sp\" />\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:id=\"@+id/cal\"\r\n                android:textSize=\"20sp\" />\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_food_recyclerview.xml b/app/src/main/res/layout/item_food_recyclerview.xml
+--- a/app/src/main/res/layout/item_food_recyclerview.xml	(revision ae0eb067ecdc909448bf622e11ef043147627336)
++++ b/app/src/main/res/layout/item_food_recyclerview.xml	(date 1669632078799)
+@@ -1,39 +1,89 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+ 
+     <LinearLayout
+         android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        tools:ignore="MissingConstraints">
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            tools:ignore="MissingConstraints">
+ 
+-        <TextView
+-            android:id="@+id/food"
+-            android:layout_width="280dp"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="center"
+-            android:textSize="24sp" />
+-        <LinearLayout
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="right"
+-            android:orientation="vertical">
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:id="@+id/unit"
+-                android:textSize="10sp" />
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:id="@+id/cal"
+-                android:textSize="20sp" />
++            <TextView
++                android:id="@+id/food"
++                android:layout_width="280dp"
++                android:layout_height="wrap_content"
++                android:layout_gravity="center"
++                android:textSize="24sp" />
++
++            <LinearLayout
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="right"
++                android:orientation="vertical">
++
++                <TextView
++                    android:id="@+id/unit"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:textSize="10sp" />
++
++                <TextView
++                    android:id="@+id/cal"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:textSize="20sp" />
++            </LinearLayout>
++
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="horizontal">
++
++            <TextView
++                android:id="@+id/carbo"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="5dp"
++                android:textSize="10sp" />
++
++            <TextView
++                android:id="@+id/protein"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="5dp"
++                android:textSize="10sp" />
++
++            <TextView
++                android:id="@+id/fat"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="5dp"
++                android:textSize="10sp" />
++
++            <TextView
++                android:id="@+id/sugars"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="5dp"
++                android:textSize="10sp" />
++
++            <TextView
++                android:id="@+id/sodium"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginRight="5dp"
++                android:textSize="10sp" />
++
+         </LinearLayout>
+-
+     </LinearLayout>
+-
+-
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/adapter/ItemAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.adapter;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.app.Activity;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Filter;\r\nimport android.widget.Filterable;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapp.FoodData;\r\nimport com.example.myapp.R;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n/***********************************************************************************************\r\n mtp1\r\n ItemAdapter\t\t=> ToDoAdapter\t\t\t어댑터이름\r\n ItemViewHolder\t\t=> ToDoViewHolder\t\t뷰홀더이름\r\n onItemListener\t=> onToDoClickListener \t인터페이스이름\r\n onItemClicked \t\t=> onToDoClicked \t\t인터페이스 클릭메서드이름\r\n row_item\t\t=> list_item \t\t\t아이템레이아웃이름\r\n ItemModel\t\t=> Person \t\t\t\t모델이름\r\n\r\n **********************************************************************************************/\r\n\r\npublic class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> implements Filterable {\r\n\r\n    private List<FoodData> mDataList;\r\n    private List<FoodData> mDataListAll;\r\n\r\n    //constructor\r\n    public ItemAdapter(List<FoodData> items) {\r\n        mDataList = items;\r\n        mDataListAll = new ArrayList<>(items);\r\n    }\r\n\r\n    //interface - 클릭인터페이스\r\n    private onItemListener mListener;\r\n    public void setOnClickListener(onItemListener listener){\r\n        mListener = listener;\r\n    }\r\n\r\n    //data set changed\r\n    public void dataSetChanged(List<FoodData> exampleList) {\r\n        mDataList = exampleList;\r\n        notifyDataSetChanged();\r\n    }\r\n\r\n    //1.onCreateViewHolder -------------------------------------------------------\r\n    @NonNull\r\n    @Override\r\n    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_recyclerview,\r\n                parent, false);\r\n        return new ItemViewHolder(v);\r\n    }\r\n\r\n    //2.onBindViewHolder  -------------------------------------------------------\r\n    @Override\r\n    public void onBindViewHolder(@NonNull final ItemViewHolder holder, @SuppressLint(\"RecyclerView\") final int position) {\r\n        FoodData currentItem = mDataList.get(position);\r\n        // TODO : 데이터를 뷰홀더에 표시하시오\r\n        holder.food.setText(currentItem.getFood());\r\n        holder.unit.setText(currentItem.getUnit());\r\n        holder.cal.setText(currentItem.getCal());\r\n\r\n\r\n        // TODO : 리스너를 정의하시오.\r\n        if (mListener != null){\r\n            final int pos = position;\r\n            //final ItemModel item = mItems.get(viewHolder.getAdapterPosition());\r\n            holder.itemView.setOnClickListener(new View.OnClickListener(){\r\n                @Override\r\n                public void onClick(View v) {\r\n                    mListener.onItemClicked(position);\r\n                    //mListener.onItemClicked(item);\r\n                }\r\n            });\r\n            //버튼등에도 동일하게 지정할 수 있음 holder.버튼이름.setOnClickListener..형식으로\r\n        }\r\n    }\r\n\r\n    //3.getItemCount  -------------------------------------------------------\r\n    @Override\r\n    public int getItemCount() {\r\n        return mDataList.size();\r\n    }\r\n\r\n    public void  filterList(ArrayList<FoodData> filteredList) {\r\n        mDataList = filteredList;\r\n        notifyDataSetChanged();\r\n    }\r\n\r\n\r\n    // 데이터 필터 검색 Filterable implement ---------------------------------\r\n    @Override\r\n    public Filter getFilter() {\r\n        return exampleFilter;\r\n    }\r\n\r\n    private Filter exampleFilter = new Filter() {\r\n        //Automatic on background thread\r\n        @Override\r\n        protected FilterResults performFiltering(CharSequence constraint) {\r\n            List<FoodData> filteredList = new ArrayList<>();\r\n\r\n            if (constraint == null || constraint.length() == 0) {\r\n                filteredList.addAll(mDataListAll);\r\n            } else {\r\n                String filterPattern = constraint.toString().toLowerCase().trim();\r\n                for (FoodData item : mDataListAll) {\r\n                    //TODO filter 대상 setting\r\n                    if (item.getFood().toLowerCase().contains(filterPattern)) {\r\n                        filteredList.add(item);\r\n                    }\r\n                }\r\n            }\r\n            FilterResults results = new FilterResults();\r\n            results.values = filteredList;\r\n            return results;\r\n        }\r\n\r\n        //Automatic on UI thread\r\n        @Override\r\n        protected void publishResults(CharSequence constraint, FilterResults results) {\r\n            mDataList.clear();\r\n            mDataList.addAll((List) results.values);\r\n            notifyDataSetChanged();\r\n        }\r\n    };\r\n\r\n    // 뷰홀더 클래스  ---------------------------------\r\n    class ItemViewHolder extends RecyclerView.ViewHolder {\r\n        // TODO : 뷰홀더 완성하시오\r\n        TextView food;\r\n        TextView cal;\r\n        TextView unit;\r\n\r\n        ItemViewHolder(View itemView) {\r\n            super(itemView);\r\n            // TODO : 뷰홀더 완성하시오\r\n            food = itemView.findViewById(R.id.food);\r\n            cal = itemView.findViewById(R.id.cal);\r\n            unit = itemView.findViewById(R.id.unit);\r\n\r\n        }\r\n    }\r\n    public void setItems(ArrayList<FoodData> list){\r\n        mDataList = list;\r\n        notifyDataSetChanged();\r\n    }\r\n\r\n    //onclick listener interface\r\n    //1. interface onItemListener 선언\r\n    //2. 내부에서 mListener 선언하고\r\n    // 외부에서 접근가능하도록 setOnClickListener작성\r\n    //3.onBindViewHolder에서 처리\r\n    public interface onItemListener {\r\n        void onItemClicked(int position);\r\n        //void onItemClicked(ItemModel model); 모델값을 넘길수 있음\r\n        //다른버튼도 정의할 수 있음 onShareButtonClicked(int position);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/adapter/ItemAdapter.java b/app/src/main/java/com/example/myapp/adapter/ItemAdapter.java
+--- a/app/src/main/java/com/example/myapp/adapter/ItemAdapter.java	(revision ae0eb067ecdc909448bf622e11ef043147627336)
++++ b/app/src/main/java/com/example/myapp/adapter/ItemAdapter.java	(date 1669630418962)
+@@ -16,6 +16,8 @@
+ import com.example.myapp.FoodData;
+ import com.example.myapp.R;
+ 
++import org.w3c.dom.Text;
++
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+@@ -71,6 +73,12 @@
+         holder.unit.setText(currentItem.getUnit());
+         holder.cal.setText(currentItem.getCal());
+ 
++        holder.carbo.setText(currentItem.getCarbo());
++        holder.protein.setText(currentItem.getProtein());
++        holder.fat.setText(currentItem.getFat());
++        holder.sugars.setText(currentItem.getSugars());
++        holder.sodium.setText(currentItem.getSodium());
++
+ 
+         // TODO : 리스너를 정의하시오.
+         if (mListener != null){
+@@ -142,6 +150,11 @@
+         TextView food;
+         TextView cal;
+         TextView unit;
++        TextView carbo;
++        TextView protein;
++        TextView fat;
++        TextView sugars;
++        TextView sodium;
+ 
+         ItemViewHolder(View itemView) {
+             super(itemView);
+@@ -150,6 +163,12 @@
+             cal = itemView.findViewById(R.id.cal);
+             unit = itemView.findViewById(R.id.unit);
+ 
++            carbo = itemView.findViewById(R.id.carbo);
++            protein = itemView.findViewById(R.id.protein);
++            fat = itemView.findViewById(R.id.fat);
++            sugars = itemView.findViewById(R.id.sugars);
++            sodium = itemView.findViewById(R.id.sodium);
++
+         }
+     }
+     public void setItems(ArrayList<FoodData> list){
+Index: app/src/main/java/com/example/myapp/FoodData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp;\r\n\r\npublic class FoodData {\r\n    private String food;\r\n    private String cal;\r\n    private String unit;\r\n    public FoodData(String food, String cal, String unit){\r\n        this.food=food;\r\n        this.cal = cal;\r\n        this.unit= unit;\r\n    }\r\n\r\n    public String getFood(){\r\n        return food;\r\n    }\r\n\r\n    public void setFood(String food) {\r\n        this.food = food;\r\n    }\r\n    public String getCal(){\r\n        return cal+\"kcal\";\r\n    }\r\n    public void setCal(String cal){\r\n        this.cal=cal ;\r\n    }\r\n    public String getUnit(){\r\n        return unit;\r\n    }\r\n\r\n    public void setUnit(String unit) {\r\n        this.unit = unit;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/FoodData.java b/app/src/main/java/com/example/myapp/FoodData.java
+--- a/app/src/main/java/com/example/myapp/FoodData.java	(revision ae0eb067ecdc909448bf622e11ef043147627336)
++++ b/app/src/main/java/com/example/myapp/FoodData.java	(date 1669624597293)
+@@ -4,30 +4,42 @@
+     private String food;
+     private String cal;
+     private String unit;
+-    public FoodData(String food, String cal, String unit){
++    private String carbo; //탄
++    private String protein; //단
++    private String fat; //지
++    private String sugars; //당류
++    private String sodium; //나트륨
++
++    public FoodData(String food, String cal, String unit, String carbo, String protein, String fat, String sugars, String sodium){
+         this.food=food;
+         this.cal = cal;
+         this.unit= unit;
++        this.carbo=carbo;
++        this.protein=protein;
++        this.fat=fat;
++        this.sugars=sugars;
++        this.sodium=sodium;
+     }
+ 
+     public String getFood(){
+         return food;
+     }
+-
+     public void setFood(String food) {
+         this.food = food;
+     }
+-    public String getCal(){
+-        return cal+"kcal";
+-    }
+-    public void setCal(String cal){
+-        this.cal=cal ;
+-    }
+-    public String getUnit(){
+-        return unit;
+-    }
++    public String getCal(){return cal+"kcal";}
++    public void setCal(String cal){ this.cal=cal ;}
++    public String getUnit(){return unit;}
++    public void setUnit(String unit) {this.unit = unit;}
+ 
+-    public void setUnit(String unit) {
+-        this.unit = unit;
+-    }
++    public String getCarbo() { return "탄수화물: "+carbo+"g";}
++    public void setCarbo(String carbo) { this.carbo=carbo; }
++    public String getProtein() { return "단백질: "+protein+"g";}
++    public void setProtein(String protein) { this.protein=protein; }
++    public String getFat() { return "지방: "+fat+"g";}
++    public void setFat(String fat) { this.fat=fat; }
++    public String getSugars() { return "당류: "+sugars+"g";}
++    public void setSugars(String sugars) { this.sugars=sugars; }
++    public String getSodium() { return "나트륨: "+sodium+"mg";}
++    public void setSodium(String sodium) { this.sodium=sodium; }
+ }
+Index: app/src/main/res/layout/add_food.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"300dp\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:background=\"@drawable/edgeall\"\r\n    android:backgroundTint=\"#BADEFA\"\r\n    android:gravity=\"center\"\r\n    android:orientation=\"vertical\"\r\n    tools:ignore=\"MissingConstraints\"\r\n    tools:layout_editor_absoluteX=\"40dp\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/d_food\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"음식을 입력하세요.\"\r\n        android:inputType=\"text\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/d_unit\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"내용량을 입력하세요.\"\r\n        android:inputType=\"text\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/d_cal\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"열량(kcal)을 입력하세요.\"\r\n        android:inputType=\"numberDecimal\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"right\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_insert\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"5dp\"\r\n            android:layout_marginBottom=\"5dp\"\r\n            android:background=\"@drawable/box\"\r\n            android:backgroundTint=\"#7080DA\"\r\n\r\n            android:text=\"저장\"\r\n            android:textSize=\"16sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:id=\"@+id/btn_back\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"5dp\"\r\n            android:layout_marginBottom=\"5dp\"\r\n            android:background=\"@drawable/box\"\r\n            android:backgroundTint=\"#7080DA\"\r\n\r\n            android:text=\"취소\"\r\n            android:textSize=\"16sp\"\r\n            android:textStyle=\"bold\" />\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/add_food.xml b/app/src/main/res/layout/add_food.xml
+--- a/app/src/main/res/layout/add_food.xml	(revision ae0eb067ecdc909448bf622e11ef043147627336)
++++ b/app/src/main/res/layout/add_food.xml	(date 1669622897670)
+@@ -32,6 +32,42 @@
+         android:hint="열량(kcal)을 입력하세요."
+         android:inputType="numberDecimal" />
+ 
++    <EditText
++        android:id="@+id/d_carbo"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="탄수화물 함량(g)을 입력하세요."
++        android:inputType="numberDecimal" />
++
++    <EditText
++        android:id="@+id/d_protein"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="단백질 함량(g)을 입력하세요."
++        android:inputType="numberDecimal" />
++
++    <EditText
++        android:id="@+id/d_fat"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="지방 함량(g)을 입력하세요."
++        android:inputType="numberDecimal" />
++
++    <EditText
++        android:id="@+id/d_sugars"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="당류 함량(g)을 입력하세요."
++        android:inputType="numberDecimal" />
++
++
++    <EditText
++        android:id="@+id/d_sodium"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:hint="나트륨 함량(mg)을 입력하세요."
++        android:inputType="numberDecimal" />
++
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"

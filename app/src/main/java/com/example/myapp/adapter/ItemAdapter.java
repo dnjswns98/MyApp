@@ -17,6 +17,8 @@ import com.example.myapp.ExerData;
 import com.example.myapp.FoodData;
 import com.example.myapp.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +73,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.food.setText(currentItem.getFood());
         holder.unit.setText(currentItem.getUnit());
         holder.cal.setText(currentItem.getCal());
+
+        holder.carbo.setText(currentItem.getCarbo());
+        holder.protein.setText(currentItem.getProtein());
+        holder.fat.setText(currentItem.getFat());
+        holder.sugars.setText(currentItem.getSugars());
+        holder.sodium.setText(currentItem.getSodium());
 
 
         // TODO : 리스너를 정의하시오.
@@ -143,6 +151,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         TextView food;
         TextView cal;
         TextView unit;
+        TextView carbo;
+        TextView protein;
+        TextView fat;
+        TextView sugars;
+        TextView sodium;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -150,6 +163,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             food = itemView.findViewById(R.id.food);
             cal = itemView.findViewById(R.id.cal);
             unit = itemView.findViewById(R.id.unit);
+
+            carbo = itemView.findViewById(R.id.carbo);
+            protein = itemView.findViewById(R.id.protein);
+            fat = itemView.findViewById(R.id.fat);
+            sugars = itemView.findViewById(R.id.sugars);
+            sodium = itemView.findViewById(R.id.sodium);
 
         }
     }
