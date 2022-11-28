@@ -1,9 +1,12 @@
 package com.example.myapp.Activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,6 +53,7 @@ public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDi
 
         //알람 취소
         btn_alarm_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 cancelAlarm();
             }
@@ -91,6 +95,7 @@ public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDi
      */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.d(TAG, "## onTimeSet");
         Calendar c = Calendar.getInstance();
 
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -105,6 +110,7 @@ public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDi
 
     //화면에 사용자가 선택한 시작을 보여주는 method
     private void updateTimeText(Calendar c){
+        Log.d(TAG, "## startAlarm##");
         String timeText = "알람 시간: ";
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         time_text.setText(timeText);
@@ -125,6 +131,7 @@ public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDi
 
     //알람 취소
     private void cancelAlarm(){
+        Log.d(TAG, "## cancelAlarm");
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
