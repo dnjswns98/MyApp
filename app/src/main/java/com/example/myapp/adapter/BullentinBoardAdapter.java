@@ -16,9 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapp.Activity.PostActivity;
-import com.example.myapp.BulletinBoard.FreeWriteActivity;
-import com.example.myapp.BulletinBoard.ReviewWriteActivity;
-import com.example.myapp.BulletinBoard.TipWriteActivity;
+import com.example.myapp.Activity.BulletinBoardWriteActivity;
 import com.example.myapp.StoreLink;
 import com.example.myapp.R;
 import com.example.myapp.PostWriteinfo;
@@ -30,7 +28,7 @@ import java.util.ArrayList;
 public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAdapter.MainViewHolder> {
     private ArrayList<PostWriteinfo> mDataset;
     private Activity activity;
-    private StoreLink firebaseHelper;
+    private StoreLink storeLink;
     private final int MORE_INDEX = 2;
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
@@ -47,11 +45,11 @@ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAd
         this.activity = activity;
 
 
-        firebaseHelper = new StoreLink(activity);
+        storeLink = new StoreLink(activity);
     }
 
     public void setOnPostListener(OnPostListener onPostListener){
-        firebaseHelper.setOnPostListener(onPostListener);
+        storeLink.setOnPostListener(onPostListener);
     }
 
     @Override
@@ -115,12 +113,10 @@ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAd
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.modify:
-                        startActivity(FreeWriteActivity.class,mDataset.get(position));
-                        startActivity(ReviewWriteActivity.class,mDataset.get(position));
-                        startActivity(TipWriteActivity.class,mDataset.get(position));
+                        startActivity(BulletinBoardWriteActivity.class,mDataset.get(position));
                         return true;
                     case R.id.delete:
-                        firebaseHelper.storageDelete(mDataset.get(position));
+                        storeLink.storageDelete(mDataset.get(position));
                         return true;
                     default:
                         return false;
