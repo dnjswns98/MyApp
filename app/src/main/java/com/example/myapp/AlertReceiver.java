@@ -8,6 +8,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.myapp.NotificationHelper;
 
 public class AlertReceiver extends BroadcastReceiver {
+    String title, message;
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationHelper notificationHelper = new NotificationHelper(context);
