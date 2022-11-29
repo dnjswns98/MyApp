@@ -80,7 +80,7 @@
                 android:fontFamily="@font/gmarketsans"
                 android:gravity="center"
                 android:minHeight="60dp"
-                android:text="app name"
+                android:text="Fit the Gym"
                 android:textColor="@color/white"
                 android:textSize="40sp"
                 android:textStyle="bold" />

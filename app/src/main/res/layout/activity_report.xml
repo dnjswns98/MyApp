@@ -8,14 +8,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:background="@color/black"
         android:fontFamily="@font/gmarketsans"
         android:gravity="center"
         android:minHeight="60dp"
-        android:text="app name"
+        android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold" />
