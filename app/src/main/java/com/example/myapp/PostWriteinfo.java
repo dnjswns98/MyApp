@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Writeinfo implements Serializable {
+public class PostWriteinfo implements Serializable {
     private String title;
     private String write;
     private ArrayList<String> contents;
@@ -15,7 +15,7 @@ public class Writeinfo implements Serializable {
     private Date createAt;
     private String id;
 
-    public Writeinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt, String id){
+    public PostWriteinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt, String id){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
@@ -24,7 +24,7 @@ public class Writeinfo implements Serializable {
         this.id = id;
     }
 
-    public Writeinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt){
+    public PostWriteinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
@@ -32,7 +32,7 @@ public class Writeinfo implements Serializable {
         this.createAt = createAt;
     }
 
-    public Writeinfo(String title, String write, String id) {
+    public PostWriteinfo(String title, String write, String id) {
         this.title = title;
         this.write = write;
         this.id = id;

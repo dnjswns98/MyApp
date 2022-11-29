@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.example.myapp.Activity.BasicActivity;
 import com.example.myapp.R;
-import com.example.myapp.Writeinfo;
+import com.example.myapp.PostWriteinfo;
 import com.example.myapp.adapter.BullentinBoardAdapter;
 import com.example.myapp.listener.OnPostListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,14 +29,14 @@ public class ReviewActivity extends BasicActivity {
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firebaseFirestore;
     private BullentinBoardAdapter bullentinBoardAdapter;
-    private ArrayList<Writeinfo> postList;
+    private ArrayList<PostWriteinfo> postList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        setToolbarTitle("후기 게시판");
+        setToolbarTitle("챌린지 후기 게시판");
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -91,7 +91,7 @@ public class ReviewActivity extends BasicActivity {
                             postList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                postList.add(new Writeinfo(
+                                postList.add(new PostWriteinfo(
                                         document.getData().get("title").toString(),
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),

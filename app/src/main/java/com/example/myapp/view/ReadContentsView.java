@@ -11,16 +11,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapp.R;
-import com.example.myapp.Writeinfo;
+import com.example.myapp.PostWriteinfo;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
@@ -60,7 +57,7 @@ public class ReadContentsView extends LinearLayout {
 
     }
 
-    public void setPostInfo(Writeinfo writeinfo){
+    public void setPostInfo(PostWriteinfo writeinfo){
         TextView createAtTextView = findViewById(R.id.createAtTextView);
         createAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(writeinfo.getCreateAt()));
 

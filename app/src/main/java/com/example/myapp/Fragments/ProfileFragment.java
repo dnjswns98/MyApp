@@ -18,15 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.myapp.Activity.BasicActivity;
-import com.example.myapp.Activity.GalleryActivity;
-import com.example.myapp.Activity.MainActivity;
-import com.example.myapp.Activity.MessageActivity;
-import com.example.myapp.Activity.PostActivity;
-import com.example.myapp.Activity.ReportActivity;
 import com.example.myapp.Memberinfo;
 import com.example.myapp.R;
-import com.example.myapp.adapter.GalleryAdapter;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -145,6 +138,7 @@ public class ProfileFragment extends Fragment {
                         map.put("imageURL", mUri);
                         reference.updateChildren(map);
 
+                        Toast.makeText(getContext(),"사진을 변경했습니다.", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     } else {
                         Toast.makeText(getContext(),"Failed!", Toast.LENGTH_SHORT).show();

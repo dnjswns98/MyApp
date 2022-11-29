@@ -17,12 +17,12 @@ import static com.example.myapp.Util.isStorageUrl;
 import static com.example.myapp.Util.showToast;
 import static com.example.myapp.Util.storageUrlToName;
 
-public class FirebaseHelper {
+public class StoreLink {
     private Activity activity;
     private OnPostListener onPostListener;
     private int successCount;
 
-    public FirebaseHelper(Activity activity){
+    public StoreLink(Activity activity){
         this.activity = activity;
     }
 
@@ -30,7 +30,7 @@ public class FirebaseHelper {
         this.onPostListener = onPostListener;
     }
 
-    public void storageDelete(Writeinfo writeinfo){
+    public void storageDelete(PostWriteinfo writeinfo){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 

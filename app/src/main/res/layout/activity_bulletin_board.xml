@@ -131,7 +131,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
-                    android:text="후기 게시판"
+                    android:text="챌린지 후기 게시판"
                     android:textColor="@color/white"
                     android:textSize="24sp"
                     android:textStyle="bold" />

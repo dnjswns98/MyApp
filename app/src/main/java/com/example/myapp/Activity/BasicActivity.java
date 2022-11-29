@@ -26,4 +26,12 @@ public class BasicActivity extends AppCompatActivity {
         if(actionBar != null)
             actionBar.setTitle(title);
     }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+    }
 }

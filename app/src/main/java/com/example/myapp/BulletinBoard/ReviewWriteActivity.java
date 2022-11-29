@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapp.Activity.BasicActivity;
 import com.example.myapp.Activity.GalleryActivity;
 import com.example.myapp.R;
-import com.example.myapp.Writeinfo;
+import com.example.myapp.PostWriteinfo;
 import com.example.myapp.view.ContentsView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,7 +58,7 @@ public class ReviewWriteActivity extends BasicActivity {
     private EditText selectedEditText;
     private EditText contentsEditText;
     private EditText titleEditText;
-    private Writeinfo writeinfo;
+    private PostWriteinfo writeinfo;
     private int pathCount, successCount;
 
     @Override
@@ -93,7 +93,7 @@ public class ReviewWriteActivity extends BasicActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
-        writeinfo = (Writeinfo)getIntent().getSerializableExtra("writeinfo");
+        writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
         postInit();
     }
 
@@ -255,7 +255,7 @@ public class ReviewWriteActivity extends BasicActivity {
                                             successCount--;
                                             if (successCount == 0){
                                                 //완료
-                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);
+                                                PostWriteinfo writeinfo = new PostWriteinfo(title, contentsList, formatList, user.getUid(), date);
                                                 storeUpload(documentReference, writeinfo);
                                             }
                                         }
@@ -270,7 +270,7 @@ public class ReviewWriteActivity extends BasicActivity {
                 }
             }
             if(successCount == 0){
-                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));
+                storeUpload(documentReference, new PostWriteinfo(title, contentsList, formatList, user.getUid(), date));
             }
         } else {
 
@@ -278,7 +278,7 @@ public class ReviewWriteActivity extends BasicActivity {
         }
     }
 
-    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {
+    private void storeUpload(DocumentReference documentReference, final PostWriteinfo writeinfo) {
         documentReference.set(writeinfo.getWriteinfo())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

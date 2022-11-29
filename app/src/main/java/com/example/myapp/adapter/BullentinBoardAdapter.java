@@ -19,18 +19,18 @@ import com.example.myapp.Activity.PostActivity;
 import com.example.myapp.BulletinBoard.FreeWriteActivity;
 import com.example.myapp.BulletinBoard.ReviewWriteActivity;
 import com.example.myapp.BulletinBoard.TipWriteActivity;
-import com.example.myapp.FirebaseHelper;
+import com.example.myapp.StoreLink;
 import com.example.myapp.R;
-import com.example.myapp.Writeinfo;
+import com.example.myapp.PostWriteinfo;
 import com.example.myapp.listener.OnPostListener;
 import com.example.myapp.view.ReadContentsView;
 
 import java.util.ArrayList;
 
 public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAdapter.MainViewHolder> {
-    private ArrayList<Writeinfo> mDataset;
+    private ArrayList<PostWriteinfo> mDataset;
     private Activity activity;
-    private FirebaseHelper firebaseHelper;
+    private StoreLink firebaseHelper;
     private final int MORE_INDEX = 2;
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
@@ -42,12 +42,12 @@ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAd
         }
     }
 
-    public BullentinBoardAdapter(Activity activity, ArrayList<Writeinfo> myDataset) {
+    public BullentinBoardAdapter(Activity activity, ArrayList<PostWriteinfo> myDataset) {
         this.mDataset = myDataset;
         this.activity = activity;
 
 
-        firebaseHelper = new FirebaseHelper(activity);
+        firebaseHelper = new StoreLink(activity);
     }
 
     public void setOnPostListener(OnPostListener onPostListener){
@@ -88,7 +88,7 @@ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAd
         CardView cardView = holder.cardView;
         TextView titleTextView = cardView.findViewById(R.id.titleTextView);
 
-        Writeinfo writeinfo = mDataset.get(position);
+        PostWriteinfo writeinfo = mDataset.get(position);
         titleTextView.setText(writeinfo.getTitle());
 
         ReadContentsView readContentsView = cardView.findViewById(R.id.readContentsView);
@@ -132,33 +132,8 @@ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAd
         popup.show();
     }
 
-    /*
-    private void showPopup(View v, int position) {
-        PopupMenu popup = new PopupMenu(activity, v);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.modify:
-                            startActivity(NewWriteActivity.class,mDataset.get(position));
-                            startActivity(ReturnWriteActivity.class,mDataset.get(position));
-                            startActivity(TransferWriteActivity.class,mDataset.get(position));
-                        return true;
-                    case R.id.delete:
-                        firebaseHelper.storageDelete(mDataset.get(position));
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.post, popup.getMenu());
-        popup.show();
-    }
-     */
 
-    private void startActivity(Class c, Writeinfo writeinfo) {
+    private void startActivity(Class c, PostWriteinfo writeinfo) {
         Intent intent = new Intent(activity, c);
         intent.putExtra("writeinfo", writeinfo);
         activity.startActivity(intent);
