@@ -69,7 +69,6 @@ public class StoreLink {
                         public void onSuccess(Void aVoid) {
                             showToast(activity, "게시글을 삭제하였습니다.");
                             onPostListener.onDelete();
-                            //postUpdate();
                         }
                     })
 
@@ -80,41 +79,6 @@ public class StoreLink {
                         }
                     });
 
-            firebaseFirestore.collection("posts2").document(id)
-                    .delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            showToast(activity, "게시글을 삭제하였습니다.");
-                            onPostListener.onDelete();
-                            //postUpdate();
-                        }
-                    })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            showToast(activity, "게시글을 삭제하지 못했습니다.");
-                        }
-                    });
-
-            firebaseFirestore.collection("posts3").document(id)
-                    .delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            showToast(activity, "게시글을 삭제하였습니다.");
-                            onPostListener.onDelete();
-                            //postUpdate();
-                        }
-                    })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            showToast(activity, "게시글을 삭제하지 못했습니다.");
-                        }
-                    });
         }
     }
 }

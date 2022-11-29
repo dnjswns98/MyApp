@@ -1,4 +1,4 @@
-package com.example.myapp.BulletinBoard;
+package com.example.myapp.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +14,6 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.myapp.Activity.BasicActivity;
-import com.example.myapp.Activity.GalleryActivity;
 import com.example.myapp.R;
 import com.example.myapp.PostWriteinfo;
 import com.example.myapp.view.ContentsView;
@@ -47,11 +45,14 @@ import static com.example.myapp.Util.isVideoFile;
 import static com.example.myapp.Util.showToast;
 import static com.example.myapp.Util.storageUrlToName;
 
-public class ReviewWriteActivity extends BasicActivity {
-    private static final String TAG = "ReviewWriteActivity";
+public class BulletinBoardWriteActivity extends BasicActivity {
+    private static final String TAG = "BulletinBoardWriteActivity";
     private FirebaseUser user;
     private StorageReference storageRef;
+
+    // 클릭했을 때 어떤 게시물을 클릭했는지 게시물 번호를 담기 위한 배열
     private ArrayList<String> pathList = new ArrayList<>();
+
     private LinearLayout parent;
     private RelativeLayout ButtonBackgroundLayout;
     private ImageView selectedImageView;
@@ -64,27 +65,31 @@ public class ReviewWriteActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review_write);
+        setContentView(R.layout.activity_bulletin_write_board);
         setToolbarTitle("게시글 작성");
 
-        parent = findViewById(R.id.contentsLayout2);
-        ButtonBackgroundLayout = findViewById(R.id.ButtonBackgroundLayout2);
-        contentsEditText = findViewById(R.id.contentsEditText2);
-        titleEditText = findViewById(R.id.titleEditText2);
+        parent = findViewById(R.id.contentsLayout);
+        ButtonBackgroundLayout = findViewById(R.id.ButtonBackgroundLayout);
+        contentsEditText = findViewById(R.id.contentsEditText);
+        titleEditText = findViewById(R.id.titleEditText);
 
-        findViewById(R.id.btn_upload2).setOnClickListener(onClickListener);
-        findViewById(R.id.btn_image2).setOnClickListener(onClickListener);
-        findViewById(R.id.btn_video2).setOnClickListener(onClickListener);
-        findViewById(R.id.imageModify2).setOnClickListener(onClickListener);
-        findViewById(R.id.videoModify2).setOnClickListener(onClickListener);
-        findViewById(R.id.Modifydelete2).setOnClickListener(onClickListener);
+        findViewById(R.id.btn_upload).setOnClickListener(onClickListener);
+        findViewById(R.id.btn_image).setOnClickListener(onClickListener);
+        findViewById(R.id.btn_video).setOnClickListener(onClickListener);
+        findViewById(R.id.imageModify).setOnClickListener(onClickListener);
+        findViewById(R.id.videoModify).setOnClickListener(onClickListener);
+        findViewById(R.id.Modifydelete).setOnClickListener(onClickListener);
 
         ButtonBackgroundLayout.setOnClickListener(onClickListener);
+        //포커스는 다음 키입력을 받을 뷰가 누구인지를 가리키는 표식
+        //Focusable의 속성이 true이어야 하는데, EditText의 경우 별도의 작업이 필요 없이 true
+        //EditText를 누르면 키보드가 보여지면서 EditText와 상호작용할 수 있게 되는데,
+        //이 때 EditText는 Focus를 갖게 된다.
         contentsEditText.setOnFocusChangeListener(onFocusChangeListener);
         titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
+                if (hasFocus) { //포커스일때 selectedEditText를 비워준다
                     selectedEditText = null;
                 }
             }
@@ -93,17 +98,24 @@ public class ReviewWriteActivity extends BasicActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
+        //클래스 안에 멤버 변수들은 연속된 메모리에 할당되지 않기 때문에 직렬화 객체가 될 수 없다.
+        //다른 액티비티에 이러한 데이터 객체를 넘겨주기 위해서는
+        //값이 변경될 수 있는 멤버 변수들을 연속된 메모리에 할당된 형태인 직렬화 형태로 변경해야 가능하다.
+        //getSerializableExtra로 직렬화 형태로 변경한다다
         writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
+
         postInit();
     }
 
+
+    //데이터 넘겨 받기
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0:
                 if (resultCode == Activity.RESULT_OK) {
-                    String path = data.getStringExtra(INTENT_PATH);
+                    String path = data.getStringExtra(INTENT_PATH); //"path"
                     pathList.add(path);
 
                     ContentsView contentsItemView = new ContentsView(this);
@@ -167,22 +179,28 @@ public class ReviewWriteActivity extends BasicActivity {
                 break;
             case R.id.Modifydelete:
                 final View selectedView = (View)selectedImageView.getParent();
-
-                StorageReference desertRef = storageRef.child("posts/"+writeinfo.getId()+"/"+storageUrlToName(pathList.get(parent.indexOfChild(selectedView) -1)));
-                desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        showToast(ReviewWriteActivity.this,"파일 삭제 성공");
-                        pathList.remove(parent.indexOfChild(selectedView) - 1);
-                        parent.removeView(selectedView);
-                        ButtonBackgroundLayout.setVisibility(View.GONE);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        showToast(ReviewWriteActivity.this,"파일 삭제 실패");
-                    }
-                });
+                String path = pathList.get(parent.indexOfChild(selectedView) -1);
+                if(isStorageUrl(path)){
+                    StorageReference desertRef = storageRef.child("posts/"+writeinfo.getId()+"/"+storageUrlToName(path));
+                    desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            showToast(BulletinBoardWriteActivity.this,"파일 삭제 성공");
+                            pathList.remove(parent.indexOfChild(selectedView) - 1);
+                            parent.removeView(selectedView);
+                            ButtonBackgroundLayout.setVisibility(View.GONE);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            showToast(BulletinBoardWriteActivity.this,"파일 삭제 실패");
+                        }
+                    });
+                } else {
+                    pathList.remove(parent.indexOfChild(selectedView) - 1);
+                    parent.removeView(selectedView);
+                    ButtonBackgroundLayout.setVisibility(View.GONE);
+                }
                 break;
         }
     };
@@ -274,7 +292,7 @@ public class ReviewWriteActivity extends BasicActivity {
             }
         } else {
 
-            showToast(ReviewWriteActivity.this,"제목을 입력해주세요.");
+            showToast(BulletinBoardWriteActivity.this,"제목을 입력해주세요.");
         }
     }
 
@@ -303,15 +321,22 @@ public class ReviewWriteActivity extends BasicActivity {
         if(writeinfo != null){
             titleEditText.setText(writeinfo.getTitle());
             ArrayList<String> contentsList = writeinfo.getContents();
+            //contents에 저장된 리스트 불러오기
             for (int i = 0; i < contentsList.size(); i++) {
+                //i == 0, text
+                //i == 1, image
+                //i == 2, image의 contents
                 String contents = contentsList.get(i);
                 if (isStorageUrl(contents)) {
+                    //리스트에 컨텐츠 추가
                     pathList.add(contents);
                     ContentsView contentsItemView = new ContentsView(this);
 
+                    //LinearLayout 추가
                     parent.addView(contentsItemView);
 
                     contentsItemView.setImage(contents);
+                    //이미지클릭시 ui나옴
                     contentsItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

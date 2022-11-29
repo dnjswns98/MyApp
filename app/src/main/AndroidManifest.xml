@@ -25,13 +25,8 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <activity android:name=".BulletinBoard.BulletinBoardActivity" />
-        <activity android:name=".BulletinBoard.FreeActivity" />
-        <activity android:name=".BulletinBoard.ReviewActivity" />
-        <activity android:name=".BulletinBoard.TipActivity" />
-        <activity android:name=".BulletinBoard.FreeWriteActivity" />
-        <activity android:name=".BulletinBoard.ReviewWriteActivity" />
-        <activity android:name=".BulletinBoard.TipWriteActivity" />
+        <activity android:name=".Activity.BulletinBoardActivity" />
+        <activity android:name=".Activity.BulletinBoardWriteActivity" />
         <receiver android:name=".AlertReceiver" />
         <activity android:name=".Activity.ExerAlarmActivity" />
         <activity android:name=".Activity.PedometerActivity" />

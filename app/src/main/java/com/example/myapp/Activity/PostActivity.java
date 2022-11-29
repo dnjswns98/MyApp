@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.example.myapp.BulletinBoard.FreeWriteActivity;
 import com.example.myapp.StoreLink;
 import com.example.myapp.R;
 import com.example.myapp.PostWriteinfo;
@@ -18,7 +17,7 @@ import com.example.myapp.view.ReadContentsView;
 
 public class PostActivity extends BasicActivity {
     private PostWriteinfo writeinfo;
-    private StoreLink firebaseHelper;
+    private StoreLink storeLink;
     private ReadContentsView readContentsView;
     private LinearLayout contentsLayout;
 
@@ -31,8 +30,8 @@ public class PostActivity extends BasicActivity {
         contentsLayout = findViewById(R.id.contentsLayout);
         readContentsView = findViewById(R.id.readContentsView);
 
-        firebaseHelper = new StoreLink(this);
-        firebaseHelper.setOnPostListener(onPostListener);
+        storeLink = new StoreLink(this);
+        storeLink.setOnPostListener(onPostListener);
         uiUpdate();
 
     }
@@ -40,14 +39,10 @@ public class PostActivity extends BasicActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 0:
-                if (resultCode == Activity.RESULT_OK) {
-                    writeinfo = (PostWriteinfo) data.getSerializableExtra("writeinfo");
-                    contentsLayout.removeAllViews();
-                    uiUpdate();
-                }
-                break;
+        if(requestCode == 0 && requestCode == Activity.RESULT_OK) {
+            writeinfo = (PostWriteinfo) data.getSerializableExtra("writeinfo");
+            contentsLayout.removeAllViews();
+            uiUpdate();
         }
     }
 
@@ -61,14 +56,12 @@ public class PostActivity extends BasicActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                firebaseHelper.storageDelete(writeinfo);
+                storeLink.storageDelete(writeinfo);
                 finish();
                 return true;
 
             case R.id.modify:
-                startActivity(FreeWriteActivity.class, writeinfo);
-                //startActivity(ReviewWriteActivity.class, writeinfo);
-                //startActivity(TipWriteActivity.class, writeinfo);
+                startActivity(BulletinBoardWriteActivity.class, writeinfo);
                 return true;
 
             default:

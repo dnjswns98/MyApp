@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,9 +71,7 @@ public class RegisterActivity extends BasicActivity {
                     Toast.makeText(RegisterActivity.this,"올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
                 } else if(!passMatcher.find()){
                     Toast.makeText(RegisterActivity.this,"비밀번호는 영문과 특수문자 숫자를 포함하며 8자 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
-                }
-                // 비밀번호 재확인을 위해 필요한 코드
-                else if (!txt_password.equals(txt_checkPwd)){
+                } else if (!txt_password.equals(txt_checkPwd)){
                     Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     register(txt_nickname, txt_email, txt_password, txt_phoneNum, txt_username);
@@ -120,8 +119,14 @@ public class RegisterActivity extends BasicActivity {
                             }
                         }
                     });
-                } else {
-                    Toast.makeText(RegisterActivity.this, "가입 실패", Toast.LENGTH_SHORT).show();
+                } try {
+                    //단독으로 쓸 씨 튕김. 예외 처리 해줘야 한다.
+                    task.getResult();
+                }catch (Exception e) {
+                    //이메일 중복 체크
+                    e.printStackTrace();
+                    Log.d("Fail_register_email",e.getMessage());
+                    Toast.makeText(RegisterActivity.this, "이미있는 이메일 형식입니다 다시 입력해주세요", Toast.LENGTH_LONG).show();
                 }
             }
         });

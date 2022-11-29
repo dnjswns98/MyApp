@@ -92,7 +92,7 @@ public class UserUpdateinfoActivity extends BasicActivity {
             public void onClick(View v) {
                 String txt_phoneNum = phoneNum.getText().toString();
                 String txt_username = username.getText().toString();
-                if (!TextUtils.isEmpty(txt_username) || !TextUtils.isEmpty(txt_phoneNum)){
+                if (!TextUtils.isEmpty(txt_username) && !TextUtils.isEmpty(txt_phoneNum)){
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
