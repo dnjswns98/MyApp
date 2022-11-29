@@ -1,0 +1,792 @@
+Index: app/src/main/java/com/example/myapp/Activity/PostActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport com.example.myapp.R;\r\n\r\npublic class PostActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_post);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/PostActivity.java b/app/src/main/java/com/example/myapp/Activity/PostActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/PostActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/Activity/PostActivity.java	(date 1669728787336)
+@@ -1,16 +1,104 @@
+ package com.example.myapp.Activity;
+ 
+-import androidx.appcompat.app.AppCompatActivity;
+-
++import android.app.Activity;
++import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.Menu;
++import android.view.MenuItem;
++import android.widget.LinearLayout;
+ 
++import com.example.myapp.BulletinBoard.FreeWriteActivity;
++import com.example.myapp.StoreLink;
+ import com.example.myapp.R;
++import com.example.myapp.PostWriteinfo;
++import com.example.myapp.listener.OnPostListener;
++import com.example.myapp.view.ReadContentsView;
+ 
+-public class PostActivity extends AppCompatActivity {
++
++public class PostActivity extends BasicActivity {
++    private PostWriteinfo writeinfo;
++    private StoreLink firebaseHelper;
++    private ReadContentsView readContentsView;
++    private LinearLayout contentsLayout;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_post);
++
++        writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
++        contentsLayout = findViewById(R.id.contentsLayout);
++        readContentsView = findViewById(R.id.readContentsView);
++
++        firebaseHelper = new StoreLink(this);
++        firebaseHelper.setOnPostListener(onPostListener);
++        uiUpdate();
++
++    }
++
++    @Override
++    public void onActivityResult(int requestCode, int resultCode, Intent data) {
++        super.onActivityResult(requestCode, resultCode, data);
++        switch (requestCode) {
++            case 0:
++                if (resultCode == Activity.RESULT_OK) {
++                    writeinfo = (PostWriteinfo) data.getSerializableExtra("writeinfo");
++                    contentsLayout.removeAllViews();
++                    uiUpdate();
++                }
++                break;
++        }
++    }
++
++    @Override
++    public boolean onCreateOptionsMenu(Menu menu) {
++        getMenuInflater().inflate(R.menu.post, menu);
++        return super.onCreateOptionsMenu(menu);
++    }
++
++    @Override
++    public boolean onOptionsItemSelected(MenuItem item) {
++        switch (item.getItemId()) {
++            case R.id.delete:
++                firebaseHelper.storageDelete(writeinfo);
++                finish();
++                return true;
++
++            case R.id.modify:
++                startActivity(FreeWriteActivity.class, writeinfo);
++                //startActivity(ReviewWriteActivity.class, writeinfo);
++                //startActivity(TipWriteActivity.class, writeinfo);
++                return true;
++
++            default:
++                return super.onOptionsItemSelected(item);
++
++        }
++    }
++
++
++    OnPostListener onPostListener = new OnPostListener() {
++        @Override
++        public void onDelete() {
++            Log.e("로그","삭제 성공");
++        }
++
++        @Override
++        public void onModify() {
++            Log.e("로그","수정 성공");
++
++        }
++    };
++
++    private void uiUpdate(){
++        readContentsView.setPostInfo(writeinfo);
++        setToolbarTitle(writeinfo.getTitle());
++    }
++
++    private void startActivity(Class c, PostWriteinfo writeinfo) {
++        Intent intent = new Intent(this, c);
++        intent.putExtra("writeinfo", writeinfo);
++        startActivityForResult(intent,0);
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/FirebaseHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/FirebaseHelper.java b/app/src/main/java/com/example/myapp/StoreLink.java
+rename from app/src/main/java/com/example/myapp/FirebaseHelper.java
+rename to app/src/main/java/com/example/myapp/StoreLink.java
+--- a/app/src/main/java/com/example/myapp/FirebaseHelper.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/StoreLink.java	(date 1669728787369)
+@@ -17,12 +17,12 @@
+ import static com.example.myapp.Util.showToast;
+ import static com.example.myapp.Util.storageUrlToName;
+ 
+-public class FirebaseHelper {
++public class StoreLink {
+     private Activity activity;
+     private OnPostListener onPostListener;
+     private int successCount;
+ 
+-    public FirebaseHelper(Activity activity){
++    public StoreLink(Activity activity){
+         this.activity = activity;
+     }
+ 
+@@ -30,7 +30,7 @@
+         this.onPostListener = onPostListener;
+     }
+ 
+-    public void storageDelete(Writeinfo writeinfo){
++    public void storageDelete(PostWriteinfo writeinfo){
+         FirebaseStorage storage = FirebaseStorage.getInstance();
+         StorageReference storageRef = storage.getReference();
+ 
+Index: app/src/main/java/com/example/myapp/adapter/BullentinBoardAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.adapter;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.view.LayoutInflater;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.PopupMenu;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.myapp.Activity.PostActivity;\r\nimport com.example.myapp.BulletinBoard.FreeWriteActivity;\r\nimport com.example.myapp.BulletinBoard.ReviewWriteActivity;\r\nimport com.example.myapp.BulletinBoard.TipWriteActivity;\r\nimport com.example.myapp.FirebaseHelper;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.listener.OnPostListener;\r\nimport com.example.myapp.view.ReadContentsView;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAdapter.MainViewHolder> {\r\n    private ArrayList<Writeinfo> mDataset;\r\n    private Activity activity;\r\n    private FirebaseHelper firebaseHelper;\r\n    private final int MORE_INDEX = 2;\r\n\r\n    public static class MainViewHolder extends RecyclerView.ViewHolder {\r\n        public CardView cardView;\r\n        public MainViewHolder(CardView v) {\r\n            super(v);\r\n            cardView = v;\r\n\r\n        }\r\n    }\r\n\r\n    public BullentinBoardAdapter(Activity activity, ArrayList<Writeinfo> myDataset) {\r\n        this.mDataset = myDataset;\r\n        this.activity = activity;\r\n\r\n\r\n        firebaseHelper = new FirebaseHelper(activity);\r\n    }\r\n\r\n    public void setOnPostListener(OnPostListener onPostListener){\r\n        firebaseHelper.setOnPostListener(onPostListener);\r\n    }\r\n\r\n    @Override\r\n    public int getItemViewType(int position){\r\n        return position;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public BullentinBoardAdapter.MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {\r\n        CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);\r\n        final MainViewHolder mainViewHolder = new MainViewHolder(cardView);\r\n        cardView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(activity, PostActivity.class);\r\n                intent.putExtra(\"writeinfo\", mDataset.get(mainViewHolder.getBindingAdapterPosition()));\r\n                activity.startActivity(intent);\r\n            }\r\n        });\r\n\r\n        cardView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                showPopup(v, mainViewHolder.getBindingAdapterPosition());\r\n            }\r\n        });\r\n\r\n        return mainViewHolder;\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull final MainViewHolder holder, int position) {\r\n        CardView cardView = holder.cardView;\r\n        TextView titleTextView = cardView.findViewById(R.id.titleTextView);\r\n\r\n        Writeinfo writeinfo = mDataset.get(position);\r\n        titleTextView.setText(writeinfo.getTitle());\r\n\r\n        ReadContentsView readContentsView = cardView.findViewById(R.id.readContentsView);\r\n        LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);\r\n\r\n        if(contentsLayout.getTag() == null || !contentsLayout.getTag().equals(writeinfo)){\r\n            contentsLayout.setTag(writeinfo);\r\n            contentsLayout.removeAllViews();\r\n\r\n            readContentsView.setMoreIndex(MORE_INDEX);\r\n            readContentsView.setPostInfo(writeinfo);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return mDataset.size();\r\n    }\r\n\r\n    private void showPopup(View v, int position) {\r\n        PopupMenu popup = new PopupMenu(activity, v);\r\n        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {\r\n            @Override\r\n            public boolean onMenuItemClick(MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.modify:\r\n                        startActivity(FreeWriteActivity.class,mDataset.get(position));\r\n                        startActivity(ReviewWriteActivity.class,mDataset.get(position));\r\n                        startActivity(TipWriteActivity.class,mDataset.get(position));\r\n                        return true;\r\n                    case R.id.delete:\r\n                        firebaseHelper.storageDelete(mDataset.get(position));\r\n                        return true;\r\n                    default:\r\n                        return false;\r\n                }\r\n            }\r\n        });\r\n        MenuInflater inflater = popup.getMenuInflater();\r\n        inflater.inflate(R.menu.post, popup.getMenu());\r\n        popup.show();\r\n    }\r\n\r\n    /*\r\n    private void showPopup(View v, int position) {\r\n        PopupMenu popup = new PopupMenu(activity, v);\r\n        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {\r\n            @Override\r\n            public boolean onMenuItemClick(MenuItem item) {\r\n                switch (item.getItemId()) {\r\n                    case R.id.modify:\r\n                            startActivity(NewWriteActivity.class,mDataset.get(position));\r\n                            startActivity(ReturnWriteActivity.class,mDataset.get(position));\r\n                            startActivity(TransferWriteActivity.class,mDataset.get(position));\r\n                        return true;\r\n                    case R.id.delete:\r\n                        firebaseHelper.storageDelete(mDataset.get(position));\r\n                        return true;\r\n                    default:\r\n                        return false;\r\n                }\r\n            }\r\n        });\r\n        MenuInflater inflater = popup.getMenuInflater();\r\n        inflater.inflate(R.menu.post, popup.getMenu());\r\n        popup.show();\r\n    }\r\n     */\r\n\r\n    private void startActivity(Class c, Writeinfo writeinfo) {\r\n        Intent intent = new Intent(activity, c);\r\n        intent.putExtra(\"writeinfo\", writeinfo);\r\n        activity.startActivity(intent);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/adapter/BullentinBoardAdapter.java b/app/src/main/java/com/example/myapp/adapter/BullentinBoardAdapter.java
+--- a/app/src/main/java/com/example/myapp/adapter/BullentinBoardAdapter.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/adapter/BullentinBoardAdapter.java	(date 1669728787345)
+@@ -19,18 +19,18 @@
+ import com.example.myapp.BulletinBoard.FreeWriteActivity;
+ import com.example.myapp.BulletinBoard.ReviewWriteActivity;
+ import com.example.myapp.BulletinBoard.TipWriteActivity;
+-import com.example.myapp.FirebaseHelper;
++import com.example.myapp.StoreLink;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.listener.OnPostListener;
+ import com.example.myapp.view.ReadContentsView;
+ 
+ import java.util.ArrayList;
+ 
+ public class BullentinBoardAdapter extends RecyclerView.Adapter<BullentinBoardAdapter.MainViewHolder> {
+-    private ArrayList<Writeinfo> mDataset;
++    private ArrayList<PostWriteinfo> mDataset;
+     private Activity activity;
+-    private FirebaseHelper firebaseHelper;
++    private StoreLink firebaseHelper;
+     private final int MORE_INDEX = 2;
+ 
+     public static class MainViewHolder extends RecyclerView.ViewHolder {
+@@ -42,12 +42,12 @@
+         }
+     }
+ 
+-    public BullentinBoardAdapter(Activity activity, ArrayList<Writeinfo> myDataset) {
++    public BullentinBoardAdapter(Activity activity, ArrayList<PostWriteinfo> myDataset) {
+         this.mDataset = myDataset;
+         this.activity = activity;
+ 
+ 
+-        firebaseHelper = new FirebaseHelper(activity);
++        firebaseHelper = new StoreLink(activity);
+     }
+ 
+     public void setOnPostListener(OnPostListener onPostListener){
+@@ -88,7 +88,7 @@
+         CardView cardView = holder.cardView;
+         TextView titleTextView = cardView.findViewById(R.id.titleTextView);
+ 
+-        Writeinfo writeinfo = mDataset.get(position);
++        PostWriteinfo writeinfo = mDataset.get(position);
+         titleTextView.setText(writeinfo.getTitle());
+ 
+         ReadContentsView readContentsView = cardView.findViewById(R.id.readContentsView);
+@@ -132,33 +132,8 @@
+         popup.show();
+     }
+ 
+-    /*
+-    private void showPopup(View v, int position) {
+-        PopupMenu popup = new PopupMenu(activity, v);
+-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+-            @Override
+-            public boolean onMenuItemClick(MenuItem item) {
+-                switch (item.getItemId()) {
+-                    case R.id.modify:
+-                            startActivity(NewWriteActivity.class,mDataset.get(position));
+-                            startActivity(ReturnWriteActivity.class,mDataset.get(position));
+-                            startActivity(TransferWriteActivity.class,mDataset.get(position));
+-                        return true;
+-                    case R.id.delete:
+-                        firebaseHelper.storageDelete(mDataset.get(position));
+-                        return true;
+-                    default:
+-                        return false;
+-                }
+-            }
+-        });
+-        MenuInflater inflater = popup.getMenuInflater();
+-        inflater.inflate(R.menu.post, popup.getMenu());
+-        popup.show();
+-    }
+-     */
+-
+-    private void startActivity(Class c, Writeinfo writeinfo) {
++
++    private void startActivity(Class c, PostWriteinfo writeinfo) {
+         Intent intent = new Intent(activity, c);
+         intent.putExtra("writeinfo", writeinfo);
+         activity.startActivity(intent);
+Index: app/src/main/java/com/example/myapp/Activity/BasicActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Activity;\r\n\r\nimport android.content.pm.ActivityInfo;\r\nimport android.os.Bundle;\r\n\r\n\r\nimport androidx.annotation.LayoutRes;\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\n\r\nimport com.example.myapp.R;\r\n\r\npublic class BasicActivity extends AppCompatActivity {\r\n    @Override\r\n    //어플 생명주기, 사용자가 다른 어플 사용하거나 통화를 하거나 등 다른 활동을 할때 문제 해결\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n        //세로 화면으로 고정\r\n        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);\r\n    }\r\n\r\n    public void setToolbarTitle(String title){\r\n        ActionBar actionBar = getSupportActionBar();\r\n        if(actionBar != null)\r\n            actionBar.setTitle(title);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Activity/BasicActivity.java b/app/src/main/java/com/example/myapp/Activity/BasicActivity.java
+--- a/app/src/main/java/com/example/myapp/Activity/BasicActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/Activity/BasicActivity.java	(date 1669716872745)
+@@ -26,4 +26,12 @@
+         if(actionBar != null)
+             actionBar.setTitle(title);
+     }
++
++    @Override
++    public void setContentView(@LayoutRes int layoutResID) {
++        super.setContentView(layoutResID);
++
++        Toolbar myToolbar = findViewById(R.id.toolbar);
++        setSupportActionBar(myToolbar);
++    }
+ }
+Index: .idea/deploymentTargetDropDown.xml
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ /dev/null	(revision 997af957b713a569054ad79d2154c32df4e0475d)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <targetSelectedWithDropDown>
+-      <Target>
+-        <type value="QUICK_BOOT_TARGET" />
+-        <deviceKey>
+-          <Key>
+-            <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\하은\.android\avd\Pixel_3a_API_33.avd" />
+-          </Key>
+-        </deviceKey>
+-      </Target>
+-    </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-11-28T08:16:45.828813500Z" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_post.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Activity.PostActivity\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_post.xml b/app/src/main/res/layout/activity_post.xml
+--- a/app/src/main/res/layout/activity_post.xml	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/res/layout/activity_post.xml	(date 1669726950384)
+@@ -1,9 +1,32 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".Activity.PostActivity">
++    android:layout_height="match_parent">
++
++    <include
++        layout="@layout/view_toolbar"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content" />
++
++    <ScrollView
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_below="@+id/toolbar">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical"
++            android:padding="10dp">
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++
++            <com.example.myapp.view.ReadContentsView
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:id="@+id/readContentsView">
++
++            </com.example.myapp.view.ReadContentsView>
++        </LinearLayout>
++    </ScrollView>
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapp/BulletinBoard/ReviewActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\n\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.adapter.BullentinBoardAdapter;\r\nimport com.example.myapp.listener.OnPostListener;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.CollectionReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\npublic class ReviewActivity extends BasicActivity {\r\n    private static final String TAG = \"ReviewActivity\";\r\n    private FirebaseUser firebaseUser;\r\n    private FirebaseFirestore firebaseFirestore;\r\n    private BullentinBoardAdapter bullentinBoardAdapter;\r\n    private ArrayList<Writeinfo> postList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_review);\r\n\r\n        setToolbarTitle(\"후기 게시판\");\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n\r\n        postList = new ArrayList<>();\r\n        bullentinBoardAdapter = new BullentinBoardAdapter(ReviewActivity.this, postList);\r\n        bullentinBoardAdapter.setOnPostListener(onPostListener);\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView2);\r\n        recyclerView.setHasFixedSize(true);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(ReviewActivity.this));\r\n        recyclerView.setAdapter(bullentinBoardAdapter);\r\n\r\n        FloatingActionButton btn_plus = findViewById(R.id.btn_plus);\r\n        btn_plus.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(ReviewActivity.this, ReviewWriteActivity.class);\r\n                startActivity(intent);\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    OnPostListener onPostListener = new OnPostListener() {\r\n        @Override\r\n        public void onDelete() {\r\n            postUpdate();\r\n            Log.e(\"로그\", \"삭제 성공\");\r\n        }\r\n\r\n        @Override\r\n        public void onModify() {\r\n            Log.e(\"로그\", \"수정 성공\");\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        postUpdate();\r\n    }\r\n\r\n    private void postUpdate() {\r\n        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();\r\n        firebaseFirestore = FirebaseFirestore.getInstance();\r\n\r\n        if (firebaseUser != null) {\r\n            CollectionReference collectionReference = firebaseFirestore.collection(\"posts\");\r\n            collectionReference.orderBy(\"createAt\", Query.Direction.DESCENDING).get()\r\n                    .addOnCompleteListener(task -> {\r\n                        if (task.isSuccessful()) {\r\n                            postList.clear();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Log.d(TAG, document.getId() + \" => \" + document.getData());\r\n                                postList.add(new Writeinfo(\r\n                                        document.getData().get(\"title\").toString(),\r\n                                        (ArrayList<String>) document.getData().get(\"contents\"),\r\n                                        (ArrayList<String>) document.getData().get(\"formats\"),\r\n                                        document.getData().get(\"publisher\").toString(),\r\n                                        new Date(document.getDate(\"createAt\").getTime()),\r\n                                        document.getId()));\r\n                            }\r\n                            bullentinBoardAdapter.notifyDataSetChanged();\r\n\r\n                        } else {\r\n                            Log.d(TAG, \"Error getting documents: \", task.getException());\r\n                        }\r\n                    });\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/ReviewActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/ReviewActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/ReviewActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/ReviewActivity.java	(date 1669728787382)
+@@ -10,7 +10,7 @@
+ 
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.adapter.BullentinBoardAdapter;
+ import com.example.myapp.listener.OnPostListener;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+@@ -29,14 +29,14 @@
+     private FirebaseUser firebaseUser;
+     private FirebaseFirestore firebaseFirestore;
+     private BullentinBoardAdapter bullentinBoardAdapter;
+-    private ArrayList<Writeinfo> postList;
++    private ArrayList<PostWriteinfo> postList;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_review);
+ 
+-        setToolbarTitle("후기 게시판");
++        setToolbarTitle("챌린지 후기 게시판");
+ 
+         FirebaseStorage storage = FirebaseStorage.getInstance();
+ 
+@@ -91,7 +91,7 @@
+                             postList.clear();
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 Log.d(TAG, document.getId() + " => " + document.getData());
+-                                postList.add(new Writeinfo(
++                                postList.add(new PostWriteinfo(
+                                         document.getData().get("title").toString(),
+                                         (ArrayList<String>) document.getData().get("contents"),
+                                         (ArrayList<String>) document.getData().get("formats"),
+Index: app/src/main/res/layout/activity_bulletin_board.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.coordinatorlayout.widget.CoordinatorLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        tools:context=\".Activity.CommunityActivity\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"bottom\"\r\n            android:layout_weight=\"1\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_home\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:adjustViewBounds=\"true\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_home_24\"\r\n                android:scaleType=\"fitStart\"\r\n                android:text=\"Home\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_community\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/material_dynamic_neutral80\"\r\n                android:drawableTop=\"@drawable/ic_baseline_person_24\"\r\n                android:text=\"Community\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_setting\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_settings_24\"\r\n                android:text=\"Setting\"\r\n                android:textSize=\"11sp\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btn_menu\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@color/white\"\r\n                android:drawableTop=\"@drawable/ic_baseline_dehaze_24\"\r\n                android:text=\"menu\"\r\n                android:textSize=\"11sp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/black\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"60dp\"\r\n                android:text=\"Fit the Gym\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"40sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView6\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@color/cardview_dark_background\"\r\n                android:fontFamily=\"@font/gmarketsans\"\r\n                android:gravity=\"center\"\r\n                android:minHeight=\"40dp\"\r\n                android:text=\"게시판\"\r\n                android:textColor=\"@color/white\"\r\n                android:textSize=\"25sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:layout_marginRight=\"20dp\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_tip\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"60dp\"\r\n                    android:layout_marginEnd=\"10dp\"\r\n                    android:background=\"@drawable/button_shape\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:text=\"꿀팁 게시판\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_review\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:layout_marginEnd=\"10dp\"\r\n                    android:background=\"@drawable/button_shape\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:text=\"후기 게시판\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <androidx.appcompat.widget.AppCompatButton\r\n                    android:id=\"@+id/btn_free\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"20dp\"\r\n                    android:layout_marginEnd=\"10dp\"\r\n                    android:background=\"@drawable/button_shape\"\r\n                    android:fontFamily=\"@font/gmarketsans\"\r\n                    android:text=\"자유 게시판\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:textSize=\"24sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n\r\n            <!--<com.github.mikephil.charting.charts.BarChart\r\n                    android:id=\"@+id/chart\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_margin=\"10dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintHorizontal_bias=\"0.5\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n        -->\r\n\r\n        </LinearLayout>\r\n\r\n\r\n        <!--        <com.google.android.material.bottomappbar.BottomAppBar-->\r\n        <!--            android:id=\"@+id/bottomAppBar\"-->\r\n        <!--            android:layout_width=\"match_parent\"-->\r\n        <!--            android:layout_height=\"wrap_content\"-->\r\n        <!--            android:layout_gravity=\"bottom\"-->\r\n        <!--            app:fabCradleMargin=\"10dp\"-->\r\n        <!--            app:fabCradleRoundedCornerRadius=\"10dp\"-->\r\n        <!--            app:fabCradleVerticalOffset=\"10dp\">-->\r\n\r\n        <!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->\r\n        <!--                android:id=\"@+id/bottomNavigationView\"-->\r\n        <!--                android:layout_width=\"match_parent\"-->\r\n        <!--                android:layout_height=\"match_parent\"-->\r\n        <!--                android:layout_marginRight=\"16dp\"-->\r\n        <!--                android:background=\"@drawable/transparent_background\"-->\r\n        <!--                app:menu=\"@menu/bottom_nav_menu\"-->\r\n\r\n        <!--                />-->\r\n        <!--        </com.google.android.material.bottomappbar.BottomAppBar>-->\r\n\r\n        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->\r\n        <!--            android:id=\"@+id/fab\"-->\r\n        <!--            android:layout_width=\"wrap_content\"-->\r\n        <!--            android:layout_height=\"wrap_content\"-->\r\n        <!--            android:src=\"@drawable/ic_baseline_add_24\"-->\r\n        <!--            app:layout_anchor=\"@id/bottomAppBar\"-->\r\n\r\n        <!--            />-->\r\n\r\n\r\n    </androidx.coordinatorlayout.widget.CoordinatorLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_bulletin_board.xml b/app/src/main/res/layout/activity_bulletin_board.xml
+--- a/app/src/main/res/layout/activity_bulletin_board.xml	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/res/layout/activity_bulletin_board.xml	(date 1669717337543)
+@@ -131,7 +131,7 @@
+                     android:layout_marginEnd="10dp"
+                     android:background="@drawable/button_shape"
+                     android:fontFamily="@font/gmarketsans"
+-                    android:text="후기 게시판"
++                    android:text="챌린지 후기 게시판"
+                     android:textColor="@color/white"
+                     android:textSize="24sp"
+                     android:textStyle="bold" />
+Index: app/src/main/java/com/example/myapp/BulletinBoard/FreeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\n\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.adapter.BullentinBoardAdapter;\r\nimport com.example.myapp.listener.OnPostListener;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.CollectionReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\npublic class FreeActivity extends BasicActivity {\r\n    private static final String TAG = \"FreeActivity\";\r\n    private FirebaseUser firebaseUser;\r\n    private FirebaseFirestore firebaseFirestore;\r\n    private BullentinBoardAdapter bullentinBoardAdapter;\r\n    private ArrayList<Writeinfo> postList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_free);\r\n\r\n        setToolbarTitle(\"자유 게시판\");\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n\r\n        postList = new ArrayList<>();\r\n        bullentinBoardAdapter = new BullentinBoardAdapter(FreeActivity.this, postList);\r\n        bullentinBoardAdapter.setOnPostListener(onPostListener);\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView2);\r\n        recyclerView.setHasFixedSize(true);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(FreeActivity.this));\r\n        recyclerView.setAdapter(bullentinBoardAdapter);\r\n\r\n        FloatingActionButton btn_plus = findViewById(R.id.btn_plus);\r\n        btn_plus.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(FreeActivity.this, FreeWriteActivity.class);\r\n                startActivity(intent);\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    OnPostListener onPostListener = new OnPostListener() {\r\n        @Override\r\n        public void onDelete() {\r\n            postUpdate();\r\n            Log.e(\"로그\", \"삭제 성공\");\r\n        }\r\n\r\n        @Override\r\n        public void onModify() {\r\n            Log.e(\"로그\", \"수정 성공\");\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        postUpdate();\r\n    }\r\n\r\n    private void postUpdate() {\r\n        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();\r\n        firebaseFirestore = FirebaseFirestore.getInstance();\r\n\r\n        if (firebaseUser != null) {\r\n            CollectionReference collectionReference = firebaseFirestore.collection(\"posts\");\r\n            collectionReference.orderBy(\"createAt\", Query.Direction.DESCENDING).get()\r\n                    .addOnCompleteListener(task -> {\r\n                        if (task.isSuccessful()) {\r\n                            postList.clear();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Log.d(TAG, document.getId() + \" => \" + document.getData());\r\n                                postList.add(new Writeinfo(\r\n                                        document.getData().get(\"title\").toString(),\r\n                                        (ArrayList<String>) document.getData().get(\"contents\"),\r\n                                        (ArrayList<String>) document.getData().get(\"formats\"),\r\n                                        document.getData().get(\"publisher\").toString(),\r\n                                        new Date(document.getDate(\"createAt\").getTime()),\r\n                                        document.getId()));\r\n                            }\r\n                            bullentinBoardAdapter.notifyDataSetChanged();\r\n\r\n                        } else {\r\n                            Log.d(TAG, \"Error getting documents: \", task.getException());\r\n                        }\r\n                    });\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/FreeActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/FreeActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/FreeActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/FreeActivity.java	(date 1669728787361)
+@@ -10,7 +10,7 @@
+ 
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.adapter.BullentinBoardAdapter;
+ import com.example.myapp.listener.OnPostListener;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+@@ -29,7 +29,7 @@
+     private FirebaseUser firebaseUser;
+     private FirebaseFirestore firebaseFirestore;
+     private BullentinBoardAdapter bullentinBoardAdapter;
+-    private ArrayList<Writeinfo> postList;
++    private ArrayList<PostWriteinfo> postList;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -91,7 +91,7 @@
+                             postList.clear();
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 Log.d(TAG, document.getId() + " => " + document.getData());
+-                                postList.add(new Writeinfo(
++                                postList.add(new PostWriteinfo(
+                                         document.getData().get("title").toString(),
+                                         (ArrayList<String>) document.getData().get("contents"),
+                                         (ArrayList<String>) document.getData().get("formats"),
+Index: app/src/main/java/com/example/myapp/BulletinBoard/TipActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\n\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.adapter.BullentinBoardAdapter;\r\nimport com.example.myapp.listener.OnPostListener;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.CollectionReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\npublic class TipActivity extends BasicActivity {\r\n    private static final String TAG = \"TipActivity\";\r\n    private FirebaseUser firebaseUser;\r\n    private FirebaseFirestore firebaseFirestore;\r\n    private BullentinBoardAdapter bullentinBoardAdapter;\r\n    private ArrayList<Writeinfo> postList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_tip);\r\n\r\n        setToolbarTitle(\"꿀팁 게시판\");\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n\r\n        postList = new ArrayList<>();\r\n        bullentinBoardAdapter = new BullentinBoardAdapter(TipActivity.this, postList);\r\n        bullentinBoardAdapter.setOnPostListener(onPostListener);\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.recyclerView2);\r\n        recyclerView.setHasFixedSize(true);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(TipActivity.this));\r\n        recyclerView.setAdapter(bullentinBoardAdapter);\r\n\r\n        FloatingActionButton btn_plus = findViewById(R.id.btn_plus);\r\n        btn_plus.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(TipActivity.this, TipWriteActivity.class);\r\n                startActivity(intent);\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    OnPostListener onPostListener = new OnPostListener() {\r\n        @Override\r\n        public void onDelete() {\r\n            postUpdate();\r\n            Log.e(\"로그\", \"삭제 성공\");\r\n        }\r\n\r\n        @Override\r\n        public void onModify() {\r\n            Log.e(\"로그\", \"수정 성공\");\r\n        }\r\n    };\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        postUpdate();\r\n    }\r\n\r\n    private void postUpdate() {\r\n        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();\r\n        firebaseFirestore = FirebaseFirestore.getInstance();\r\n\r\n        if (firebaseUser != null) {\r\n            CollectionReference collectionReference = firebaseFirestore.collection(\"posts\");\r\n            collectionReference.orderBy(\"createAt\", Query.Direction.DESCENDING).get()\r\n                    .addOnCompleteListener(task -> {\r\n                        if (task.isSuccessful()) {\r\n                            postList.clear();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Log.d(TAG, document.getId() + \" => \" + document.getData());\r\n                                postList.add(new Writeinfo(\r\n                                        document.getData().get(\"title\").toString(),\r\n                                        (ArrayList<String>) document.getData().get(\"contents\"),\r\n                                        (ArrayList<String>) document.getData().get(\"formats\"),\r\n                                        document.getData().get(\"publisher\").toString(),\r\n                                        new Date(document.getDate(\"createAt\").getTime()),\r\n                                        document.getId()));\r\n                            }\r\n                            bullentinBoardAdapter.notifyDataSetChanged();\r\n\r\n                        } else {\r\n                            Log.d(TAG, \"Error getting documents: \", task.getException());\r\n                        }\r\n                    });\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/TipActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/TipActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/TipActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/TipActivity.java	(date 1669728787408)
+@@ -10,7 +10,7 @@
+ 
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.adapter.BullentinBoardAdapter;
+ import com.example.myapp.listener.OnPostListener;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+@@ -29,7 +29,7 @@
+     private FirebaseUser firebaseUser;
+     private FirebaseFirestore firebaseFirestore;
+     private BullentinBoardAdapter bullentinBoardAdapter;
+-    private ArrayList<Writeinfo> postList;
++    private ArrayList<PostWriteinfo> postList;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -91,7 +91,7 @@
+                             postList.clear();
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 Log.d(TAG, document.getId() + " => " + document.getData());
+-                                postList.add(new Writeinfo(
++                                postList.add(new PostWriteinfo(
+                                         document.getData().get("title").toString(),
+                                         (ArrayList<String>) document.getData().get("contents"),
+                                         (ArrayList<String>) document.getData().get("formats"),
+Index: app/src/main/java/com/example/myapp/Fragments/ProfileFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.Fragments;\r\n\r\nimport android.app.ProgressDialog;\r\nimport android.content.ContentResolver;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.webkit.MimeTypeMap;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.Activity.GalleryActivity;\r\nimport com.example.myapp.Activity.MainActivity;\r\nimport com.example.myapp.Activity.MessageActivity;\r\nimport com.example.myapp.Activity.PostActivity;\r\nimport com.example.myapp.Activity.ReportActivity;\r\nimport com.example.myapp.Memberinfo;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.adapter.GalleryAdapter;\r\nimport com.google.android.gms.tasks.Continuation;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.StorageTask;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport java.util.HashMap;\r\n\r\nimport de.hdodenhof.circleimageview.CircleImageView;\r\n\r\nimport static android.app.Activity.RESULT_OK;\r\n\r\npublic class ProfileFragment extends Fragment {\r\n\r\n    CircleImageView image_profile;\r\n    TextView username;\r\n\r\n    DatabaseReference reference;\r\n    FirebaseUser fuser;\r\n\r\n    StorageReference storageReference;\r\n    private static final int IMAGE_REQUEST = 1;\r\n    private Uri imageUri;\r\n    private StorageTask uploadTask;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_profile, container, false);\r\n\r\n        image_profile = view.findViewById(R.id.profile_image);\r\n        username = view.findViewById(R.id.username);\r\n\r\n        storageReference = FirebaseStorage.getInstance().getReference(\"uploads\");\r\n\r\n        fuser = FirebaseAuth.getInstance().getCurrentUser();\r\n        reference = FirebaseDatabase.getInstance().getReference(\"Users\").child(fuser.getUid());\r\n\r\n        reference.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                Memberinfo memberinfo = dataSnapshot.getValue(Memberinfo.class);\r\n                username.setText(memberinfo.getUsername());\r\n                if (memberinfo.getImageURL().equals(\"default\")){\r\n                    image_profile.setImageResource(R.mipmap.ic_launcher);\r\n                } else\r\n                    Glide.with(getContext()).load(memberinfo.getImageURL()).into(image_profile);\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n\r\n        image_profile.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openImage();\r\n            }\r\n        });\r\n\r\n        return view;\r\n    }\r\n\r\n    private void openImage() {\r\n        Intent intent = new Intent();\r\n        intent.setType(\"image/*\");\r\n        intent.setAction(Intent.ACTION_GET_CONTENT);\r\n        startActivityForResult(intent, IMAGE_REQUEST);\r\n    }\r\n\r\n    private String getFileExtension(Uri uri){\r\n        ContentResolver contentResolver = getContext().getContentResolver();\r\n        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();\r\n        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));\r\n    }\r\n\r\n    private void uploadImage() {\r\n        final ProgressDialog pd = new ProgressDialog(getContext());\r\n        pd.setMessage(\"Uploading\");\r\n        pd.show();\r\n\r\n        if (imageUri != null){\r\n            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()\r\n                    +\".\"+getFileExtension(imageUri));\r\n\r\n            uploadTask = fileReference.putFile(imageUri);\r\n            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {\r\n                @Override\r\n                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {\r\n                    if (!task.isSuccessful()){\r\n                        throw task.getException();\r\n                    }\r\n                    return fileReference.getDownloadUrl();\r\n                }\r\n            }).addOnCompleteListener(new OnCompleteListener<Uri>() {\r\n                @Override\r\n                public void onComplete(@NonNull Task<Uri> task) {\r\n                    if (task.isSuccessful()) {\r\n                        Uri downloadUri = task.getResult();\r\n                        String mUri = downloadUri.toString();\r\n\r\n                        reference = FirebaseDatabase.getInstance().getReference(\"Users\").child(fuser.getUid());\r\n                        HashMap<String, Object> map = new HashMap<>();\r\n                        map.put(\"imageURL\", mUri);\r\n                        reference.updateChildren(map);\r\n\r\n                        pd.dismiss();\r\n                    } else {\r\n                        Toast.makeText(getContext(),\"Failed!\", Toast.LENGTH_SHORT).show();\r\n                        pd.dismiss();\r\n                    }\r\n\r\n                }\r\n            }).addOnFailureListener(new OnFailureListener() {\r\n                @Override\r\n                public void onFailure(@NonNull Exception e) {\r\n                    Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT).show();\r\n                    pd.dismiss();\r\n                }\r\n            });\r\n        } else {\r\n            Toast.makeText(getContext(), \"No image selected\", Toast.LENGTH_SHORT).show();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK\r\n                && data != null && data.getData() != null) {\r\n            imageUri = data.getData();\r\n\r\n            if (uploadTask != null && uploadTask.isInProgress()){\r\n                Toast.makeText(getContext(), \"Upload in preogress\", Toast.LENGTH_SHORT).show();\r\n            } else {\r\n                uploadImage();\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Fragments/ProfileFragment.java b/app/src/main/java/com/example/myapp/Fragments/ProfileFragment.java
+--- a/app/src/main/java/com/example/myapp/Fragments/ProfileFragment.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/Fragments/ProfileFragment.java	(date 1669728662742)
+@@ -18,15 +18,8 @@
+ import android.widget.Toast;
+ 
+ import com.bumptech.glide.Glide;
+-import com.example.myapp.Activity.BasicActivity;
+-import com.example.myapp.Activity.GalleryActivity;
+-import com.example.myapp.Activity.MainActivity;
+-import com.example.myapp.Activity.MessageActivity;
+-import com.example.myapp.Activity.PostActivity;
+-import com.example.myapp.Activity.ReportActivity;
+ import com.example.myapp.Memberinfo;
+ import com.example.myapp.R;
+-import com.example.myapp.adapter.GalleryAdapter;
+ import com.google.android.gms.tasks.Continuation;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.OnFailureListener;
+@@ -145,6 +138,7 @@
+                         map.put("imageURL", mUri);
+                         reference.updateChildren(map);
+ 
++                        Toast.makeText(getContext(),"사진을 변경했습니다.", Toast.LENGTH_SHORT).show();
+                         pd.dismiss();
+                     } else {
+                         Toast.makeText(getContext(),"Failed!", Toast.LENGTH_SHORT).show();
+Index: app/src/main/java/com/example/myapp/Writeinfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/Writeinfo.java b/app/src/main/java/com/example/myapp/PostWriteinfo.java
+rename from app/src/main/java/com/example/myapp/Writeinfo.java
+rename to app/src/main/java/com/example/myapp/PostWriteinfo.java
+--- a/app/src/main/java/com/example/myapp/Writeinfo.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/PostWriteinfo.java	(date 1669728787392)
+@@ -6,7 +6,7 @@
+ import java.util.HashMap;
+ import java.util.Map;
+ 
+-public class Writeinfo implements Serializable {
++public class PostWriteinfo implements Serializable {
+     private String title;
+     private String write;
+     private ArrayList<String> contents;
+@@ -15,7 +15,7 @@
+     private Date createAt;
+     private String id;
+ 
+-    public Writeinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt, String id){
++    public PostWriteinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt, String id){
+         this.title = title;
+         this.contents = contents;
+         this.formats = formats;
+@@ -24,7 +24,7 @@
+         this.id = id;
+     }
+ 
+-    public Writeinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt){
++    public PostWriteinfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createAt){
+         this.title = title;
+         this.contents = contents;
+         this.formats = formats;
+@@ -32,7 +32,7 @@
+         this.createAt = createAt;
+     }
+ 
+-    public Writeinfo(String title, String write, String id) {
++    public PostWriteinfo(String title, String write, String id) {
+         this.title = title;
+         this.write = write;
+         this.id = id;
+Index: app/src/main/java/com/example/myapp/BulletinBoard/ReviewWriteActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.RelativeLayout;\r\n\r\nimport androidx.annotation.NonNull;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.Activity.GalleryActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.view.ContentsView;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageMetadata;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport java.io.File;\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.InputStream;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\nimport static com.example.myapp.Util.GALLERY_IMAGE;\r\nimport static com.example.myapp.Util.GALLERY_VIDEO;\r\nimport static com.example.myapp.Util.INTENT_MEDIA;\r\nimport static com.example.myapp.Util.INTENT_PATH;\r\nimport static com.example.myapp.Util.isImageFile;\r\nimport static com.example.myapp.Util.isStorageUrl;\r\nimport static com.example.myapp.Util.isVideoFile;\r\nimport static com.example.myapp.Util.showToast;\r\nimport static com.example.myapp.Util.storageUrlToName;\r\n\r\npublic class ReviewWriteActivity extends BasicActivity {\r\n    private static final String TAG = \"ReviewWriteActivity\";\r\n    private FirebaseUser user;\r\n    private StorageReference storageRef;\r\n    private ArrayList<String> pathList = new ArrayList<>();\r\n    private LinearLayout parent;\r\n    private RelativeLayout ButtonBackgroundLayout;\r\n    private ImageView selectedImageView;\r\n    private EditText selectedEditText;\r\n    private EditText contentsEditText;\r\n    private EditText titleEditText;\r\n    private Writeinfo writeinfo;\r\n    private int pathCount, successCount;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_review_write);\r\n        setToolbarTitle(\"게시글 작성\");\r\n\r\n        parent = findViewById(R.id.contentsLayout2);\r\n        ButtonBackgroundLayout = findViewById(R.id.ButtonBackgroundLayout2);\r\n        contentsEditText = findViewById(R.id.contentsEditText2);\r\n        titleEditText = findViewById(R.id.titleEditText2);\r\n\r\n        findViewById(R.id.btn_upload2).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_image2).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_video2).setOnClickListener(onClickListener);\r\n        findViewById(R.id.imageModify2).setOnClickListener(onClickListener);\r\n        findViewById(R.id.videoModify2).setOnClickListener(onClickListener);\r\n        findViewById(R.id.Modifydelete2).setOnClickListener(onClickListener);\r\n\r\n        ButtonBackgroundLayout.setOnClickListener(onClickListener);\r\n        contentsEditText.setOnFocusChangeListener(onFocusChangeListener);\r\n        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {\r\n            @Override\r\n            public void onFocusChange(View v, boolean hasFocus) {\r\n                if (hasFocus) {\r\n                    selectedEditText = null;\r\n                }\r\n            }\r\n        });\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n        storageRef = storage.getReference();\r\n\r\n        writeinfo = (Writeinfo)getIntent().getSerializableExtra(\"writeinfo\");\r\n        postInit();\r\n    }\r\n\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        switch (requestCode) {\r\n            case 0:\r\n                if (resultCode == Activity.RESULT_OK) {\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.add(path);\r\n\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    if(selectedEditText == null){\r\n                        parent.addView(contentsItemView);\r\n                    } else {\r\n                        for(int i = 0; i < parent.getChildCount(); i++){\r\n                            if(parent.getChildAt(i) == selectedEditText.getParent()){\r\n                                parent.addView(contentsItemView, i + 1);\r\n                                break;\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    contentsItemView.setImage(path);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n\r\n                }\r\n                break;\r\n            case 1:\r\n                if(resultCode == Activity.RESULT_OK){\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.set(parent.indexOfChild((View)selectedImageView.getParent()) - 1, path);\r\n                    Glide.with(this).load(path).override(1000).into(selectedImageView);\r\n                }\r\n                break;\r\n        }\r\n    }\r\n\r\n    View.OnClickListener onClickListener = (v) -> {\r\n        switch (v.getId()){\r\n            case R.id.btn_upload:\r\n                storageUpload();\r\n                break;\r\n            case R.id.btn_image:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 0);\r\n                break;\r\n            case R.id.btn_video:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 0);\r\n                break;\r\n            case R.id.ButtonBackgroundLayout:\r\n                if(ButtonBackgroundLayout.getVisibility() == View.VISIBLE){\r\n                    ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                }\r\n                break;\r\n            case R.id. imageModify:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.videoModify:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.Modifydelete:\r\n                final View selectedView = (View)selectedImageView.getParent();\r\n\r\n                StorageReference desertRef = storageRef.child(\"posts/\"+writeinfo.getId()+\"/\"+storageUrlToName(pathList.get(parent.indexOfChild(selectedView) -1)));\r\n                desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void aVoid) {\r\n                        showToast(ReviewWriteActivity.this,\"파일 삭제 성공\");\r\n                        pathList.remove(parent.indexOfChild(selectedView) - 1);\r\n                        parent.removeView(selectedView);\r\n                        ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                    }\r\n                }).addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception exception) {\r\n                        showToast(ReviewWriteActivity.this,\"파일 삭제 실패\");\r\n                    }\r\n                });\r\n                break;\r\n        }\r\n    };\r\n\r\n    View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {\r\n        @Override\r\n        public void onFocusChange(View v, boolean hasFocus) {\r\n            if(hasFocus){\r\n                selectedEditText = (EditText) v;\r\n            }\r\n        }\r\n    };\r\n\r\n    public void storageUpload() {\r\n        final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();\r\n\r\n        if (title.length() > 0) {\r\n            final ArrayList<String> contentsList = new ArrayList<>();\r\n            final ArrayList<String> formatList = new ArrayList<>();\r\n\r\n            user = FirebaseAuth.getInstance().getCurrentUser();\r\n            FirebaseStorage storage = FirebaseStorage.getInstance();\r\n            StorageReference storageRef = storage.getReference();\r\n            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();\r\n            final DocumentReference documentReference = writeinfo == null ? firebaseFirestore.collection(\"posts\").document() : firebaseFirestore.collection(\"posts\").document(writeinfo.getId());\r\n            final Date date = writeinfo == null ? new Date() : writeinfo.getCreateAt();\r\n\r\n            for(int i = 0; i < parent.getChildCount(); i++){\r\n                LinearLayout linearLayout = (LinearLayout)parent.getChildAt(i);\r\n                for(int ii = 0; ii < linearLayout.getChildCount(); ii++){\r\n                    View view = linearLayout.getChildAt(ii);\r\n                    if(view instanceof EditText){\r\n                        String text = ((EditText)view).getText().toString();\r\n                        if(text.length() > 0){\r\n                            contentsList.add(text);\r\n                            formatList.add(\"text\");\r\n                        }\r\n                    } else if (!isStorageUrl(pathList.get(pathCount))){\r\n                        String path = pathList.get(pathCount);\r\n                        successCount++;\r\n                        contentsList.add(path);\r\n\r\n                        if(isImageFile(path)){\r\n                            formatList.add(\"image\");\r\n                        } else if (isVideoFile(path)){\r\n                            formatList.add(\"video\");\r\n                        } else {\r\n                            formatList.add(\"text\");\r\n                        }\r\n\r\n                        String[] pathArray = path.split(\"\\\\.\");\r\n                        final StorageReference mountainImagesRef = storageRef.child(\"posts/\" +documentReference.getId() + \"/\"+pathCount+\".\"+pathArray[pathArray.length -1]);\r\n                        try {\r\n                            InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));\r\n                            StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata(\"index\",\"\"+(contentsList.size()-1)).build();\r\n                            UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);\r\n                            uploadTask.addOnFailureListener(new OnFailureListener() {\r\n                                @Override\r\n                                public void onFailure(@NonNull Exception exception) {\r\n                                    // Handle unsuccessful uploads\r\n                                }\r\n                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                                @Override\r\n                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                                    final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata(\"index\"));\r\n                                    mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n                                        @Override\r\n                                        public void onSuccess(Uri uri) {\r\n                                            contentsList.set(index, uri.toString());\r\n                                            successCount--;\r\n                                            if (successCount == 0){\r\n                                                //완료\r\n                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);\r\n                                                storeUpload(documentReference, writeinfo);\r\n                                            }\r\n                                        }\r\n                                    });\r\n                                }\r\n                            });\r\n                        } catch (FileNotFoundException e){\r\n                        }\r\n\r\n                        pathCount++;\r\n                    }\r\n                }\r\n            }\r\n            if(successCount == 0){\r\n                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));\r\n            }\r\n        } else {\r\n\r\n            showToast(ReviewWriteActivity.this,\"제목을 입력해주세요.\");\r\n        }\r\n    }\r\n\r\n    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {\r\n        documentReference.set(writeinfo.getWriteinfo())\r\n                .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void aVoid) {\r\n                        Log.d(TAG, \"DocumentSnapshot successfully written!\");\r\n                        Intent resultIntent = new Intent();\r\n                        resultIntent.putExtra(\"writeinfo\", writeinfo);\r\n                        setResult(Activity.RESULT_OK, resultIntent);\r\n                        finish();\r\n                    }\r\n                })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n                        Log.w(TAG, \"Error writing document\", e);\r\n                    }\r\n                });\r\n\r\n    }\r\n\r\n    private void postInit(){\r\n        if(writeinfo != null){\r\n            titleEditText.setText(writeinfo.getTitle());\r\n            ArrayList<String> contentsList = writeinfo.getContents();\r\n            for (int i = 0; i < contentsList.size(); i++) {\r\n                String contents = contentsList.get(i);\r\n                if (isStorageUrl(contents)) {\r\n                    pathList.add(contents);\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    parent.addView(contentsItemView);\r\n\r\n                    contentsItemView.setImage(contents);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n                    if(i < contentsList.size() - 1){\r\n                        String nextContents = contentsList.get(i + 1);\r\n                        if(!isStorageUrl(nextContents)){\r\n                            contentsItemView.setText(nextContents);\r\n                        }\r\n                    }\r\n\r\n                }else if(i == 0){\r\n                    contentsEditText.setText(contents);\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private void startActivity(Class c, int media, int requestCode) {\r\n        Intent intent = new Intent(this, c);\r\n        intent.putExtra(INTENT_MEDIA, media);\r\n        startActivityForResult(intent, requestCode);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/ReviewWriteActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/ReviewWriteActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/ReviewWriteActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/ReviewWriteActivity.java	(date 1669728787459)
+@@ -17,7 +17,7 @@
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.Activity.GalleryActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.view.ContentsView;
+ import com.google.android.gms.tasks.OnFailureListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+@@ -58,7 +58,7 @@
+     private EditText selectedEditText;
+     private EditText contentsEditText;
+     private EditText titleEditText;
+-    private Writeinfo writeinfo;
++    private PostWriteinfo writeinfo;
+     private int pathCount, successCount;
+ 
+     @Override
+@@ -93,7 +93,7 @@
+         FirebaseStorage storage = FirebaseStorage.getInstance();
+         storageRef = storage.getReference();
+ 
+-        writeinfo = (Writeinfo)getIntent().getSerializableExtra("writeinfo");
++        writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
+         postInit();
+     }
+ 
+@@ -255,7 +255,7 @@
+                                             successCount--;
+                                             if (successCount == 0){
+                                                 //완료
+-                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);
++                                                PostWriteinfo writeinfo = new PostWriteinfo(title, contentsList, formatList, user.getUid(), date);
+                                                 storeUpload(documentReference, writeinfo);
+                                             }
+                                         }
+@@ -270,7 +270,7 @@
+                 }
+             }
+             if(successCount == 0){
+-                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));
++                storeUpload(documentReference, new PostWriteinfo(title, contentsList, formatList, user.getUid(), date));
+             }
+         } else {
+ 
+@@ -278,7 +278,7 @@
+         }
+     }
+ 
+-    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {
++    private void storeUpload(DocumentReference documentReference, final PostWriteinfo writeinfo) {
+         documentReference.set(writeinfo.getWriteinfo())
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                     @Override
+Index: app/src/main/java/com/example/myapp/BulletinBoard/TipWriteActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.RelativeLayout;\r\n\r\nimport androidx.annotation.NonNull;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.Activity.GalleryActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.view.ContentsView;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageMetadata;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport java.io.File;\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.InputStream;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\nimport static com.example.myapp.Util.GALLERY_IMAGE;\r\nimport static com.example.myapp.Util.GALLERY_VIDEO;\r\nimport static com.example.myapp.Util.INTENT_MEDIA;\r\nimport static com.example.myapp.Util.INTENT_PATH;\r\nimport static com.example.myapp.Util.isImageFile;\r\nimport static com.example.myapp.Util.isStorageUrl;\r\nimport static com.example.myapp.Util.isVideoFile;\r\nimport static com.example.myapp.Util.showToast;\r\nimport static com.example.myapp.Util.storageUrlToName;\r\n\r\npublic class TipWriteActivity extends BasicActivity {\r\n    private static final String TAG = \"TipWriteActivity\";\r\n    private FirebaseUser user;\r\n    private StorageReference storageRef;\r\n    private ArrayList<String> pathList = new ArrayList<>();\r\n    private LinearLayout parent;\r\n    private RelativeLayout ButtonBackgroundLayout;\r\n    private ImageView selectedImageView;\r\n    private EditText selectedEditText;\r\n    private EditText contentsEditText;\r\n    private EditText titleEditText;\r\n    private Writeinfo writeinfo;\r\n    private int pathCount, successCount;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_tip_write);\r\n        setToolbarTitle(\"게시글 작성\");\r\n\r\n        parent = findViewById(R.id.contentsLayout3);\r\n        ButtonBackgroundLayout = findViewById(R.id.ButtonBackgroundLayout3);\r\n        contentsEditText = findViewById(R.id.contentsEditText3);\r\n        titleEditText = findViewById(R.id.titleEditText3);\r\n\r\n        findViewById(R.id.btn_upload3).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_image3).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_video3).setOnClickListener(onClickListener);\r\n        findViewById(R.id.imageModify3).setOnClickListener(onClickListener);\r\n        findViewById(R.id.videoModify3).setOnClickListener(onClickListener);\r\n        findViewById(R.id.Modifydelete3).setOnClickListener(onClickListener);\r\n\r\n        ButtonBackgroundLayout.setOnClickListener(onClickListener);\r\n        contentsEditText.setOnFocusChangeListener(onFocusChangeListener);\r\n        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {\r\n            @Override\r\n            public void onFocusChange(View v, boolean hasFocus) {\r\n                if (hasFocus) {\r\n                    selectedEditText = null;\r\n                }\r\n            }\r\n        });\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n        storageRef = storage.getReference();\r\n\r\n        writeinfo = (Writeinfo)getIntent().getSerializableExtra(\"writeinfo\");\r\n        postInit();\r\n    }\r\n\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        switch (requestCode) {\r\n            case 0:\r\n                if (resultCode == Activity.RESULT_OK) {\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.add(path);\r\n\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    if(selectedEditText == null){\r\n                        parent.addView(contentsItemView);\r\n                    } else {\r\n                        for(int i = 0; i < parent.getChildCount(); i++){\r\n                            if(parent.getChildAt(i) == selectedEditText.getParent()){\r\n                                parent.addView(contentsItemView, i + 1);\r\n                                break;\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    contentsItemView.setImage(path);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n\r\n                }\r\n                break;\r\n            case 1:\r\n                if(resultCode == Activity.RESULT_OK){\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.set(parent.indexOfChild((View)selectedImageView.getParent()) - 1, path);\r\n                    Glide.with(this).load(path).override(1000).into(selectedImageView);\r\n                }\r\n                break;\r\n        }\r\n    }\r\n\r\n    View.OnClickListener onClickListener = (v) -> {\r\n        switch (v.getId()){\r\n            case R.id.btn_upload:\r\n                storageUpload();\r\n                break;\r\n            case R.id.btn_image:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 0);\r\n                break;\r\n            case R.id.btn_video:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 0);\r\n                break;\r\n            case R.id.ButtonBackgroundLayout:\r\n                if(ButtonBackgroundLayout.getVisibility() == View.VISIBLE){\r\n                    ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                }\r\n                break;\r\n            case R.id. imageModify:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.videoModify:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.Modifydelete:\r\n                final View selectedView = (View)selectedImageView.getParent();\r\n\r\n                StorageReference desertRef = storageRef.child(\"posts/\"+writeinfo.getId()+\"/\"+storageUrlToName(pathList.get(parent.indexOfChild(selectedView) -1)));\r\n                desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void aVoid) {\r\n                        showToast(TipWriteActivity.this,\"파일 삭제 성공\");\r\n                        pathList.remove(parent.indexOfChild(selectedView) - 1);\r\n                        parent.removeView(selectedView);\r\n                        ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                    }\r\n                }).addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception exception) {\r\n                        showToast(TipWriteActivity.this,\"파일 삭제 실패\");\r\n                    }\r\n                });\r\n                break;\r\n        }\r\n    };\r\n\r\n    View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {\r\n        @Override\r\n        public void onFocusChange(View v, boolean hasFocus) {\r\n            if(hasFocus){\r\n                selectedEditText = (EditText) v;\r\n            }\r\n        }\r\n    };\r\n\r\n    public void storageUpload() {\r\n        final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();\r\n\r\n        if (title.length() > 0) {\r\n            final ArrayList<String> contentsList = new ArrayList<>();\r\n            final ArrayList<String> formatList = new ArrayList<>();\r\n\r\n            user = FirebaseAuth.getInstance().getCurrentUser();\r\n            FirebaseStorage storage = FirebaseStorage.getInstance();\r\n            StorageReference storageRef = storage.getReference();\r\n            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();\r\n            final DocumentReference documentReference = writeinfo == null ? firebaseFirestore.collection(\"posts\").document() : firebaseFirestore.collection(\"posts\").document(writeinfo.getId());\r\n            final Date date = writeinfo == null ? new Date() : writeinfo.getCreateAt();\r\n\r\n            for(int i = 0; i < parent.getChildCount(); i++){\r\n                LinearLayout linearLayout = (LinearLayout)parent.getChildAt(i);\r\n                for(int ii = 0; ii < linearLayout.getChildCount(); ii++){\r\n                    View view = linearLayout.getChildAt(ii);\r\n                    if(view instanceof EditText){\r\n                        String text = ((EditText)view).getText().toString();\r\n                        if(text.length() > 0){\r\n                            contentsList.add(text);\r\n                            formatList.add(\"text\");\r\n                        }\r\n                    } else if (!isStorageUrl(pathList.get(pathCount))){\r\n                        String path = pathList.get(pathCount);\r\n                        successCount++;\r\n                        contentsList.add(path);\r\n\r\n                        if(isImageFile(path)){\r\n                            formatList.add(\"image\");\r\n                        } else if (isVideoFile(path)){\r\n                            formatList.add(\"video\");\r\n                        } else {\r\n                            formatList.add(\"text\");\r\n                        }\r\n\r\n                        String[] pathArray = path.split(\"\\\\.\");\r\n                        final StorageReference mountainImagesRef = storageRef.child(\"posts/\" +documentReference.getId() + \"/\"+pathCount+\".\"+pathArray[pathArray.length -1]);\r\n                        try {\r\n                            InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));\r\n                            StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata(\"index\",\"\"+(contentsList.size()-1)).build();\r\n                            UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);\r\n                            uploadTask.addOnFailureListener(new OnFailureListener() {\r\n                                @Override\r\n                                public void onFailure(@NonNull Exception exception) {\r\n                                    // Handle unsuccessful uploads\r\n                                }\r\n                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                                @Override\r\n                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                                    final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata(\"index\"));\r\n                                    mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n                                        @Override\r\n                                        public void onSuccess(Uri uri) {\r\n                                            contentsList.set(index, uri.toString());\r\n                                            successCount--;\r\n                                            if (successCount == 0){\r\n                                                //완료\r\n                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);\r\n                                                storeUpload(documentReference, writeinfo);\r\n                                            }\r\n                                        }\r\n                                    });\r\n                                }\r\n                            });\r\n                        } catch (FileNotFoundException e){\r\n                        }\r\n\r\n                        pathCount++;\r\n                    }\r\n                }\r\n            }\r\n            if(successCount == 0){\r\n                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));\r\n            }\r\n        } else {\r\n\r\n            showToast(TipWriteActivity.this,\"제목을 입력해주세요.\");\r\n        }\r\n    }\r\n\r\n    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {\r\n        documentReference.set(writeinfo.getWriteinfo())\r\n                .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void aVoid) {\r\n                        Log.d(TAG, \"DocumentSnapshot successfully written!\");\r\n                        Intent resultIntent = new Intent();\r\n                        resultIntent.putExtra(\"writeinfo\", writeinfo);\r\n                        setResult(Activity.RESULT_OK, resultIntent);\r\n                        finish();\r\n                    }\r\n                })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n                        Log.w(TAG, \"Error writing document\", e);\r\n                    }\r\n                });\r\n\r\n    }\r\n\r\n    private void postInit(){\r\n        if(writeinfo != null){\r\n            titleEditText.setText(writeinfo.getTitle());\r\n            ArrayList<String> contentsList = writeinfo.getContents();\r\n            for (int i = 0; i < contentsList.size(); i++) {\r\n                String contents = contentsList.get(i);\r\n                if (isStorageUrl(contents)) {\r\n                    pathList.add(contents);\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    parent.addView(contentsItemView);\r\n\r\n                    contentsItemView.setImage(contents);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n                    if(i < contentsList.size() - 1){\r\n                        String nextContents = contentsList.get(i + 1);\r\n                        if(!isStorageUrl(nextContents)){\r\n                            contentsItemView.setText(nextContents);\r\n                        }\r\n                    }\r\n\r\n                }else if(i == 0){\r\n                    contentsEditText.setText(contents);\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private void startActivity(Class c, int media, int requestCode) {\r\n        Intent intent = new Intent(this, c);\r\n        intent.putExtra(INTENT_MEDIA, media);\r\n        startActivityForResult(intent, requestCode);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/TipWriteActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/TipWriteActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/TipWriteActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/TipWriteActivity.java	(date 1669728787443)
+@@ -17,7 +17,7 @@
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.Activity.GalleryActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.view.ContentsView;
+ import com.google.android.gms.tasks.OnFailureListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+@@ -58,7 +58,7 @@
+     private EditText selectedEditText;
+     private EditText contentsEditText;
+     private EditText titleEditText;
+-    private Writeinfo writeinfo;
++    private PostWriteinfo writeinfo;
+     private int pathCount, successCount;
+ 
+     @Override
+@@ -93,7 +93,7 @@
+         FirebaseStorage storage = FirebaseStorage.getInstance();
+         storageRef = storage.getReference();
+ 
+-        writeinfo = (Writeinfo)getIntent().getSerializableExtra("writeinfo");
++        writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
+         postInit();
+     }
+ 
+@@ -255,7 +255,7 @@
+                                             successCount--;
+                                             if (successCount == 0){
+                                                 //완료
+-                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);
++                                                PostWriteinfo writeinfo = new PostWriteinfo(title, contentsList, formatList, user.getUid(), date);
+                                                 storeUpload(documentReference, writeinfo);
+                                             }
+                                         }
+@@ -270,7 +270,7 @@
+                 }
+             }
+             if(successCount == 0){
+-                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));
++                storeUpload(documentReference, new PostWriteinfo(title, contentsList, formatList, user.getUid(), date));
+             }
+         } else {
+ 
+@@ -278,7 +278,7 @@
+         }
+     }
+ 
+-    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {
++    private void storeUpload(DocumentReference documentReference, final PostWriteinfo writeinfo) {
+         documentReference.set(writeinfo.getWriteinfo())
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                     @Override
+Index: app/src/main/java/com/example/myapp/view/ReadContentsView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.view;\r\n\r\nimport android.content.Context;\r\nimport android.net.Uri;\r\nimport android.util.AttributeSet;\r\nimport android.view.LayoutInflater;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.google.android.exoplayer2.ExoPlayer;\r\nimport com.google.android.exoplayer2.MediaItem;\r\nimport com.google.android.exoplayer2.SimpleExoPlayer;\r\nimport com.google.android.exoplayer2.source.MediaSource;\r\nimport com.google.android.exoplayer2.source.ProgressiveMediaSource;\r\nimport com.google.android.exoplayer2.ui.PlayerView;\r\nimport com.google.android.exoplayer2.ui.StyledPlayerView;\r\nimport com.google.android.exoplayer2.upstream.DataSource;\r\nimport com.google.android.exoplayer2.upstream.DefaultDataSource;\r\nimport com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;\r\nimport com.google.android.exoplayer2.util.Util;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Locale;\r\n\r\nimport javax.annotation.Nullable;\r\n\r\npublic class ReadContentsView extends LinearLayout {\r\n    private Context context;\r\n    private LayoutInflater layoutInflater;\r\n    private ExoPlayer player;\r\n    private int moreIndex = -1;\r\n\r\n    public ReadContentsView(Context context) {\r\n        super(context);\r\n        this.context = context;\r\n        initView();\r\n    }\r\n\r\n    public ReadContentsView(Context context, @Nullable AttributeSet attributeSet) {\r\n        super(context, attributeSet);\r\n        this.context = context;\r\n        initView();\r\n    }\r\n\r\n    private void initView() {\r\n        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));\r\n        setOrientation(LinearLayout.VERTICAL);\r\n        layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);\r\n        layoutInflater.inflate(R.layout.view_post, this, true);\r\n    }\r\n\r\n    public void setMoreIndex(int moreIndex){\r\n        this.moreIndex = moreIndex;\r\n\r\n    }\r\n\r\n    public void setPostInfo(Writeinfo writeinfo){\r\n        TextView createAtTextView = findViewById(R.id.createAtTextView);\r\n        createAtTextView.setText(new SimpleDateFormat(\"yyyy-MM-dd\", Locale.getDefault()).format(writeinfo.getCreateAt()));\r\n\r\n        LinearLayout contentsLayout = findViewById(R.id.contentsLayout);\r\n        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);\r\n        ArrayList<String> contentsList = writeinfo.getContents();\r\n        ArrayList<String> formatList = writeinfo.getFormats();\r\n        player = new ExoPlayer.Builder(context).build();\r\n\r\n\r\n        for (int i = 0; i < contentsList.size(); i++) {\r\n\r\n            if(i == moreIndex){\r\n                TextView textView = new TextView(context);\r\n                textView.setLayoutParams(layoutParams);\r\n                textView.setText(\"더보기...\");\r\n                contentsLayout.addView(textView);\r\n                break;\r\n            }\r\n            String contents = contentsList.get(i);\r\n            String formats = formatList.get(i);\r\n\r\n            if(formats.equals(\"image\")){\r\n                ImageView imageView = (ImageView)layoutInflater.inflate(R.layout.view_contents_image, this, false);\r\n                contentsLayout.addView(imageView);\r\n                Glide.with(this).load(contents).override(1000).thumbnail(0.1f).into(imageView);\r\n\r\n            }else if(formats.equals(\"video\")){\r\n                final StyledPlayerView playerView = (StyledPlayerView)layoutInflater.inflate(R.layout.view_contents_player, this, false);\r\n                // Bind the player to the view.\r\n\r\n                //MediaSource를 생성할때 DataSourceFactory를 넣어줘야 하는데, DataSource는 URI 리소스로부터 데이터를 읽는데 사용\r\n                DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,\r\n                        Util.getUserAgent(context, getResources().getString(R.string.app_name)));\r\n\r\n                //비디오데이터를 Uri로 부터 추출해서 DataSource객체 생성\r\n                MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)\r\n                        .createMediaSource(MediaItem.fromUri(Uri.parse(contents)));\r\n                player.prepare(videoSource);\r\n\r\n//                player.addvideoListener(new VideoListener() {\r\n//                    @Override\r\n//                    public void onVideoSizeChanged(int width, int height, int unappliedRotationDegrees, float pixelWidthHeightRatio) {\r\n//                        playerView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));\r\n//                    }\r\n//                });\r\n\r\n                playerView.setPlayer(player);\r\n                contentsLayout.addView(playerView);\r\n            }else {\r\n                TextView textView = (TextView)layoutInflater.inflate(R.layout.view_contents_text, this, false);\r\n                textView.setText(contents);\r\n                contentsLayout.addView(textView);\r\n\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/view/ReadContentsView.java b/app/src/main/java/com/example/myapp/view/ReadContentsView.java
+--- a/app/src/main/java/com/example/myapp/view/ReadContentsView.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/view/ReadContentsView.java	(date 1669728787421)
+@@ -11,16 +11,13 @@
+ 
+ import com.bumptech.glide.Glide;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.google.android.exoplayer2.ExoPlayer;
+ import com.google.android.exoplayer2.MediaItem;
+-import com.google.android.exoplayer2.SimpleExoPlayer;
+ import com.google.android.exoplayer2.source.MediaSource;
+ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+-import com.google.android.exoplayer2.ui.PlayerView;
+ import com.google.android.exoplayer2.ui.StyledPlayerView;
+ import com.google.android.exoplayer2.upstream.DataSource;
+-import com.google.android.exoplayer2.upstream.DefaultDataSource;
+ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+ import com.google.android.exoplayer2.util.Util;
+ 
+@@ -60,7 +57,7 @@
+ 
+     }
+ 
+-    public void setPostInfo(Writeinfo writeinfo){
++    public void setPostInfo(PostWriteinfo writeinfo){
+         TextView createAtTextView = findViewById(R.id.createAtTextView);
+         createAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(writeinfo.getCreateAt()));
+ 
+Index: app/src/main/java/com/example/myapp/BulletinBoard/FreeWriteActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapp.BulletinBoard;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.RelativeLayout;\r\n\r\nimport androidx.annotation.NonNull;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.example.myapp.Activity.BasicActivity;\r\nimport com.example.myapp.Activity.GalleryActivity;\r\nimport com.example.myapp.R;\r\nimport com.example.myapp.Writeinfo;\r\nimport com.example.myapp.view.ContentsView;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageMetadata;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport java.io.File;\r\nimport java.io.FileInputStream;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.InputStream;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\n\r\nimport static com.example.myapp.Util.GALLERY_IMAGE;\r\nimport static com.example.myapp.Util.GALLERY_VIDEO;\r\nimport static com.example.myapp.Util.INTENT_MEDIA;\r\nimport static com.example.myapp.Util.INTENT_PATH;\r\nimport static com.example.myapp.Util.isImageFile;\r\nimport static com.example.myapp.Util.isStorageUrl;\r\nimport static com.example.myapp.Util.isVideoFile;\r\nimport static com.example.myapp.Util.showToast;\r\nimport static com.example.myapp.Util.storageUrlToName;\r\n\r\npublic class FreeWriteActivity extends BasicActivity {\r\n    private static final String TAG = \"NewWriteActivity\";\r\n    private FirebaseUser user;\r\n    private StorageReference storageRef;\r\n    private ArrayList<String> pathList = new ArrayList<>();\r\n    private LinearLayout parent;\r\n    private RelativeLayout ButtonBackgroundLayout;\r\n    private ImageView selectedImageView;\r\n    private EditText selectedEditText;\r\n    private EditText contentsEditText;\r\n    private EditText titleEditText;\r\n    private Writeinfo writeinfo;\r\n    private int pathCount, successCount;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_free_write);\r\n        setToolbarTitle(\"게시글 작성\");\r\n\r\n        parent = findViewById(R.id.contentsLayout);\r\n        ButtonBackgroundLayout = findViewById(R.id.ButtonBackgroundLayout);\r\n        contentsEditText = findViewById(R.id.contentsEditText);\r\n        titleEditText = findViewById(R.id.titleEditText);\r\n\r\n        findViewById(R.id.btn_upload).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_image).setOnClickListener(onClickListener);\r\n        findViewById(R.id.btn_video).setOnClickListener(onClickListener);\r\n        findViewById(R.id.imageModify).setOnClickListener(onClickListener);\r\n        findViewById(R.id.videoModify).setOnClickListener(onClickListener);\r\n        findViewById(R.id.Modifydelete).setOnClickListener(onClickListener);\r\n\r\n        ButtonBackgroundLayout.setOnClickListener(onClickListener);\r\n        contentsEditText.setOnFocusChangeListener(onFocusChangeListener);\r\n        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {\r\n            @Override\r\n            public void onFocusChange(View v, boolean hasFocus) {\r\n                if (hasFocus) {\r\n                    selectedEditText = null;\r\n                }\r\n            }\r\n        });\r\n\r\n        FirebaseStorage storage = FirebaseStorage.getInstance();\r\n        storageRef = storage.getReference();\r\n\r\n        writeinfo = (Writeinfo)getIntent().getSerializableExtra(\"writeinfo\");\r\n        postInit();\r\n    }\r\n\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        switch (requestCode) {\r\n            case 0:\r\n                if (resultCode == Activity.RESULT_OK) {\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.add(path);\r\n\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    if(selectedEditText == null){\r\n                        parent.addView(contentsItemView);\r\n                    } else {\r\n                        for(int i = 0; i < parent.getChildCount(); i++){\r\n                            if(parent.getChildAt(i) == selectedEditText.getParent()){\r\n                                parent.addView(contentsItemView, i + 1);\r\n                                break;\r\n                            }\r\n                        }\r\n                    }\r\n\r\n                    contentsItemView.setImage(path);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n\r\n                }\r\n                break;\r\n            case 1:\r\n                if(resultCode == Activity.RESULT_OK){\r\n                    String path = data.getStringExtra(INTENT_PATH);\r\n                    pathList.set(parent.indexOfChild((View)selectedImageView.getParent()) - 1, path);\r\n                    Glide.with(this).load(path).override(1000).into(selectedImageView);\r\n                }\r\n                break;\r\n        }\r\n    }\r\n\r\n    View.OnClickListener onClickListener = (v) -> {\r\n        switch (v.getId()){\r\n            case R.id.btn_upload:\r\n                storageUpload();\r\n                break;\r\n            case R.id.btn_image:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 0);\r\n                break;\r\n            case R.id.btn_video:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 0);\r\n                break;\r\n            case R.id.ButtonBackgroundLayout:\r\n                if(ButtonBackgroundLayout.getVisibility() == View.VISIBLE){\r\n                    ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                }\r\n                break;\r\n            case R.id. imageModify:\r\n                startActivity(GalleryActivity.class, GALLERY_IMAGE, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.videoModify:\r\n                startActivity(GalleryActivity.class, GALLERY_VIDEO, 1);\r\n                ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                break;\r\n            case R.id.Modifydelete:\r\n                final View selectedView = (View)selectedImageView.getParent();\r\n                String path = pathList.get(parent.indexOfChild(selectedView) -1);\r\n                if(isStorageUrl(path)){\r\n                    StorageReference desertRef = storageRef.child(\"posts/\"+writeinfo.getId()+\"/\"+storageUrlToName(path));\r\n                    desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                        @Override\r\n                        public void onSuccess(Void aVoid) {\r\n                            showToast(FreeWriteActivity.this,\"파일 삭제 성공\");\r\n                            pathList.remove(parent.indexOfChild(selectedView) - 1);\r\n                            parent.removeView(selectedView);\r\n                            ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                        }\r\n                    }).addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception exception) {\r\n                            showToast(FreeWriteActivity.this,\"파일 삭제 실패\");\r\n                        }\r\n                    });\r\n                } else {\r\n                    pathList.remove(parent.indexOfChild(selectedView) - 1);\r\n                    parent.removeView(selectedView);\r\n                    ButtonBackgroundLayout.setVisibility(View.GONE);\r\n                }\r\n                break;\r\n        }\r\n    };\r\n\r\n    View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {\r\n        @Override\r\n        public void onFocusChange(View v, boolean hasFocus) {\r\n            if(hasFocus){\r\n                selectedEditText = (EditText) v;\r\n            }\r\n        }\r\n    };\r\n\r\n    public void storageUpload() {\r\n        final String title = ((EditText) findViewById(R.id.titleEditText)).getText().toString();\r\n\r\n        if (title.length() > 0) {\r\n            final ArrayList<String> contentsList = new ArrayList<>();\r\n            final ArrayList<String> formatList = new ArrayList<>();\r\n\r\n            user = FirebaseAuth.getInstance().getCurrentUser();\r\n            FirebaseStorage storage = FirebaseStorage.getInstance();\r\n            StorageReference storageRef = storage.getReference();\r\n            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();\r\n            final DocumentReference documentReference = writeinfo == null ? firebaseFirestore.collection(\"posts\").document() : firebaseFirestore.collection(\"posts\").document(writeinfo.getId());\r\n            final Date date = writeinfo == null ? new Date() : writeinfo.getCreateAt();\r\n\r\n            for(int i = 0; i < parent.getChildCount(); i++){\r\n                LinearLayout linearLayout = (LinearLayout)parent.getChildAt(i);\r\n                for(int ii = 0; ii < linearLayout.getChildCount(); ii++){\r\n                    View view = linearLayout.getChildAt(ii);\r\n                    if(view instanceof EditText){\r\n                        String text = ((EditText)view).getText().toString();\r\n                        if(text.length() > 0){\r\n                            contentsList.add(text);\r\n                            formatList.add(\"text\");\r\n                        }\r\n                    } else if (!isStorageUrl(pathList.get(pathCount))){\r\n                        String path = pathList.get(pathCount);\r\n                        successCount++;\r\n                        contentsList.add(path);\r\n\r\n                        if(isImageFile(path)){\r\n                            formatList.add(\"image\");\r\n                        } else if (isVideoFile(path)){\r\n                            formatList.add(\"video\");\r\n                        } else {\r\n                            formatList.add(\"text\");\r\n                        }\r\n\r\n                        String[] pathArray = path.split(\"\\\\.\");\r\n                        final StorageReference mountainImagesRef = storageRef.child(\"posts/\" +documentReference.getId() + \"/\"+pathCount+\".\"+pathArray[pathArray.length -1]);\r\n                        try {\r\n                            InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));\r\n                            StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata(\"index\",\"\"+(contentsList.size()-1)).build();\r\n                            UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);\r\n                            uploadTask.addOnFailureListener(new OnFailureListener() {\r\n                                @Override\r\n                                public void onFailure(@NonNull Exception exception) {\r\n                                    // Handle unsuccessful uploads\r\n                                }\r\n                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                                @Override\r\n                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                                    final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata(\"index\"));\r\n                                    mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n                                        @Override\r\n                                        public void onSuccess(Uri uri) {\r\n                                            contentsList.set(index, uri.toString());\r\n                                            successCount--;\r\n                                            if (successCount == 0){\r\n                                                //완료\r\n                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);\r\n                                                storeUpload(documentReference, writeinfo);\r\n                                            }\r\n                                        }\r\n                                    });\r\n                                }\r\n                            });\r\n                        } catch (FileNotFoundException e){\r\n                        }\r\n\r\n                        pathCount++;\r\n                    }\r\n                }\r\n            }\r\n            if(successCount == 0){\r\n                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));\r\n            }\r\n        } else {\r\n\r\n            showToast(FreeWriteActivity.this,\"제목을 입력해주세요.\");\r\n        }\r\n    }\r\n\r\n    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {\r\n        documentReference.set(writeinfo.getWriteinfo())\r\n                .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void aVoid) {\r\n                        Log.d(TAG, \"DocumentSnapshot successfully written!\");\r\n                        Intent resultIntent = new Intent();\r\n                        resultIntent.putExtra(\"writeinfo\", writeinfo);\r\n                        setResult(Activity.RESULT_OK, resultIntent);\r\n                        finish();\r\n                    }\r\n                })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n                        Log.w(TAG, \"Error writing document\", e);\r\n                    }\r\n                });\r\n\r\n    }\r\n\r\n    private void postInit(){\r\n        if(writeinfo != null){\r\n            titleEditText.setText(writeinfo.getTitle());\r\n            ArrayList<String> contentsList = writeinfo.getContents();\r\n            for (int i = 0; i < contentsList.size(); i++) {\r\n                String contents = contentsList.get(i);\r\n                if (isStorageUrl(contents)) {\r\n                    pathList.add(contents);\r\n                    ContentsView contentsItemView = new ContentsView(this);\r\n\r\n                    parent.addView(contentsItemView);\r\n\r\n                    contentsItemView.setImage(contents);\r\n                    contentsItemView.setOnClickListener(new View.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(View v) {\r\n                            ButtonBackgroundLayout.setVisibility(View.VISIBLE);\r\n                            selectedImageView = (ImageView) v;\r\n                        }\r\n                    });\r\n                    contentsItemView.setOnFocusChangeListener(onFocusChangeListener);\r\n                    if(i < contentsList.size() - 1){\r\n                        String nextContents = contentsList.get(i + 1);\r\n                        if(!isStorageUrl(nextContents)){\r\n                            contentsItemView.setText(nextContents);\r\n                        }\r\n                    }\r\n\r\n                }else if(i == 0){\r\n                    contentsEditText.setText(contents);\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private void startActivity(Class c, int media, int requestCode) {\r\n        Intent intent = new Intent(this, c);\r\n        intent.putExtra(INTENT_MEDIA, media);\r\n        startActivityForResult(intent, requestCode);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapp/BulletinBoard/FreeWriteActivity.java b/app/src/main/java/com/example/myapp/BulletinBoard/FreeWriteActivity.java
+--- a/app/src/main/java/com/example/myapp/BulletinBoard/FreeWriteActivity.java	(revision 997af957b713a569054ad79d2154c32df4e0475d)
++++ b/app/src/main/java/com/example/myapp/BulletinBoard/FreeWriteActivity.java	(date 1669728787475)
+@@ -17,7 +17,7 @@
+ import com.example.myapp.Activity.BasicActivity;
+ import com.example.myapp.Activity.GalleryActivity;
+ import com.example.myapp.R;
+-import com.example.myapp.Writeinfo;
++import com.example.myapp.PostWriteinfo;
+ import com.example.myapp.view.ContentsView;
+ import com.google.android.gms.tasks.OnFailureListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+@@ -58,7 +58,7 @@
+     private EditText selectedEditText;
+     private EditText contentsEditText;
+     private EditText titleEditText;
+-    private Writeinfo writeinfo;
++    private PostWriteinfo writeinfo;
+     private int pathCount, successCount;
+ 
+     @Override
+@@ -93,7 +93,7 @@
+         FirebaseStorage storage = FirebaseStorage.getInstance();
+         storageRef = storage.getReference();
+ 
+-        writeinfo = (Writeinfo)getIntent().getSerializableExtra("writeinfo");
++        writeinfo = (PostWriteinfo)getIntent().getSerializableExtra("writeinfo");
+         postInit();
+     }
+ 
+@@ -261,7 +261,7 @@
+                                             successCount--;
+                                             if (successCount == 0){
+                                                 //완료
+-                                                Writeinfo writeinfo = new Writeinfo(title, contentsList, formatList, user.getUid(), date);
++                                                PostWriteinfo writeinfo = new PostWriteinfo(title, contentsList, formatList, user.getUid(), date);
+                                                 storeUpload(documentReference, writeinfo);
+                                             }
+                                         }
+@@ -276,7 +276,7 @@
+                 }
+             }
+             if(successCount == 0){
+-                storeUpload(documentReference, new Writeinfo(title, contentsList, formatList, user.getUid(), date));
++                storeUpload(documentReference, new PostWriteinfo(title, contentsList, formatList, user.getUid(), date));
+             }
+         } else {
+ 
+@@ -284,7 +284,7 @@
+         }
+     }
+ 
+-    private void storeUpload(DocumentReference documentReference, final Writeinfo writeinfo) {
++    private void storeUpload(DocumentReference documentReference, final PostWriteinfo writeinfo) {
+         documentReference.set(writeinfo.getWriteinfo())
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                     @Override
