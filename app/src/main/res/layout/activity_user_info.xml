@@ -46,6 +46,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -54,9 +56,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#161132"
+                    android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:text="회원 정보 수정"
                     android:textColor="@color/white"
@@ -70,7 +72,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#161132"
+                    android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:text="로그아웃"
                     android:textColor="@color/white"
@@ -84,7 +86,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#161132"
+                    android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:text="회원 탈퇴"
                     android:textColor="@color/white"
@@ -94,33 +96,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="bottom"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_home"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:adjustViewBounds="true"
                         android:background="@color/white"
                         android:drawableTop="@drawable/ic_baseline_home_24"
                         android:scaleType="fitStart"
                         android:text="Home"
-                        android:textSize="11sp"
-                        android:layout_gravity="bottom"/>
+                        android:textSize="11sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_community"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:drawableTop="@drawable/ic_baseline_person_24"
                         android:text="Community"
-                        android:textSize="11sp"
-                        android:layout_gravity="bottom"/>
+                        android:textSize="11sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_setting"
@@ -137,16 +139,15 @@
                         android:id="@+id/btn_menu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:drawableTop="@drawable/ic_baseline_dehaze_24"
                         android:text="menu"
-                        android:textSize="11sp"
-                        android:layout_gravity="bottom"/>
+                        android:textSize="11sp" />
 
 
                 </LinearLayout>
-
 
 
             </LinearLayout>

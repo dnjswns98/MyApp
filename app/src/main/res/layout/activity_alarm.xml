@@ -21,7 +21,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
+                android:background="@color/material_dynamic_neutral0"
                 android:fontFamily="@font/gmarketsans"
                 android:gravity="center"
                 android:minHeight="60dp"
@@ -46,6 +46,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -54,9 +56,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#161132"
+                    android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:text="만보기"
                     android:textColor="@color/white"
@@ -70,7 +72,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
-                    android:background="#161132"
+                    android:background="@drawable/button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:text="운동 알람"
                     android:textColor="@color/white"
