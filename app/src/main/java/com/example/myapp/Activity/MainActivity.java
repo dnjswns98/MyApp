@@ -337,8 +337,8 @@ public class MainActivity extends BasicActivity {
 
         FirebaseUser user = auth.getCurrentUser();
         if(user == null) {
-            finish();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
 
@@ -360,8 +360,8 @@ public class MainActivity extends BasicActivity {
 
         FirebaseUser user = auth.getCurrentUser();
         if(user == null) {
-            finish();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
     @SuppressLint("WrongConstant")
@@ -377,8 +377,8 @@ public class MainActivity extends BasicActivity {
         }
         FirebaseUser user = auth.getCurrentUser();
         if(user == null) {
-            finish();
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 

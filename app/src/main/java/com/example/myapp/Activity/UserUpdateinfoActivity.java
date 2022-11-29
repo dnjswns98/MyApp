@@ -92,12 +92,16 @@ public class UserUpdateinfoActivity extends BasicActivity {
             public void onClick(View v) {
                 String txt_phoneNum = phoneNum.getText().toString();
                 String txt_username = username.getText().toString();
-                if (!TextUtils.isEmpty(txt_username)){
+                if (!TextUtils.isEmpty(txt_username) || !TextUtils.isEmpty(txt_phoneNum)){
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Memberinfo memberinfo = dataSnapshot.getValue(Memberinfo.class);
+                            reference.child("username").setValue(txt_username);
+                            reference.child("phoneNum").setValue(txt_phoneNum);
 
+                            Toast.makeText(UserUpdateinfoActivity.this,"회원정보 수정 되었습니다.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(UserUpdateinfoActivity.this, SettingActivity.class));
+                            finish();
                         }
 
                         @Override
@@ -105,6 +109,8 @@ public class UserUpdateinfoActivity extends BasicActivity {
 
                         }
                     });
+                } else {
+                    Toast.makeText(UserUpdateinfoActivity.this,"수정할 정보를 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
