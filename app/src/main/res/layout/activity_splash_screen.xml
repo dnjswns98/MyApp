@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/gmarketsans"
-        android:text="당신과 함께 합니다"
+        android:text="\n당신과 함께 합니다"
         android:textColor="@color/black"
         android:textSize="38dp"
         android:visibility="gone" />

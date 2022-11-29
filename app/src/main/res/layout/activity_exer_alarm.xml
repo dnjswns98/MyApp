@@ -101,9 +101,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -122,7 +122,7 @@
                     android:id="@+id/btn_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:backgroundTint="@color/material_dynamic_primary60"
                     android:fontFamily="@font/gmarketsans"
                     android:gravity="center_horizontal"
@@ -134,6 +134,7 @@
                     android:id="@+id/btn_alarm_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="@color/material_dynamic_primary60"
                     android:fontFamily="@font/gmarketsans"
                     android:gravity="center_horizontal"

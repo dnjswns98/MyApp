@@ -147,7 +147,7 @@
                     android:max="10000"
                     android:progress="0"
                     android:progressBackgroundTint="@color/material_dynamic_neutral80"
-                    android:progressTint="@color/material_dynamic_primary80" />
+                    android:progressTint="#219BCC" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

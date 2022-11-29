@@ -41,15 +41,15 @@
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
                     android:layout_marginTop="35dp"
-                    android:background="@color/black"
+                    android:background="@drawable/video_button_shape"
                     android:fontFamily="@font/gmarketsans"
                     android:orientation="vertical"
                     android:text=" 오늘의 운동 "
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textColor="#546E7A"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
 
