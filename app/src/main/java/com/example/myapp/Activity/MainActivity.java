@@ -64,7 +64,7 @@ public class MainActivity extends BasicActivity {
     Button btn_setting, btn_community, btn_menu;
     private FirebaseAuth auth;
 
-    @SuppressLint("MissingInflatedId")
+    //@SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -213,19 +213,19 @@ public class MainActivity extends BasicActivity {
             strEx=new String(fileData2);
             strW=new String(fileData3);
 
-            contextEditText.setVisibility(View.INVISIBLE);
+            contextEditText.setVisibility(View.VISIBLE);
             textView2.setVisibility(View.VISIBLE);
             textView2.setText(strFood);
 
-            saveFood_Btn.setVisibility(View.INVISIBLE);
+            saveFood_Btn.setVisibility(View.VISIBLE);
             chaFood_Btn.setVisibility(View.VISIBLE);
             delFood_Btn.setVisibility(View.VISIBLE);
 
-            contextEditText2.setVisibility(View.INVISIBLE);
+            contextEditText2.setVisibility(View.VISIBLE);
             textEx.setVisibility(View.VISIBLE);
             textEx.setText(strEx);
 
-            saveEx_Btn.setVisibility(View.INVISIBLE);
+            saveEx_Btn.setVisibility(View.VISIBLE);
             chaEx_Btn.setVisibility(View.VISIBLE);
             delEx_Btn.setVisibility(View.VISIBLE);
 
