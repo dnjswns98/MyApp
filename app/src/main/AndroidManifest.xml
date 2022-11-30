@@ -40,7 +40,6 @@
         <activity android:name=".Activity.RoomActivity" />
         <activity android:name=".Activity.MessageActivity" />
         <activity android:name=".Activity.GalleryActivity" />
-        <activity android:name=".Activity.DetailReportActivity" />
         <activity android:name=".Activity.ExerDictionaryActivity" />
         <activity android:name=".Activity.FoodDictionaryActivity" />
         <activity android:name=".Activity.VideoActivity" />
