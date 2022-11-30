@@ -23,6 +23,7 @@ public class MenuActivity extends BasicActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, DictionaryActivity.class));
+                finish();
             }
         });
 //        btn_go_diary.setOnClickListener(new View.OnClickListener() {
@@ -35,18 +36,21 @@ public class MenuActivity extends BasicActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, AlarmActivity.class));
+                finish();
             }
         });
         btn_go_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, ReportActivity.class));
+                finish();
             }
         });
         btn_go_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, VideoActivity.class));
+                finish();
             }
         });
 
@@ -57,26 +61,29 @@ public class MenuActivity extends BasicActivity{
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
                 startActivity(new Intent(MenuActivity.this, SettingActivity.class));
+                finish();
             }
         });
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, MainActivity.class));
+                finish();
             }
         });
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, MainActivity.class));
+                finish();
             }
         });
         btn_community.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuActivity.this, CommunityActivity.class));
+                finish();
             }
         });
     }
