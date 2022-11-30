@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/fragment_thirtyChallange">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:fontFamily="@font/gmarketsans"
+            android:gravity="center"
+            android:minHeight="60dp"
+            android:text="Fit the Gym"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@color/cardview_shadow_start_color"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yasik_text"
+                android:text="야식 끊기 챌린지"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/gmarketsans"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작!"
+                android:id="@+id/yasik_tvTime"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"/>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <Button
+                    android:id="@+id/btn_challenge_yasik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:fontFamily="@font/gmarketsans"
+                    android:onClick="timeronClick_yasik"
+                    android:text="챌린지"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <!--                                <Button-->
+            <!--                                    android:layout_width="wrap_content"-->
+            <!--                                    android:layout_height="wrap_content"-->
+            <!--                                    android:fontFamily="@font/gmarketsans"-->
+            <!--                                    android:textStyle="bold"-->
+            <!--                                    android:layout_gravity="end"-->
+            <!--                                    android:onClick="timeronClick_yasik"-->
+            <!--                                    android:id="@+id/btn_challenge_yasik_rec"-->
+            <!--                                    android:text="기록"/>-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@color/cardview_shadow_start_color"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/manbo_text"
+                android:text="만보 걷기 챌린지"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/gmarketsans"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작!"
+                android:id="@+id/manbo_tvTime"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"/>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsans"
+                    android:textStyle="bold"
+                    android:onClick="timeronClick"
+                    android:layout_gravity="end"
+                    android:id="@+id/btn_challenge_manbo"
+                    android:text="챌린지"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@color/cardview_shadow_start_color"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/flour_text"
+                android:text="밀가루 끊기 챌린지"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/gmarketsans"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작!"
+                android:id="@+id/flour_tvTime"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsans"
+                    android:textStyle="bold"
+                    android:layout_gravity="end"
+                    android:onClick="timeronClick"
+                    android:id="@+id/btn_challenge_flour"
+                    android:text="챌린지"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/btn_my_challenge"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/gmarketsans"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="MY 챌린지"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/invisible_yasik_text"
+                android:visibility="invisible"
+                android:fontFamily="@font/font_login"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:text="야식 끊기 챌린지를 시작 중 입니다"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                android:fontFamily="@font/font_login"
+                android:textSize="20dp"
+                android:id="@+id/invisible_manbo_text"
+                android:text="만보 걷기 챌린지를 시작 중 입니다"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/invisible_flour_text"
+                android:visibility="invisible"
+                android:fontFamily="@font/font_login"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_gravity="center"
+                android:text="밀가루 끊기 챌린지를 시작 중 입니다"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_home_24"
+            android:scaleType="fitStart"
+            android:text="Home"
+            android:textSize="11sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_community"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/material_dynamic_neutral80"
+            android:drawableTop="@drawable/ic_baseline_person_24"
+            android:text="Community"
+            android:textSize="11sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:text="Setting"
+            android:textSize="11sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:drawableTop="@drawable/ic_baseline_dehaze_24"
+            android:text="menu"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

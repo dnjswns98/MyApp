@@ -9,7 +9,7 @@ import com.example.myapp.R;
 
 public class CommunityActivity extends BasicActivity{
     Button btn_home,btn_setting, btn_community, btn_menu;
-    Button btn_chatting, btn_bulletinboard;
+    Button btn_chatting, btn_bulletinboard, btn_challenge;
 
 
     @Override
@@ -24,6 +24,7 @@ public class CommunityActivity extends BasicActivity{
         btn_menu = findViewById(R.id.btn_menu);
         btn_chatting = findViewById(R.id.btn_chatting);
         btn_bulletinboard = findViewById(R.id.btn_bulletinboard);
+        btn_challenge = findViewById(R.id.btn_go_challenge);
 
         btn_chatting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,8 @@ public class CommunityActivity extends BasicActivity{
             }
         });
 
+
+
         btn_bulletinboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +43,15 @@ public class CommunityActivity extends BasicActivity{
                 startActivity(intent);
             }
         });
+
+        btn_challenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CommunityActivity.this, ThirtyChallangeActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override

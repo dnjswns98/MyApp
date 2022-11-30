@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -131,6 +132,7 @@ public class BulletinBoardWriteActivity extends BasicActivity {
                         }
                     }
 
+                    //이미지 클릭시 ui 보이게
                     contentsItemView.setImage(path);
                     contentsItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -156,6 +158,7 @@ public class BulletinBoardWriteActivity extends BasicActivity {
     View.OnClickListener onClickListener = (v) -> {
         switch (v.getId()){
             case R.id.btn_upload:
+                Toast.makeText(BulletinBoardWriteActivity.this, "화면을 터치하지말고 잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
                 storageUpload();
                 break;
             case R.id.btn_image:
@@ -323,9 +326,6 @@ public class BulletinBoardWriteActivity extends BasicActivity {
             ArrayList<String> contentsList = writeinfo.getContents();
             //contents에 저장된 리스트 불러오기
             for (int i = 0; i < contentsList.size(); i++) {
-                //i == 0, text
-                //i == 1, image
-                //i == 2, image의 contents
                 String contents = contentsList.get(i);
                 if (isStorageUrl(contents)) {
                     //리스트에 컨텐츠 추가
