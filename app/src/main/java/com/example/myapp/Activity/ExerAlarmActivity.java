@@ -23,7 +23,7 @@ import com.example.myapp.AlertReceiver;
 import com.example.myapp.Fragments.TimePickerFragment;
 import com.example.myapp.NotificationHelper;
 
-public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class ExerAlarmActivity extends BasicActivity implements TimePickerDialog.OnTimeSetListener {
     TextView time_text;
     Button btn_home, btn_setting, btn_community, btn_menu, btn_time, btn_alarm_cancel;
 
@@ -120,13 +120,13 @@ public class ExerAlarmActivity extends AppCompatActivity implements TimePickerDi
     private void startAlarm(Calendar c) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
 
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
         //RTC_WAKE: 지정된 시간에 기기의 절전 모드를 해제하여 대기 중인 인텐트 실행
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     //알람 취소

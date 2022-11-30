@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapp">
-
-    <uses-permission android:name="android.poermission" />
+    package="com.example.myapp" >
+    <uses-permission android:name="android.poermission"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -25,20 +24,22 @@
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <receiver android:name=".AlertReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name=".Activity.CommunityActivity" />
+        <activity android:name=".Activity.BulletinBoardActivity" />
+        <activity android:name=".Activity.BulletinBoardWriteActivity" />
+        <activity android:name=".Activity.ExerAlarmActivity" />
+        <activity android:name=".Activity.PedometerActivity" />
+        <activity android:name=".Activity.PostActivity" />
         <activity android:name=".Activity.RoomActivity" />
         <activity android:name=".Activity.MessageActivity" />
         <activity android:name=".Activity.GalleryActivity" />
-        <activity android:name=".Activity.ThirtyChallangeActivity" />
-        <activity android:name=".Activity.BulletinBoardActivity" />
-        <activity android:name=".Activity.BulletinBoardWriteActivity" />
-        <activity android:name=".Activity.PostActivity" />
-
-        <receiver android:name=".AlertReceiver" />
-
-        <activity android:name=".Activity.ExerAlarmActivity" />
-        <activity android:name=".Activity.PedometerActivity" />
         <activity android:name=".Activity.DetailReportActivity" />
         <activity android:name=".Activity.ExerDictionaryActivity" />
         <activity android:name=".Activity.FoodDictionaryActivity" />
@@ -46,6 +47,7 @@
         <activity android:name=".Activity.ReportActivity" />
         <activity android:name=".Activity.AlarmActivity" />
         <activity android:name=".Activity.DictionaryActivity" />
+        <activity android:name=".Activity.CommunityActivity" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.UserLeaveActivity" />
         <activity android:name=".Activity.UserLeaveCheckActivity" />
@@ -53,7 +55,7 @@
         <activity android:name=".Activity.SettingActivity" />
         <activity
             android:name=".Activity.ResetPasswordActivity"
-            android:parentActivityName=".Activity.LoginActivity" />
+            android:parentActivityName=".Activity.LoginActivity"></activity>
         <!--
  <activity android:name=".Activity.MainActivity"
             android:exported="false"> 가 원래 모습
@@ -71,5 +73,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

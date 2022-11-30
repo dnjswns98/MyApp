@@ -44,7 +44,7 @@ public class NotificationHelper extends ContextWrapper {
         return notiManager;
     }
 
-    public NotificationCompat.Builder getChannel1Notification(String title, String message) {
+    public NotificationCompat.Builder getChannelNotification(String title, String message) {
         return new NotificationCompat.Builder(getApplicationContext(), channeID)
                 .setContentTitle("알람")
                 .setContentText("운동할 시간입니다!")
@@ -55,6 +55,7 @@ public class NotificationHelper extends ContextWrapper {
         return new NotificationCompat.Builder(getApplicationContext(), channeID)
                 .setContentTitle("알람")
                 .setContentText("운동할 시간입니다!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.loginbg2);
     }
 

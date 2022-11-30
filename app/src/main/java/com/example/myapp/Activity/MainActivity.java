@@ -217,7 +217,7 @@ public class MainActivity extends BasicActivity {
             textView2.setVisibility(View.VISIBLE);
             textView2.setText(strFood);
 
-            saveFood_Btn.setVisibility(View.VISIBLE);
+            saveFood_Btn.setVisibility(View.INVISIBLE);
             chaFood_Btn.setVisibility(View.VISIBLE);
             delFood_Btn.setVisibility(View.VISIBLE);
 
@@ -225,13 +225,15 @@ public class MainActivity extends BasicActivity {
             textEx.setVisibility(View.VISIBLE);
             textEx.setText(strEx);
 
-            saveEx_Btn.setVisibility(View.VISIBLE);
+            saveEx_Btn.setVisibility(View.INVISIBLE);
             chaEx_Btn.setVisibility(View.VISIBLE);
             delEx_Btn.setVisibility(View.VISIBLE);
 
             contextEditText3.setVisibility(View.VISIBLE);
             textW.setVisibility(View.VISIBLE);
             contextEditText3.setText(strW+"kg");
+            saveW_Btn.setVisibility(View.VISIBLE);
+
 
             chaFood_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
